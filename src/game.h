@@ -6,7 +6,9 @@
 #include "systems/movementSystem.h"
 #include "systems/renderSystem.h"
 #include "utils/textureCache.h"
-#include "utils/audioManager.h"
+#include "utils/soundManager.h"
+#include "utils/musicManager.h"
+
 
 
 class Game
@@ -27,7 +29,8 @@ class Game
         sf::Clock clock_;
 
         TextureCache textures_;
-        AudioManager audio_;
+        SoundManager sound_;
+        MusicManager music_;
 
         entt::entity player_;
 
