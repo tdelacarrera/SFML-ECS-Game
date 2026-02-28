@@ -3,7 +3,7 @@
 #include "renderSystem.h"
 #include "../components/components.h"
 
-void RenderSystem::draw(entt::registry& registry, TextureCache& textures, sf::RenderWindow& window)
+void RenderSystem::draw(entt::registry& registry, TextureManager& textures, sf::RenderWindow& window)
 {
     auto view = registry.view<TransformComponent, SpriteComponent>();
 

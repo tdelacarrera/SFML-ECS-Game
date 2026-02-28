@@ -8,15 +8,15 @@
 
 class MusicManager {
 public:
-    void loadMusic(const std::string& logicalName, const std::string& key_or_path);
-    sf::Music& getMusic(const std::string& key);
-    void playMusic(const std::string& key, bool loop = true, float volume = 50.f);
-    void pauseMusic();
-    void resumeMusic();
-    void stopMusic();
-    void setMusicVolume(float volume);
+    void load(const std::string& id, const std::string& path);
+    sf::Music& get(const std::string& id) const;
+    void play(const std::string& id, bool loop = true, float volume = 50.f);
+    void pause();
+    void resume();
+    void stop();
+    void setVolume(float volume);
 
 private:
-    std::unordered_map<std::string, std::unique_ptr<sf::Music>> musics_;
-    std::string currentMusicKey_;
+    std::unordered_map<std::string, std::unique_ptr<sf::Music>> resources_;
+    std::string currentMusicId_;
 };

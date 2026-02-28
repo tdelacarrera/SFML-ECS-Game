@@ -3,8 +3,7 @@
 #include <SFML/Graphics.hpp>
 #include "components/components.h"
 
-Game::Game() :
-    window_(sf::VideoMode({1000, 800}), "SFML Game")
+Game::Game() : window_(sf::VideoMode({1000, 800}), "SFML Game")
 {
     window_.setFramerateLimit(60);
     window_.setMouseCursorVisible(false);
@@ -13,11 +12,12 @@ Game::Game() :
     textures_.load("wall", "content/textures/tile2.png");
     textures_.load("colonist", "content/textures/colonist.png");
 
-    sound_.loadSound("walk", "content/sounds/walk.wav");
-    sound_.loadSound("test", "content/sounds/test.ogg");
+    sound_.load("walk", "content/sounds/walk.wav");
+    sound_.load("test", "content/sounds/test.ogg");
 
-    music_.loadMusic("music", "content/music/music2.mp3");
-    music_.playMusic("music");
+    music_.load("music", "content/music/music2.ogg");
+    music_.play("music");
+    
     initEntities();
 }
 
@@ -47,16 +47,13 @@ void Game::update()
 {
     float dt = clock_.restart().asSeconds();
     movementSystem.update(registry_, sound_, dt);
-
-    sf::SoundBuffer soundbuffertest;
-    soundbuffertest.loadFromFile("content/sounds/test.ogg");
-    sf::Sound soundtest(soundbuffertest);
-    soundtest.play();
 }
 
 void Game::render()
 {
     window_.clear(sf::Color::Black);
+
+    window_.setView(view_);
 
     renderSystem.draw(registry_, textures_, window_);
 

@@ -2,8 +2,8 @@
 
 #include <entt/entt.hpp>
 #include <SFML/Graphics.hpp>
-#include "../utils/textureCache.h"
+#include "../utils/textureManager.h"
 
 struct RenderSystem {
-    void draw(entt::registry& registry, TextureCache& textures, sf::RenderWindow& window);
+    void draw(entt::registry& registry, TextureManager& textures, sf::RenderWindow& window);
 };

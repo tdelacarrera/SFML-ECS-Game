@@ -1,11 +1,10 @@
 
 #include "musicManager.h"
 
-void MusicManager::loadMusic(const std::string& logicalName, const std::string& path)
+void MusicManager::load(const std::string& id, const std::string& path)
 {
-    auto it = musics_.find(logicalName);
-    if (it != musics_.end()) {
-        return;  // ya cargada
+    if (resources_.contains(id)) {
+        return;
     }
 
     auto music = std::make_unique<sf::Music>();
@@ -13,68 +12,61 @@ void MusicManager::loadMusic(const std::string& logicalName, const std::string& 
         throw std::runtime_error("Failed to load music: " + path);
     }
 
-    musics_[logicalName] = std::move(music);
+    resources_[id] = std::move(music);
 }
 
 
-sf::Music& MusicManager::getMusic(const std::string& key)
+sf::Music& MusicManager::get(const std::string& id) const
 {
-    auto it = musics_.find(key);
-    if (it == musics_.end()) {
-        throw std::runtime_error("Music key not found: " + key);
+    auto it = resources_.find(id);
+    if (it == resources_.end()) {
+        throw std::runtime_error("Music not found: " + id);
     }
+
     return *it->second;
 }
 
-
-void MusicManager::playMusic(const std::string& key, bool loop, float volume)
+void MusicManager::play(const std::string& id, bool loop, float volume)
 {
-    auto it = musics_.find(key);
-    if (it == musics_.end()) {
-        throw std::runtime_error("Music key not found: " + key);
-    }
+    sf::Music& music = get(id);
 
-    sf::Music& music = *it->second;
-
-    // Sustituir por nueva si ya exista una activa
-    if (currentMusicKey_ != key && !currentMusicKey_.empty()) {
-        auto& prev = *musics_[currentMusicKey_];
-        prev.stop();
+    if (currentMusicId_ != id && !currentMusicId_.empty()) {
+        resources_[currentMusicId_]->stop();
     }
 
     music.setLooping(loop);
     music.setVolume(volume);
     music.play();
 
-    currentMusicKey_ = key;
+    currentMusicId_ = id;
 }
 
-void MusicManager::pauseMusic()
+void MusicManager::pause()
 {
-    if (!currentMusicKey_.empty()) {
-        musics_[currentMusicKey_]->pause();
+    if (!currentMusicId_.empty()) {
+        resources_[currentMusicId_]->pause();
     }
 }
 
-void MusicManager::resumeMusic()
+void MusicManager::resume()
 {
-    if (!currentMusicKey_.empty()) {
-        musics_[currentMusicKey_]->play();
+    if (!currentMusicId_.empty()) {
+        resources_[currentMusicId_]->play();
     }
 }
 
-void MusicManager::stopMusic()
+void MusicManager::stop()
 {
-    if (!currentMusicKey_.empty()) {
-        auto& music = *musics_[currentMusicKey_];
+    if (!currentMusicId_.empty()) {
+        auto& music = *resources_[currentMusicId_];
         music.stop();
-        currentMusicKey_.clear();
+        currentMusicId_.clear();
     }
 }
 
-void MusicManager::setMusicVolume(float volume)
+void MusicManager::setVolume(float volume)
 {
-    if (!currentMusicKey_.empty()) {
-        musics_[currentMusicKey_]->setVolume(volume);
+    if (!currentMusicId_.empty()) {
+        resources_[currentMusicId_]->setVolume(volume);
     }
 }

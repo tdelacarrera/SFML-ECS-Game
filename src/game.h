@@ -5,11 +5,9 @@
 #include <entt/entt.hpp>
 #include "systems/movementSystem.h"
 #include "systems/renderSystem.h"
-#include "utils/textureCache.h"
+#include "utils/textureManager.h"
 #include "utils/soundManager.h"
 #include "utils/musicManager.h"
-
-
 
 class Game
 {
@@ -25,10 +23,11 @@ class Game
 
     private:
         sf::RenderWindow window_;
+        sf::View view_;
         entt::registry registry_;
         sf::Clock clock_;
 
-        TextureCache textures_;
+        TextureManager textures_;
         SoundManager sound_;
         MusicManager music_;
 
