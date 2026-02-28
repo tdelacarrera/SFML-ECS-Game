@@ -2,7 +2,8 @@
 
 #include <entt/entt.hpp>
 #include <SFML/Graphics.hpp>
+#include "../utils/audioManager.h"
 
 struct MovementSystem {
-    void Update(entt::registry& registry, float dt);
+    void update(entt::registry& registry, AudioManager& sounds_, float dt);
 };

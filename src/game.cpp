@@ -9,26 +9,30 @@ Game::Game() :
     window_.setFramerateLimit(60);
     window_.setMouseCursorVisible(false);
     
-    textures_.Load("grass",    "Content/Textures/tile1.png");
-    textures_.Load("wall",     "Content/Textures/tile2.png");
-    textures_.Load("colonist", "Content/Textures/colonist.png");
+    textures_.load("grass",    "content/textures/tile1.png");
+    textures_.load("wall",     "content/textures/tile2.png");
+    textures_.load("colonist", "content/textures/colonist.png");
 
-    InitEntities();
+    audio_.loadSound("walk", "content/sounds/walk.wav");
+    audio_.loadSound("test", "content/sounds/test.ogg");
+
+    initEntities();
 }
 
-bool Game::IsRunning() const
+bool Game::isRunning() const
 {
     return window_.isOpen();
 }
 
-void Game::InitEntities()
+void Game::initEntities()
 {
     player_ = registry_.create();
     registry_.emplace<TransformComponent>(player_,sf::Vector2f{0.f, 0.f},  sf::Vector2f{1.f, 1.f},  0.f);
     registry_.emplace<SpriteComponent>(player_, "colonist");
+    registry_.emplace<SoundComponent>(player_, "test");
 }
 
-void Game::ProcessEvents()
+void Game::processEvents()
 {
     while (const std::optional event = window_.pollEvent())
     {
@@ -37,20 +41,23 @@ void Game::ProcessEvents()
     }
 }
 
-void Game::Update()
+void Game::update()
 {
     float dt = clock_.restart().asSeconds();
-    movementSystem.Update(registry_, dt);
-   
+    movementSystem.update(registry_, audio_, dt);
+
+    sf::SoundBuffer soundbuffertest;
+    soundbuffertest.loadFromFile("content/sounds/test.ogg");
+    sf::Sound soundtest(soundbuffertest);
+    soundtest.play();
 }
 
-void Game::Render()
+void Game::render()
 {
     window_.clear(sf::Color::Black);
 
-    renderSystem.Draw(registry_, textures_, window_);
+    renderSystem.draw(registry_, textures_, window_);
 
     window_.display();
 
 }
-

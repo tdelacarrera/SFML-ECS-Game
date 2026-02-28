@@ -3,22 +3,26 @@
 #include "movementSystem.h"
 #include "../components/components.h"
 
-void MovementSystem::Update(entt::registry& registry, float dt)
+void MovementSystem::update(entt::registry& registry, AudioManager& sounds_, float dt)
 {
-    auto view = registry.view<TransformComponent>();
-
-    for (auto [entity, transform] : view.each()) {
+    auto view = registry.view<TransformComponent, SoundComponent>();
+    
+    for (auto [entity, transform, sound] : view.each()) {
         if (sf::Keyboard::isKeyPressed(sf::Keyboard::Scan::Up)  || sf::Keyboard::isKeyPressed(sf::Keyboard::Scan::W)) {
             transform.position.y -= 200 * dt;
+            sounds_.playSound(sound.soundKey, sound.volume, sound.pitch);
         }
         if (sf::Keyboard::isKeyPressed(sf::Keyboard::Scan::Down) || sf::Keyboard::isKeyPressed(sf::Keyboard::Scan::S)) {
             transform.position.y += 200 * dt;
+            sounds_.playSound(sound.soundKey, sound.volume, sound.pitch);
         }
         if (sf::Keyboard::isKeyPressed(sf::Keyboard::Scan::Left) || sf::Keyboard::isKeyPressed(sf::Keyboard::Scan::A)) {
             transform.position.x -= 200 * dt;
+            sounds_.playSound(sound.soundKey, sound.volume, sound.pitch);
         }
         if (sf::Keyboard::isKeyPressed(sf::Keyboard::Scan::Right) || sf::Keyboard::isKeyPressed(sf::Keyboard::Scan::D)) {
             transform.position.x += 200 * dt;
+            sounds_.playSound(sound.soundKey, sound.volume, sound.pitch);
         }
     }
 }

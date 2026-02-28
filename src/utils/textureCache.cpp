@@ -1,8 +1,7 @@
-#include <unordered_map>
 #include "textureCache.h"
 
 
-sf::Texture& TextureCache::Get(const std::string& key_or_path) {
+sf::Texture& TextureCache::get(const std::string& key_or_path) {
         auto it = cache_.find(key_or_path);
         if (it != cache_.end()) {
             return *it->second;
@@ -16,9 +15,9 @@ sf::Texture& TextureCache::Get(const std::string& key_or_path) {
         auto* raw = tex.get();
         cache_[key_or_path] = std::move(tex);
         return *raw;
-    }
+}
 
-sf::Texture& TextureCache::Load(const std::string& logicalName, const std::string& path) {
+sf::Texture& TextureCache::load(const std::string& logicalName, const std::string& path) {
         auto it = cache_.find(logicalName);
         if (it != cache_.end()) {
             return *it->second;
@@ -34,7 +33,7 @@ sf::Texture& TextureCache::Load(const std::string& logicalName, const std::strin
         return *raw;
     }
 
-void TextureCache::Clear()
+void TextureCache::clear()
 {
     cache_.clear();
 }

@@ -5,5 +5,5 @@
 #include "../utils/textureCache.h"
 
 struct RenderSystem {
-    void Draw(entt::registry& registry, TextureCache& textures, sf::RenderWindow& window);
+    void draw(entt::registry& registry, TextureCache& textures, sf::RenderWindow& window);
 };

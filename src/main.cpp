@@ -3,10 +3,10 @@
 int main()
 {
     Game game;
-    while(game.IsRunning())
+    while(game.isRunning())
     {
-        game.ProcessEvents();
-        game.Update();
-        game.Render();
+        game.processEvents();
+        game.update();
+        game.render();
     }
 }

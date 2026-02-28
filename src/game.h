@@ -6,6 +6,7 @@
 #include "systems/movementSystem.h"
 #include "systems/renderSystem.h"
 #include "utils/textureCache.h"
+#include "utils/audioManager.h"
 
 
 class Game
@@ -15,10 +16,10 @@ class Game
         Game();
         void Run();
 
-        bool IsRunning() const;
-        void ProcessEvents();
-        void Update();
-        void Render();
+        bool isRunning() const;
+        void processEvents();
+        void update();
+        void render();
 
     private:
         sf::RenderWindow window_;
@@ -26,11 +27,12 @@ class Game
         sf::Clock clock_;
 
         TextureCache textures_;
+        AudioManager audio_;
 
         entt::entity player_;
 
         MovementSystem movementSystem;
         RenderSystem renderSystem;
 
-        void InitEntities();
+        void initEntities();
 };
