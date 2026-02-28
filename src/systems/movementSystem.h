@@ -5,5 +5,5 @@
 #include "../utils/audioManager.h"
 
 struct MovementSystem {
-    void update(entt::registry& registry, AudioManager& sounds_, float dt);
+    void update(entt::registry& registry, AudioManager& audio_, float dt);
 };

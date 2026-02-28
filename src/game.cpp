@@ -9,13 +9,15 @@ Game::Game() :
     window_.setFramerateLimit(60);
     window_.setMouseCursorVisible(false);
     
-    textures_.load("grass",    "content/textures/tile1.png");
-    textures_.load("wall",     "content/textures/tile2.png");
+    textures_.load("grass", "content/textures/tile1.png");
+    textures_.load("wall", "content/textures/tile2.png");
     textures_.load("colonist", "content/textures/colonist.png");
 
     audio_.loadSound("walk", "content/sounds/walk.wav");
     audio_.loadSound("test", "content/sounds/test.ogg");
 
+    audio_.loadMusic("music", "content/music/music2.mp3");
+    audio_.playMusic("music");
     initEntities();
 }
 

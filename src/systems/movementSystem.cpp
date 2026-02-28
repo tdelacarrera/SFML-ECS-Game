@@ -3,26 +3,28 @@
 #include "movementSystem.h"
 #include "../components/components.h"
 
-void MovementSystem::update(entt::registry& registry, AudioManager& sounds_, float dt)
+void MovementSystem::update(entt::registry& registry, AudioManager& audio_, float dt)
 {
     auto view = registry.view<TransformComponent, SoundComponent>();
     
     for (auto [entity, transform, sound] : view.each()) {
         if (sf::Keyboard::isKeyPressed(sf::Keyboard::Scan::Up)  || sf::Keyboard::isKeyPressed(sf::Keyboard::Scan::W)) {
             transform.position.y -= 200 * dt;
-            sounds_.playSound(sound.soundKey, sound.volume, sound.pitch);
+            audio_.playSound(sound.soundKey, sound.volume, sound.pitch);
+            audio_.pauseMusic();
         }
         if (sf::Keyboard::isKeyPressed(sf::Keyboard::Scan::Down) || sf::Keyboard::isKeyPressed(sf::Keyboard::Scan::S)) {
             transform.position.y += 200 * dt;
-            sounds_.playSound(sound.soundKey, sound.volume, sound.pitch);
+            audio_.playSound(sound.soundKey, sound.volume, sound.pitch);
+            audio_.resumeMusic();
         }
         if (sf::Keyboard::isKeyPressed(sf::Keyboard::Scan::Left) || sf::Keyboard::isKeyPressed(sf::Keyboard::Scan::A)) {
             transform.position.x -= 200 * dt;
-            sounds_.playSound(sound.soundKey, sound.volume, sound.pitch);
+            audio_.playSound(sound.soundKey, sound.volume, sound.pitch);
         }
         if (sf::Keyboard::isKeyPressed(sf::Keyboard::Scan::Right) || sf::Keyboard::isKeyPressed(sf::Keyboard::Scan::D)) {
             transform.position.x += 200 * dt;
-            sounds_.playSound(sound.soundKey, sound.volume, sound.pitch);
+            audio_.playSound(sound.soundKey, sound.volume, sound.pitch);
         }
     }
 }
