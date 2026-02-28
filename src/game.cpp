@@ -25,7 +25,7 @@ void Game::InitEntities()
 {
     player_ = registry_.create();
     registry_.emplace<TransformComponent>(player_,sf::Vector2f{0.f, 0.f},  sf::Vector2f{1.f, 1.f},  0.f);
-    registry_.emplace<SpriteComponent>(player_, sf::Sprite(textures_.Get("colonist")));
+    registry_.emplace<SpriteComponent>(player_, "colonist");
 }
 
 void Game::ProcessEvents()
@@ -48,7 +48,7 @@ void Game::Render()
 {
     window_.clear(sf::Color::Black);
 
-    renderSystem.Draw(registry_, window_);
+    renderSystem.Draw(registry_, textures_, window_);
 
     window_.display();
 

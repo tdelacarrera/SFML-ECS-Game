@@ -12,5 +12,5 @@ struct TransformComponent
 
 struct SpriteComponent 
 {
-    sf::Sprite drawable;
+    std::string textureKey;
 };
