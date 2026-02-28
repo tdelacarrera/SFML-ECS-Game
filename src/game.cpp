@@ -8,10 +8,10 @@ Game::Game() :
 {
     window_.setFramerateLimit(60);
     window_.setMouseCursorVisible(false);
-
-    tex_grass_.loadFromFile("Content/Textures/tile1.png");
-    tex_wall_.loadFromFile("Content/Textures/tile2.png");
-    tex_colonist_.loadFromFile("Content/Textures/colonist.png");
+    
+    textures_.Load("grass",    "Content/Textures/tile1.png");
+    textures_.Load("wall",     "Content/Textures/tile2.png");
+    textures_.Load("colonist", "Content/Textures/colonist.png");
 
     InitEntities();
 }
@@ -25,7 +25,7 @@ void Game::InitEntities()
 {
     player_ = registry_.create();
     registry_.emplace<TransformComponent>(player_,sf::Vector2f{0.f, 0.f},  sf::Vector2f{1.f, 1.f},  0.f);
-    registry_.emplace<SpriteComponent>(player_, sf::Sprite(tex_colonist_));
+    registry_.emplace<SpriteComponent>(player_, sf::Sprite(textures_.Get("colonist")));
 }
 
 void Game::ProcessEvents()

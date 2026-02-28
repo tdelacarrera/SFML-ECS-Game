@@ -5,6 +5,7 @@
 #include <entt/entt.hpp>
 #include "systems/movementSystem.h"
 #include "systems/renderSystem.h"
+#include "utils/textureCache.h"
 
 
 class Game
@@ -24,9 +25,7 @@ class Game
         entt::registry registry_;
         sf::Clock clock_;
 
-        sf::Texture tex_colonist_;
-        sf::Texture tex_grass_;
-        sf::Texture tex_wall_;
+        TextureCache textures_;
 
         entt::entity player_;
 
