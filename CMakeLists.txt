@@ -21,6 +21,13 @@ FetchContent_Declare(
 )
 FetchContent_MakeAvailable(entt)
 
+# nlohmann
+FetchContent_Declare(
+    json
+    URL https://github.com/nlohmann/json/releases/download/v3.12.0/json.tar.xz
+)
+FetchContent_MakeAvailable(json)
+
 file(GLOB_RECURSE SOURCES CONFIGURE_DEPENDS src/*.cpp)
 
 add_executable(Game ${SOURCES})
@@ -32,6 +39,7 @@ target_link_libraries(Game
         SFML::Graphics 
         SFML::Audio
         EnTT::EnTT
+        nlohmann_json::nlohmann_json
 )
 
 #cmake -B Build -D CMAKE_BUILD_TYPE=Debug

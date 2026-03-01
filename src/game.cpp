@@ -3,7 +3,7 @@
 #include <SFML/Graphics.hpp>
 #include "components/components.h"
 
-Game::Game() : window_(sf::VideoMode({1000, 800}), "SFML Game"), tilemap_(255 , 255, 16)
+Game::Game() : window_(sf::VideoMode({1000, 800}), "SFML Game"), tilemap_(255 , 255, 16), entities_(registry_)
 {
     window_.setFramerateLimit(60);
     window_.setMouseCursorVisible(false);
@@ -21,7 +21,8 @@ Game::Game() : window_(sf::VideoMode({1000, 800}), "SFML Game"), tilemap_(255 , 
     view_.setSize({window_.getSize().x, window_.getSize().y});
     view_.setCenter({0.f, 0.f});
 
-    entities_.createPlayer(registry_, textures_);
+    //entities_.createPlayer(registry_, textures_);
+    entities_.withSound("walk").withSprite("colonist").withTransform({0,0},{0,0}, 0.f);
 
     
 }
