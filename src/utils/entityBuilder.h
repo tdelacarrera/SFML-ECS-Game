@@ -7,11 +7,12 @@
 class EntityBuilder {
 public:
     EntityBuilder(entt::registry& registry);
+    EntityBuilder& create();
 
-    EntityBuilder& withSprite(std::string id);
+    EntityBuilder& withSprite(const std::string& id);
     EntityBuilder& withTransform(sf::Vector2f position, sf::Vector2f scale, float rotation);
-    EntityBuilder& withSound(std::string id);
-    entt::entity build();
+    EntityBuilder& withSound(const std::string& id);
+    entt::entity build() const;
 
 private:
     entt::registry& registry_;
