@@ -3,7 +3,7 @@
 #include <SFML/Graphics.hpp>
 #include "components/components.h"
 
-Game::Game() : window_(sf::VideoMode({1000, 800}), "SFML Game")
+Game::Game() : window_(sf::VideoMode({1000, 800}), "SFML Game"), tilemap_(255 , 255, 16)
 {
     window_.setFramerateLimit(60);
     window_.setMouseCursorVisible(false);
@@ -17,6 +17,9 @@ Game::Game() : window_(sf::VideoMode({1000, 800}), "SFML Game")
 
     music_.load("music", "content/music/music2.ogg");
     music_.play("music");
+
+    view_.setSize({window_.getSize().x, window_.getSize().y});
+    view_.setCenter({0.f, 0.f});
     
     initEntities();
 }
@@ -33,6 +36,8 @@ void Game::initEntities()
     registry_.emplace<SpriteComponent>(player_, "colonist");
     registry_.emplace<SoundComponent>(player_, "test");
 }
+
+
 
 void Game::processEvents()
 {
@@ -55,6 +60,7 @@ void Game::render()
 
     window_.setView(view_);
 
+    tilemap_.render(window_, textures_);
     renderSystem.draw(registry_, textures_, window_);
 
     window_.display();

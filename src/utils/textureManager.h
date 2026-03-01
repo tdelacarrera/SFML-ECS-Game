@@ -7,7 +7,7 @@ class TextureManager {
 public:
     TextureManager() = default;
     sf::Texture& get(const std::string& path) const;
-    sf::Texture& load(const std::string& key, const std::string& path);
+    sf::Texture& load(const std::string& id, const std::string& path);
     void clear();
 
 private:

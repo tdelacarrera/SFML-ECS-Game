@@ -8,6 +8,7 @@
 #include "utils/textureManager.h"
 #include "utils/soundManager.h"
 #include "utils/musicManager.h"
+#include "utils/tileMap.h"
 
 class Game
 {
@@ -30,6 +31,7 @@ class Game
         TextureManager textures_;
         SoundManager sound_;
         MusicManager music_;
+        TileMap tilemap_;
 
         entt::entity player_;
 
