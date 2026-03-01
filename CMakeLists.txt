@@ -3,6 +3,7 @@ project(Game CXX)
 
 set(CMAKE_CXX_STANDARD 20)
 set(SFML_BUILD_NETWORK OFF)
+set(TGUI_BACKEND SFML_GRAPHICS)
 
 include(FetchContent)
 
@@ -28,6 +29,13 @@ FetchContent_Declare(
 )
 FetchContent_MakeAvailable(json)
 
+# tgui
+FetchContent_Declare(
+    tgui
+    URL https://github.com/texus/TGUI/archive/refs/tags/v1.12.0.tar.gz
+)
+FetchContent_MakeAvailable(tgui)
+
 file(GLOB_RECURSE SOURCES CONFIGURE_DEPENDS src/*.cpp)
 
 add_executable(Game ${SOURCES})
@@ -40,6 +48,7 @@ target_link_libraries(Game
         SFML::Audio
         EnTT::EnTT
         nlohmann_json::nlohmann_json
+        TGUI::TGUI
 )
 
 #cmake -B Build -D CMAKE_BUILD_TYPE=Debug

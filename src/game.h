@@ -12,6 +12,7 @@
 #include "utils/entityFactory.h"
 #include "utils/entityBuilder.h"
 #include "utils/prefabFactory.h"
+#include "utils/guiManager.h"
 
 class Game
 {
@@ -38,6 +39,7 @@ class Game
         //EntityFactory entities_;
         EntityBuilder entities_;
         PrefabFactory prefabs_;
+        GuiManager gui_;
 
         entt::entity player_;
 

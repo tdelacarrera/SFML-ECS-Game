@@ -2,11 +2,13 @@
 #include <cmath>
 #include <SFML/Graphics.hpp>
 #include "components/components.h"
+#include "utils/gameHUD.h"
+#include "utils/testView.h"
 
-Game::Game() : window_(sf::VideoMode({1000, 800}), "SFML Game"), tilemap_(255 , 255, 16), entities_(registry_)
+Game::Game() : window_(sf::VideoMode({1000, 800}), "SFML Game"), tilemap_(255 , 255, 16), entities_(registry_), gui_(window_)  
 {
     window_.setFramerateLimit(60);
-    window_.setMouseCursorVisible(false);
+    window_.setMouseCursorVisible(true);
     
     textures_.load("grass", "content/textures/tile1.png");
     textures_.load("wall", "content/textures/tile2.png");
@@ -24,6 +26,9 @@ Game::Game() : window_(sf::VideoMode({1000, 800}), "SFML Game"), tilemap_(255 , 
     prefabs_.spawnColonist(registry_, {10, 10});
     prefabs_.spawnEnemy(registry_, {10, 40});
 
+
+    gui_.setView(std::make_unique<GameHUD>());
+
 }
 
 bool Game::isRunning() const
@@ -36,7 +41,10 @@ void Game::processEvents()
     while (const std::optional event = window_.pollEvent())
     {
         if (event->is<sf::Event::Closed>())
-        window_.close();
+            window_.close();
+
+        gui_.processEvent(*event);
+
     }
 }
 
@@ -54,6 +62,8 @@ void Game::render()
 
     tilemap_.render(window_, textures_);
     renderSystem_.draw(registry_, textures_, window_);
+
+    gui_.render();
 
     window_.display();
 
