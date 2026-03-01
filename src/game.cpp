@@ -20,24 +20,16 @@ Game::Game() : window_(sf::VideoMode({1000, 800}), "SFML Game"), tilemap_(255 , 
 
     view_.setSize({window_.getSize().x, window_.getSize().y});
     view_.setCenter({0.f, 0.f});
+
+    entities_.createPlayer(registry_, textures_);
+
     
-    initEntities();
 }
 
 bool Game::isRunning() const
 {
     return window_.isOpen();
 }
-
-void Game::initEntities()
-{
-    player_ = registry_.create();
-    registry_.emplace<TransformComponent>(player_,sf::Vector2f{0.f, 0.f},  sf::Vector2f{1.f, 1.f},  0.f);
-    registry_.emplace<SpriteComponent>(player_, "colonist");
-    registry_.emplace<SoundComponent>(player_, "test");
-}
-
-
 
 void Game::processEvents()
 {
@@ -51,7 +43,7 @@ void Game::processEvents()
 void Game::update()
 {
     float dt = clock_.restart().asSeconds();
-    movementSystem.update(registry_, sound_, dt);
+    movementSystem_.update(registry_, sound_, dt);
 }
 
 void Game::render()
@@ -61,7 +53,7 @@ void Game::render()
     window_.setView(view_);
 
     tilemap_.render(window_, textures_);
-    renderSystem.draw(registry_, textures_, window_);
+    renderSystem_.draw(registry_, textures_, window_);
 
     window_.display();
 

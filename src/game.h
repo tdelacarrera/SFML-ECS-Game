@@ -9,6 +9,7 @@
 #include "utils/soundManager.h"
 #include "utils/musicManager.h"
 #include "utils/tileMap.h"
+#include "utils/entityFactory.h"
 
 class Game
 {
@@ -32,11 +33,10 @@ class Game
         SoundManager sound_;
         MusicManager music_;
         TileMap tilemap_;
+        EntityFactory entities_;
 
         entt::entity player_;
 
-        MovementSystem movementSystem;
-        RenderSystem renderSystem;
-
-        void initEntities();
+        MovementSystem movementSystem_;
+        RenderSystem renderSystem_;
 };
