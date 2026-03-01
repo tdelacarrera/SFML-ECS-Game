@@ -7,6 +7,7 @@
 class EntityBuilder {
 public:
     EntityBuilder(entt::registry& registry);
+
     EntityBuilder& create();
 
     EntityBuilder& withSprite(const std::string& id);

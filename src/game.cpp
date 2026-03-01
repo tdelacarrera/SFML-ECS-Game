@@ -20,14 +20,10 @@ Game::Game() : window_(sf::VideoMode({1000, 800}), "SFML Game"), tilemap_(255 , 
 
     view_.setSize({window_.getSize().x, window_.getSize().y});
     view_.setCenter({0.f, 0.f});
-
-    //entities_.createPlayer(registry_, textures_);
-    entities_.create().withSound("walk").withSprite("colonist").withTransform({0,0},{0,0}, 0.f).build();
-    entities_.create().withSound("walk").withSprite("grass").withTransform({22,0},{0,0}, 0.f).build();
-    entities_.create().withSound("walk").withSprite("wall").withTransform({26,0},{0,0}, 0.f).build();
-    entities_.create().withSound("test").withSprite("colonist").withTransform({10,0},{0,0}, 0.f).build();
-
     
+    prefabs_.spawnColonist(registry_, {10, 10});
+    prefabs_.spawnEnemy(registry_, {10, 40});
+
 }
 
 bool Game::isRunning() const

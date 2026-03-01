@@ -11,6 +11,7 @@
 #include "utils/tileMap.h"
 #include "utils/entityFactory.h"
 #include "utils/entityBuilder.h"
+#include "utils/prefabFactory.h"
 
 class Game
 {
@@ -36,6 +37,7 @@ class Game
         TileMap tilemap_;
         //EntityFactory entities_;
         EntityBuilder entities_;
+        PrefabFactory prefabs_;
 
         entt::entity player_;
 
