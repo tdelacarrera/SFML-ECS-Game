@@ -41,6 +41,12 @@ void Game::handleInput()
 void Game::update(float dt)
 {
     movement_.update(registry_, engine_.sounds(), dt);
+    engine_.input().update();
+
+    if (engine_.input().isActionJustPressed(Action::MoveRight)) std::cout <<"Move Right"<<std::endl;
+    if (engine_.input().isActionJustReleased(Action::MoveLeft)) std::cout <<"Move Left"<<std::endl;
+    if (engine_.input().isActionActive(Action::MoveUp)) std::cout <<"Move Up"<<std::endl;
+    if (engine_.input().isActionActive(Action::MoveDown)) std::cout <<"Move Down"<<std::endl;
 }
 
 void Game::render()

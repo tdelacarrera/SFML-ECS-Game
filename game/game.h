@@ -17,7 +17,6 @@ public:
     void handleInput() override;
     void update(float dt) override;
     void render() override;
-    bool isRunning() const override { return engine_.window().isOpen(); }
 
 private:
     Engine& engine_;

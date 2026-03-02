@@ -5,6 +5,7 @@
 #include "../audio/soundManager.h"
 #include "../audio/musicManager.h"
 #include "../gui/guiManager.h"
+#include "../input/inputManager.h"
 
 class Engine final {
 public:
@@ -18,6 +19,7 @@ public:
     MusicManager& music() noexcept { return music_; }
     TileMap& tilemap() noexcept { return tilemap_; }
     GuiManager& gui() noexcept { return gui_; }
+    InputManager& input() noexcept { return input_; }
     float getDeltaTime();
     void setGameView();
 
@@ -31,4 +33,5 @@ private:
     MusicManager music_;
     TileMap tilemap_;
     GuiManager gui_;
+    InputManager input_;
 };
