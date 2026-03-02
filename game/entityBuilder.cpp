@@ -1,5 +1,5 @@
 #include "entityBuilder.h"
-#include "../components/components.h"
+#include "components/components.h"
 
     EntityBuilder::EntityBuilder(entt::registry& registry)
         : registry_(registry)

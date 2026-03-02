@@ -1,7 +1,8 @@
 #pragma once
 
-#include "guiView.h"
-class GameHUD : public GuiView
+#include "../engine/gui/guiView.h"
+
+class TestView : public GuiView
 {
 public:
     void build(tgui::SFML_GRAPHICS::Gui& gui) override;
@@ -9,4 +10,5 @@ public:
 
 private:
     tgui::Button::Ptr testButton_;
+    tgui::Button::Ptr testButton2_;
 };

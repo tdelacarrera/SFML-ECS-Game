@@ -1,5 +1,5 @@
 #include "entityFactory.h"
-#include "../components/components.h"
+#include "components/components.h"
 
 
 
