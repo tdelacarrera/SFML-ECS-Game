@@ -17,6 +17,8 @@ public:
     void handleInput() override;
     void update(float dt) override;
     void render() override;
+    void initTilemap();
+    void inputTest();
 
 private:
     Engine& engine_;
