@@ -1,5 +1,5 @@
 
-#include "soundManager.h"
+#include "SoundManager.h"
 
 
 SoundManager::SoundManager(size_t poolSize)

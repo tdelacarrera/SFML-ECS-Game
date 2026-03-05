@@ -18,4 +18,11 @@ private:
     std::unordered_map<std::string, std::unique_ptr<sf::SoundBuffer>> resources_;
     std::vector<std::unique_ptr<sf::Sound>> pool_;
     size_t nextSoundIndex_ = 0;
+
+    SoundManager(const SoundManager&) = delete;
+    SoundManager& operator=(const SoundManager&) = delete;
+
+    SoundManager(SoundManager&&) = default;
+    SoundManager& operator=(SoundManager&&) = default;
+
 };

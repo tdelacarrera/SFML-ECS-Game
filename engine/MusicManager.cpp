@@ -1,5 +1,5 @@
 
-#include "musicManager.h"
+#include "MusicManager.h"
 
 void MusicManager::load(const std::string& id, const std::string& path)
 {

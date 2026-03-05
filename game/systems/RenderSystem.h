@@ -1,10 +1,15 @@
 #pragma once
 
-#include "renderSystem.h"
-#include "../components/components.h"
+#include <entt/entt.hpp>
+#include <SFML/Graphics.hpp>
+#include "../components/Components.h"
+#include "../../engine/Resources.h"
 
-void RenderSystem::draw(entt::registry& registry, TextureManager& textures, sf::RenderWindow& window)
+inline void RenderSystem(entt::registry& registry)
 {
+    auto &window = registry.ctx().get<WindowResource>().window;
+    auto &textures = registry.ctx().get<TextureManager>();
+
     auto view = registry.view<TransformComponent, SpriteComponent>();
 
     for (auto [entity, transform, sprite] : view.each()) 

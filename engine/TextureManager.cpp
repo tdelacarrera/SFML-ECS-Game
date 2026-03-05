@@ -1,4 +1,4 @@
-#include "textureManager.h"
+#include "TextureManager.h"
 
 
 sf::Texture& TextureManager::load(const std::string& id, const std::string& path)
