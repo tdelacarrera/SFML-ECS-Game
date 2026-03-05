@@ -17,6 +17,15 @@ inline entt::entity createPlayer(entt::registry& registry)
     return entity;
 }
 
+inline entt::entity createColonist(entt::registry& registry)
+{
+    entt::entity entity = registry.create();
+    registry.emplace<TransformComponent>(entity,sf::Vector2f{50.f, 50.f},  sf::Vector2f{1.f, 1.f},  0.f);
+    registry.emplace<SpriteComponent>(entity, "colonist");
+
+    return entity;
+}
+
 inline entt::entity createTileMap(entt::registry& registry, const sf::Texture& texture)
     {
         auto entity = registry.create();
@@ -24,8 +33,8 @@ inline entt::entity createTileMap(entt::registry& registry, const sf::Texture& t
         TileMapComponent tilemap;
         tilemap.texture = texture;
         tilemap.tileSize = 16;
-        tilemap.width = 16;
-        tilemap.height = 16;
+        tilemap.width = 255;
+        tilemap.height = 255;
         tilemap.vertices = sf::VertexArray(sf::PrimitiveType::Triangles);
         tilemap.tiles.resize(tilemap.width*tilemap.height);
 
