@@ -36,11 +36,7 @@ FetchContent_Declare(
 )
 FetchContent_MakeAvailable(tgui)
 
-file(GLOB_RECURSE SOURCES 
-    CONFIGURE_DEPENDS 
-    engine/*.cpp
-    game/*.cpp
-)
+file(GLOB_RECURSE SOURCES CONFIGURE_DEPENDS src/*.cpp )
 
 add_executable(Game ${SOURCES})
 

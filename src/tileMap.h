@@ -4,7 +4,7 @@
 #include <unordered_map>
 #include <string>
 #include <algorithm>
-#include "textureManager.h"
+#include "managers/textureManager.h"
 
 struct TileDefinition {
     std::string textureName;
@@ -16,6 +16,7 @@ struct TileLayer {
 };
 
 class TileMap {
+    
 public:
     TileMap(int mapWidth, int mapHeight, int tilePixelSize = 32);
 

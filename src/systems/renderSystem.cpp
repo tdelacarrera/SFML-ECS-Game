@@ -9,7 +9,7 @@ void RenderSystem::draw(entt::registry& registry, TextureManager& textures, sf::
 
     for (auto [entity, transform, sprite] : view.each()) 
     {
-        sf::Texture& tex = textures.get(sprite.textureKey);
+        sf::Texture& tex = textures.get(sprite.textureId);
         sf::Sprite drawable(tex);
         drawable.setPosition(transform.position);
         window.draw(drawable);

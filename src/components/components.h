@@ -12,7 +12,7 @@ struct TransformComponent
 
 struct SpriteComponent 
 {
-    std::string textureKey;
+    std::string textureId;
 };
 
 struct SoundComponent {
