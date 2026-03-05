@@ -20,7 +20,7 @@ inline entt::entity createTileMap(entt::registry& registry, const sf::Texture& t
     {
         auto entity = registry.create();
 
-        TileMapResource tilemap;
+        TileMapComponent tilemap;
         tilemap.texture = texture;
         tilemap.tileSize = 16;
         tilemap.width = 16;
@@ -39,7 +39,7 @@ inline entt::entity createTileMap(entt::registry& registry, const sf::Texture& t
 
         buildTileMap(tilemap);
 
-        registry.ctx().emplace<TileMapResource>(tilemap);
+        registry.emplace<TileMapComponent>(entity, tilemap);
 
         return entity;
     }

@@ -3,9 +3,7 @@
 #include "components/Components.h"
 #include <SFML/Graphics.hpp>
 
-inline void buildTileMap(TileMapResource& tilemap) {
-    tilemap.width = tilemap.width;
-    tilemap.height = tilemap.height;
+inline void buildTileMap(TileMapComponent& tilemap) {
     tilemap.vertices.clear();
 
     for (unsigned int j = 0; j < tilemap.height; ++j) {
