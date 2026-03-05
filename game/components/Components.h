@@ -9,6 +9,10 @@ struct TransformComponent
     float rotation;
 };
 
+struct PlayerComponent 
+{
+};
+
 struct SpriteComponent 
 {
     std::string textureId;

@@ -6,6 +6,7 @@
 #include "systems/RenderSystem.h"
 #include "systems/TileMapRenderSystem.h"
 #include "systems/PlayBackgroundMusic.h"
+#include "systems/CameraSystem.h"
 #include "Prefabs.h"
 
 void Game::load(Engine& engine)
@@ -24,9 +25,10 @@ void Game::load(Engine& engine)
     engine.addSystem(Stage::Init, PlayBackgroundMusic);
     engine.addSystem(Stage::Input, InputSystem);
     engine.addSystem(Stage::Update, MovementSystem);
+    engine.addSystem(Stage::Update, CameraSystem);
     engine.addSystem(Stage::Render, TileMapRenderSystem);
     engine.addSystem(Stage::Render, RenderSystem);
-    
+
 
     Prefabs::createPlayer(registry);
     Prefabs::createTileMap(registry, textures.get("tileset"));

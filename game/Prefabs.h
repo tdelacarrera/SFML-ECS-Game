@@ -12,6 +12,7 @@ inline entt::entity createPlayer(entt::registry& registry)
     entt::entity entity = registry.create();
     registry.emplace<TransformComponent>(entity,sf::Vector2f{0.f, 0.f},  sf::Vector2f{1.f, 1.f},  0.f);
     registry.emplace<SpriteComponent>(entity, "colonist");
+    registry.emplace<PlayerComponent>(entity);
 
     return entity;
 }
