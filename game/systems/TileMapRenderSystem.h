@@ -8,7 +8,7 @@ inline void TileMapRenderSystem(entt::registry& registry)
 {
     auto &window = registry.ctx().get<WindowResource>().window;
 
-    auto &tilemap = registry.ctx().get<TileMapComponent>();
+    auto &tilemap = registry.ctx().get<TileMapResource>();
 
     sf::RenderStates states;
     states.texture = &tilemap.texture;

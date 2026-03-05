@@ -1,22 +1,16 @@
+#pragma once
+
 #include "components/Components.h"
 #include <SFML/Graphics.hpp>
 
-struct TileMapData
-{
-    std::vector<int> tiles;
-    unsigned int width;
-    unsigned int height;
-};
-
-
-void buildTileMap(TileMapComponent& tilemap, const TileMapData& data) {
-    tilemap.width = data.width;
-    tilemap.height = data.height;
+inline void buildTileMap(TileMapResource& tilemap) {
+    tilemap.width = tilemap.width;
+    tilemap.height = tilemap.height;
     tilemap.vertices.clear();
 
-    for (unsigned int j = 0; j < data.height; ++j) {
-        for (unsigned int i = 0; i < data.width; ++i) {
-            int tileNumber = data.tiles[i + j * data.width];
+    for (unsigned int j = 0; j < tilemap.height; ++j) {
+        for (unsigned int i = 0; i < tilemap.width; ++i) {
+            int tileNumber = tilemap.tiles[i + j * tilemap.width];
 
             int tilesPerRow = tilemap.texture.getSize().x / tilemap.tileSize;
             int tu = tileNumber % tilesPerRow;

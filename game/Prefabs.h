@@ -16,28 +16,30 @@ inline entt::entity createPlayer(entt::registry& registry)
     return entity;
 }
 
-inline entt::entity createTileMap(entt::registry& registry,
-    const sf::Texture& texture,
-    const std::vector<int>& tiles,
-    unsigned int width,
-    unsigned int height,
-    unsigned int tileSize = 16)
+inline entt::entity createTileMap(entt::registry& registry, const sf::Texture& texture)
     {
         auto entity = registry.create();
 
-        TileMapComponent tilemap;
+        TileMapResource tilemap;
         tilemap.texture = texture;
-        tilemap.tileSize = tileSize;
+        tilemap.tileSize = 16;
+        tilemap.width = 16;
+        tilemap.height = 16;
         tilemap.vertices = sf::VertexArray(sf::PrimitiveType::Triangles);
+        tilemap.tiles.resize(tilemap.width*tilemap.height);
 
-        TileMapData data;
-        data.tiles = tiles;
-        data.width = width;
-        data.height = height;
+        for (unsigned int j = 0; j < tilemap.height; ++j) {
+            for (unsigned int i = 0; i < tilemap.width; ++i) {
+                if ((i + j) % 2 == 0)
+                    tilemap.tiles[i + j * tilemap.width] = 0;
+                else
+                    tilemap.tiles[i + j * tilemap.width] = 1;
+            }
+        }
 
-        buildTileMap(tilemap, data);
+        buildTileMap(tilemap);
 
-        registry.ctx().emplace<TileMapComponent>(tilemap);
+        registry.ctx().emplace<TileMapResource>(tilemap);
 
         return entity;
     }

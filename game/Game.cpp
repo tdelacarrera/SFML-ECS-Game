@@ -29,22 +29,6 @@ void Game::load(Engine& engine)
     
 
     Prefabs::createPlayer(registry);
-
-
-    TileMapData mapData;
-    mapData.width = 10;
-    mapData.height = 10;
-    mapData.tiles.resize(mapData.width * mapData.height);
-
-    for (unsigned int j = 0; j < mapData.height; ++j) {
-        for (unsigned int i = 0; i < mapData.width; ++i) {
-            if ((i + j) % 2 == 0)
-                mapData.tiles[i + j * mapData.width] = 0;
-            else
-                mapData.tiles[i + j * mapData.width] = 1;
-        }
-    }
-
-    auto tilemapEntity = Prefabs::createTileMap(registry, textures.get("tileset"), mapData.tiles, mapData.width, mapData.height, 16);
+    Prefabs::createTileMap(registry, textures.get("tileset"));
 
 }
