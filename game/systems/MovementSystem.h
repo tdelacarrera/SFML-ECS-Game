@@ -6,7 +6,7 @@
 inline void MovementSystem(entt::registry& registry)
 {
     auto& deltaTime = registry.ctx().get<TimeResource>().deltaTime;
-    auto view = registry.view<TransformComponent>();
+    auto view = registry.view<TransformComponent, PlayerComponent>();
     
     for (auto [entity, transform] : view.each()) {
         if (sf::Keyboard::isKeyPressed(sf::Keyboard::Scan::Up)  || sf::Keyboard::isKeyPressed(sf::Keyboard::Scan::W)) {
@@ -21,5 +21,6 @@ inline void MovementSystem(entt::registry& registry)
         if (sf::Keyboard::isKeyPressed(sf::Keyboard::Scan::Right) || sf::Keyboard::isKeyPressed(sf::Keyboard::Scan::D)) {
             transform.position.x += 200 * deltaTime;
         }
+        break;
     }
 }
