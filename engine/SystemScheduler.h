@@ -9,9 +9,11 @@
 enum class Stage
 {
     Init,
+    OnEnter,
     Input,
     Update,
-    Render
+    Render,
+    OnExit
 };
 
 enum class GameState
@@ -78,13 +80,22 @@ public:
         auto& stateStack = registry.ctx().get<GameStateStack>();
         GameState state = stateStack.current();
 
+        // detectar cambio de estado
+        if(state != lastState)
+        {
+            runStage(Stage::OnExit, registry, lastState);
+            runStage(Stage::OnEnter, registry, state);
+            lastState = state;
+        }
+
         runStage(Stage::Input, registry, state);
         runStage(Stage::Update, registry, state);
         runStage(Stage::Render, registry, state);
     }
 
 private:
-
+    GameState lastState = GameState::Menu;
+    
     bool isAllowed(GameState state, const std::vector<GameState>& allowed)
     {
         if(allowed.empty())

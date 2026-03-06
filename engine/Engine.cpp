@@ -14,9 +14,6 @@ void Engine::init()
     registry_.ctx().emplace<GuiResource>();
     registry_.ctx().emplace<GameStateStack>();
 
-    auto& states = registry_.ctx().get<GameStateStack>();
-    states.push(GameState::Playing);
-
     auto &gui = registry_.ctx().get<GuiResource>().gui;
     auto &window = registry_.ctx().get<WindowResource>().window;
 

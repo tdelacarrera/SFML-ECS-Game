@@ -91,16 +91,51 @@ namespace Prefabs
     inline entt::entity createMainMenu(entt::registry& registry)
     {
         auto& gui = registry.ctx().get<GuiResource>().gui;
+        auto& states = registry.ctx().get<GameStateStack>();
 
         entt::entity menu = registry.create();
 
-        auto panel = tgui::Panel::create({"100%","100%"});
+        auto panel = tgui::Panel::create({"100%", "100%"});
         gui.add(panel);
 
-        auto button = tgui::Button::create("Start");
-        button->setPosition(300,250);
+        panel->getRenderer()->setBackgroundColor({20,20,20});
 
-        panel->add(button);
+        auto title = tgui::Label::create("ECS GAME");
+        title->setPosition("40%","10%");
+        title->setTextSize(40);
+        panel->add(title);
+
+        auto play = tgui::Button::create("Jugar");
+        play->setSize(200,50);
+        play->setPosition("40%","40%");
+        panel->add(play);
+
+        auto options = tgui::Button::create("Opciones");
+        options->setSize(200,50);
+        options->setPosition("40%","50%");
+        panel->add(options);
+
+        auto quit = tgui::Button::create("Salir");
+        quit->setSize(200,50);
+        quit->setPosition("40%","60%");
+        panel->add(quit);
+
+        play->onPress([&registry](){
+
+            auto& states = registry.ctx().get<GameStateStack>();
+            states.set(GameState::Playing);
+
+            auto& gui = registry.ctx().get<GuiResource>().gui;
+            gui.removeAllWidgets();
+
+            Prefabs::createHUD(registry);
+        });
+        
+        quit->onPress([&registry](){
+
+            auto& window = registry.ctx().get<WindowResource>().window;
+            window.close();
+        });
 
         registry.emplace<UiWidgetComponent>(menu, panel);
         registry.emplace<UiMenuTag>(menu);
