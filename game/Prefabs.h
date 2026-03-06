@@ -2,7 +2,6 @@
 
 #include <entt/entt.hpp>
 #include "components/Components.h"
-#include "TileMap.h"
 
 namespace Prefabs
 {
@@ -27,32 +26,23 @@ namespace Prefabs
     }
 
     inline entt::entity createTileMap(entt::registry& registry, const sf::Texture& texture)
-        {
-            auto entity = registry.create();
+    {
+        auto entity = registry.create();
 
-            TileMapComponent tilemap;
-            tilemap.texture = texture;
-            tilemap.tileSize = 16;
-            tilemap.width = 255;
-            tilemap.height = 255;
-            tilemap.vertices = sf::VertexArray(sf::PrimitiveType::Triangles);
-            tilemap.tiles.resize(tilemap.width*tilemap.height);
+        auto& world = registry.ctx().get<WorldMap>();
 
-            for (unsigned int j = 0; j < tilemap.height; ++j) {
-                for (unsigned int i = 0; i < tilemap.width; ++i) {
-                    if ((i + j) % 2 == 0)
-                        tilemap.tiles[i + j * tilemap.width] = 0;
-                    else
-                        tilemap.tiles[i + j * tilemap.width] = 1;
-                }
-            }
+        auto& tilemap = registry.emplace<TileMapComponent>(entity);
 
-            buildTileMap(tilemap);
+        tilemap.texture = &texture;
+        tilemap.tileSize = 32;
 
-            registry.emplace<TileMapComponent>(entity, tilemap);
+        tilemap.width = world.width;
+        tilemap.height = world.height;
 
-            return entity;
-        }
+        tilemap.vertices.setPrimitiveType(sf::PrimitiveType::Triangles);
+
+        return entity;
+    }
 
     inline entt::entity createUIButton(entt::registry& registry,const std::string& text, float x, float y)
     {

@@ -10,6 +10,8 @@
 #include "systems/UiRenderSystem.h"
 #include "systems/UiEventSystem.h"
 #include "systems/TestOnExitSystem.h"
+#include "systems/WorldGenerationSystem.h"
+#include "systems/BuildTileMapSystem.h"
 #include "Prefabs.h"
 
 void Game::load(Engine& engine)
@@ -33,6 +35,8 @@ void Game::load(Engine& engine)
 
 
     engine.addSystem(Stage::OnEnter, BackgroundMusicSystem, {GameState::Playing});
+    engine.addSystem(Stage::OnEnter, WorldGenerationSystem, {GameState::Playing});
+    engine.addSystem(Stage::OnEnter, BuildTileMapSystem, {GameState::Playing});
     engine.addSystem(Stage::Input, InputSystem, {GameState::Playing});
     engine.addSystem(Stage::Update, MovementSystem, {GameState::Playing});
     engine.addSystem(Stage::Update, CameraSystem, {GameState::Playing});

@@ -6,15 +6,17 @@
 
 inline void TileMapRenderSystem(entt::registry& registry)
 {
-    auto &window = registry.ctx().get<WindowResource>().window;
+    auto& window = registry.ctx().get<WindowResource>().window;
 
     auto view = registry.view<TileMapComponent>();
 
-    for (auto [entity, tilemap] : view.each()) 
+    for(auto entity : view)
     {
+        auto& tilemap = view.get<TileMapComponent>(entity);
+
         sf::RenderStates states;
-        states.texture = &tilemap.texture;
+        states.texture = tilemap.texture;
+
         window.draw(tilemap.vertices, states);
     }
 }
-

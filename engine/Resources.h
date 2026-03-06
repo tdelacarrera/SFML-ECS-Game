@@ -69,3 +69,23 @@ struct InputState
         return !c && p;
     }
 };
+
+struct Tile
+{
+    uint16_t terrain;   // grass, dirt, stone
+    bool walkable;
+    bool buildable;
+};
+
+struct WorldMap
+{
+    int width;
+    int height;
+
+    std::vector<Tile> tiles;
+
+    Tile& get(int x, int y)
+    {
+        return tiles[x + y * width];
+    }
+};

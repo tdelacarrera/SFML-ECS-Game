@@ -30,11 +30,16 @@ struct SpriteComponent
     std::string textureId;
 };
 
-struct TileMapComponent {
-    unsigned int width;
-    unsigned int height;
-    unsigned int tileSize;
-    sf::Texture texture;
+struct TileMapComponent
+{
+    const sf::Texture* texture;
+
+    int tileSize;
+
+    int width;
+    int height;
+
+    int tilesetWidth; // cantidad de tiles en el tileset
+
     sf::VertexArray vertices;
-    std::vector<int> tiles;
 };
