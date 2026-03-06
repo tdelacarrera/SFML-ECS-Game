@@ -36,24 +36,7 @@ void Game::load(Engine& engine)
 
     Prefabs::createPlayer(registry);
     Prefabs::createTileMap(registry, textures.get("tileset"));
-
-
-    auto &gui = registry.ctx().get<GuiResource>().gui;
-
-    auto label = tgui::Label::create("Text");
-    label->setSize(200, 40);
-    label->setPosition(10, 10);
-
-    gui.add(label);
-
-    auto button = tgui::Button::create("Click");
-    button->setSize(200, 40);
-    button->setPosition(300, 250);
-
-    button->onPress([]{
-        std::cout << "pressed\n";
-    });
-
-    gui.add(button);
-
+    Prefabs::createUIButton(registry, "Click", 300, 250);
+    Prefabs::createHUD(registry);
+   // Prefabs::createMainMenu(registry);
 }

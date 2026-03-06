@@ -1,6 +1,20 @@
 #pragma once
 
 #include <SFML/Graphics.hpp>
+#include <TGUI/TGUI.hpp>
+
+struct UiWidgetComponent
+{
+    tgui::Widget::Ptr widget;
+};
+
+struct UiRootComponent
+{
+};
+
+struct UiHudTag {};
+
+struct UiMenuTag {};
 
 struct TransformComponent 
 {
@@ -9,9 +23,7 @@ struct TransformComponent
     float rotation;
 };
 
-struct PlayerComponent 
-{
-};
+struct PlayerComponent {};
 
 struct SpriteComponent 
 {
