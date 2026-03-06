@@ -4,21 +4,14 @@
 #include <entt/entt.hpp>
 #include "../../engine/Resources.h"
 
-inline void InputSystem(entt::registry& registry)
+void InputSystem(entt::registry& registry)
 {
-    auto &events = registry.ctx().get<EventResource>().events;
+    auto& bindings = registry.ctx().get<InputBindings>();
+    auto& input = registry.ctx().get<InputState>();
 
-    for(const auto& event : events)
+    for(auto& [action, key] : bindings.bindings)
     {
-        if(event.is<sf::Event::KeyPressed>())
-        {
-            auto key = event.getIf<sf::Event::KeyPressed>();
-
-            if(key->code == sf::Keyboard::Key::Escape)
-            {
-                auto &window = registry.ctx().get<WindowResource>().window;
-                window.close();
-            }
-        }
+        bool pressed = sf::Keyboard::isKeyPressed(key);
+        input.set(action, pressed);
     }
 }

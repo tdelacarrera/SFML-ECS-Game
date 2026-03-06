@@ -13,6 +13,8 @@ void Engine::init()
     registry_.ctx().emplace<EventResource>(); 
     registry_.ctx().emplace<GuiResource>();
     registry_.ctx().emplace<GameStateStack>();
+    registry_.ctx().emplace<InputBindings>();
+    registry_.ctx().emplace<InputState>();
 
     auto &gui = registry_.ctx().get<GuiResource>().gui;
     auto &window = registry_.ctx().get<WindowResource>().window;
