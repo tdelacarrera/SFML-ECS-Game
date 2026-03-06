@@ -24,14 +24,14 @@ void Game::load(Engine& engine)
     textures.load("colonist", "assets/textures/tile2.png");
     textures.load("tileset", "assets/textures/tileset.png");
 
-    engine.addSystem(Stage::Init, BackgroundMusicSystem);
-    engine.addSystem(Stage::Input, UiEventSystem);
-    engine.addSystem(Stage::Input, InputSystem);
-    engine.addSystem(Stage::Update, MovementSystem);
-    engine.addSystem(Stage::Update, CameraSystem);
-    engine.addSystem(Stage::Render, TileMapRenderSystem);
-    engine.addSystem(Stage::Render, RenderSystem);
-    engine.addSystem(Stage::Render, UiRenderSystem);
+    engine.addSystem(Stage::Init, BackgroundMusicSystem, {GameState::Playing});
+    engine.addSystem(Stage::Input, UiEventSystem, {GameState::Playing});
+    engine.addSystem(Stage::Input, InputSystem, {GameState::Playing});
+    engine.addSystem(Stage::Update, MovementSystem, {GameState::Playing});
+    engine.addSystem(Stage::Update, CameraSystem, {GameState::Playing});
+    engine.addSystem(Stage::Render, TileMapRenderSystem, {GameState::Playing});
+    engine.addSystem(Stage::Render, RenderSystem, {GameState::Playing});
+    engine.addSystem(Stage::Render, UiRenderSystem, {GameState::Playing});
 
 
     Prefabs::createPlayer(registry);

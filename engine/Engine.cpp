@@ -12,6 +12,10 @@ void Engine::init()
     registry_.ctx().emplace<TextureManager>(); 
     registry_.ctx().emplace<EventResource>(); 
     registry_.ctx().emplace<GuiResource>();
+    registry_.ctx().emplace<GameStateStack>();
+
+    auto& states = registry_.ctx().get<GameStateStack>();
+    states.push(GameState::Playing);
 
     auto &gui = registry_.ctx().get<GuiResource>().gui;
     auto &window = registry_.ctx().get<WindowResource>().window;
@@ -20,9 +24,9 @@ void Engine::init()
     
 }
 
-void Engine::addSystem(Stage stage, SystemScheduler::SystemFunc sys)
+void Engine::addSystem(Stage stage, SystemScheduler::SystemFunc sys, std::vector<GameState> states)
 {
-    scheduler_.add(stage, sys);
+    scheduler_.add(stage, sys, states);
 }
 
 entt::registry& Engine::getRegistry()

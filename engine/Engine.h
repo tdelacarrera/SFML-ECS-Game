@@ -14,7 +14,7 @@ class Engine
 public:
 
     void init();
-    void addSystem(Stage stage, SystemScheduler::SystemFunc sys);
+    void addSystem(Stage stage, SystemScheduler::SystemFunc sys, std::vector<GameState> states);
     entt::registry& getRegistry();
     void run();
 
