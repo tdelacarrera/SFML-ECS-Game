@@ -21,12 +21,10 @@ void Game::load(Engine& engine)
     auto& textures = registry.ctx().get<TextureManager>();
     auto& bindings = registry.ctx().get<InputBindings>();
 
-    bindings.bind(InputAction::MoveUp, sf::Keyboard::Key::W);
-    bindings.bind(InputAction::MoveDown, sf::Keyboard::Key::S);
-    bindings.bind(InputAction::MoveLeft, sf::Keyboard::Key::A);
-    bindings.bind(InputAction::MoveRight, sf::Keyboard::Key::D);
-    bindings.bind(InputAction::Shoot, sf::Keyboard::Key::Space);
-    bindings.bind(InputAction::OpenMenu, sf::Keyboard::Key::Escape);
+    bindings.bind("move_up", sf::Keyboard::Key::W);
+    bindings.bind("move_down", sf::Keyboard::Key::S);
+    bindings.bind("move_left", sf::Keyboard::Key::A);
+    bindings.bind("move_right", sf::Keyboard::Key::D);
 
     music.load("music1", "assets/music/music2.ogg");
     sounds.load("test2", "assets/sounds/test2.mp3");

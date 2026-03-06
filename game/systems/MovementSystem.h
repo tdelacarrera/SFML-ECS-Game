@@ -10,16 +10,16 @@ inline void MovementSystem(entt::registry& registry)
     auto& input = registry.ctx().get<InputState>();
     
     for (auto [entity, transform] : view.each()) {
-        if(input.isPressed(InputAction::MoveUp))
+        if(input.pressed("move_up"))
            transform.position.y -= 200 * deltaTime;
 
-        if(input.isPressed(InputAction::MoveDown))
+        if(input.pressed("move_down"))
            transform.position.y += 200 * deltaTime;
 
-        if(input.isPressed(InputAction::MoveLeft))
+        if(input.pressed("move_left"))
            transform.position.x -= 200 * deltaTime;
 
-        if(input.isPressed(InputAction::MoveRight))
+        if(input.pressed("move_right"))
             transform.position.x += 200 * deltaTime;
 
         break;
