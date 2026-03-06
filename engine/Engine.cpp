@@ -11,6 +11,13 @@ void Engine::init()
     registry_.ctx().emplace<SoundManager>(); 
     registry_.ctx().emplace<TextureManager>(); 
     registry_.ctx().emplace<EventResource>(); 
+    registry_.ctx().emplace<GuiResource>();
+
+    auto &gui = registry_.ctx().get<GuiResource>().gui;
+    auto &window = registry_.ctx().get<WindowResource>().window;
+
+    gui.setTarget(window);
+    
 }
 
 void Engine::addSystem(Stage stage, SystemScheduler::SystemFunc sys)

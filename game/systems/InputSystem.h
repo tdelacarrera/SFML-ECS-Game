@@ -4,7 +4,7 @@
 #include <entt/entt.hpp>
 #include "../../engine/Resources.h"
 
-void InputSystem(entt::registry& registry)
+inline void InputSystem(entt::registry& registry)
 {
     auto &events = registry.ctx().get<EventResource>().events;
 

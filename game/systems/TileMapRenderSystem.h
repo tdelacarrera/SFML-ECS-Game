@@ -16,9 +16,5 @@ inline void TileMapRenderSystem(entt::registry& registry)
         states.texture = &tilemap.texture;
         window.draw(tilemap.vertices, states);
     }
-
-
-
-    
 }
 
