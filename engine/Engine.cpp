@@ -3,7 +3,7 @@
 void Engine::init()
 {
     registry_.ctx().emplace<WindowResource>(
-        sf::RenderWindow(sf::VideoMode({800,600}), "ECS Game")
+        sf::RenderWindow(sf::VideoMode({1600,900}), "ECS Game")
     );
 
     registry_.ctx().emplace<TimeResource>();

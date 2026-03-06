@@ -3,7 +3,7 @@
 #include <entt/entt.hpp>
 #include "components/Components.h"
 
-namespace Prefabs
+namespace EntityFactory
 {
 
     inline entt::entity createPlayer(entt::registry& registry)
@@ -34,7 +34,7 @@ namespace Prefabs
         auto& tilemap = registry.emplace<TileMapComponent>(entity);
 
         tilemap.texture = &texture;
-        tilemap.tileSize = 32;
+        tilemap.tileSize = 16;
 
         tilemap.width = world.width;
         tilemap.height = world.height;
@@ -118,7 +118,7 @@ namespace Prefabs
             auto& gui = registry.ctx().get<GuiResource>().gui;
             gui.removeAllWidgets();
 
-            Prefabs::createHUD(registry);
+            EntityFactory::createHUD(registry);
         });
         
         quit->onPress([&registry](){
@@ -133,6 +133,7 @@ namespace Prefabs
         return menu;
     }
 
-
 }
+
+
 

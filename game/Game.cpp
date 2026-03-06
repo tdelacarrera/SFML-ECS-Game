@@ -9,10 +9,9 @@
 #include "systems/CameraSystem.h"
 #include "systems/UiRenderSystem.h"
 #include "systems/UiEventSystem.h"
-#include "systems/TestOnExitSystem.h"
 #include "systems/WorldGenerationSystem.h"
 #include "systems/BuildTileMapSystem.h"
-#include "Prefabs.h"
+#include "EntityFactory.h"
 
 void Game::load(Engine& engine)
 {
@@ -45,12 +44,11 @@ void Game::load(Engine& engine)
 
     engine.addSystem(Stage::Input, UiEventSystem, {GameState::Menu, GameState::Playing});
     engine.addSystem(Stage::Render, UiRenderSystem, {GameState::Menu, GameState::Playing});
-    engine.addSystem(Stage::OnExit, TestOnExitSystem, {GameState::Menu});
 
 
-    Prefabs::createPlayer(registry);
-    Prefabs::createTileMap(registry, textures.get("tileset"));
-    Prefabs::createUIButton(registry, "Click", 300, 250);
-    Prefabs::createHUD(registry);
-    Prefabs::createMainMenu(registry);
+    EntityFactory::createPlayer(registry);
+    EntityFactory::createTileMap(registry, textures.get("tileset"));
+    EntityFactory::createUIButton(registry, "Click", 300, 250);
+    EntityFactory::createHUD(registry);
+    EntityFactory::createMainMenu(registry);
 }
