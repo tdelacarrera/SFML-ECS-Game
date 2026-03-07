@@ -9,9 +9,10 @@
 #include "systems/CameraSystem.h"
 #include "systems/UiRenderSystem.h"
 #include "systems/UiEventSystem.h"
-#include "systems/WorldGenerationSystem.h"
+#include "systems/TerrainGenerationSystem.h"
 #include "systems/BuildTileMapSystem.h"
-#include "systems/PlaceWorldTreesSystem.h"
+#include "systems/VegetationGenerationSystem.h"
+#include "systems/AnimalGenerationSystem.h"
 #include "EntityFactory.h"
 
 void Game::load(Engine& engine)
@@ -36,9 +37,10 @@ void Game::load(Engine& engine)
 
 
     engine.addSystem(Stage::OnEnter, BackgroundMusicSystem, {GameState::Playing,});
-    engine.addSystem(Stage::OnEnter, WorldGenerationSystem, {GameState::Playing});
+    engine.addSystem(Stage::OnEnter, TerrainGenerationSystem, {GameState::Playing});
     engine.addSystem(Stage::OnEnter, BuildTileMapSystem, {GameState::Playing});
-    engine.addSystem(Stage::OnEnter, PlaceWorldTreesSystem, {GameState::Playing});
+    engine.addSystem(Stage::OnEnter, VegetationGenerationSystem, {GameState::Playing});
+    engine.addSystem(Stage::OnEnter, AnimalGenerationSystem, {GameState::Playing});
     engine.addSystem(Stage::Input, InputSystem, {GameState::Playing});
     engine.addSystem(Stage::Update, MovementSystem, {GameState::Playing});
     engine.addSystem(Stage::Update, CameraSystem, {GameState::Playing});

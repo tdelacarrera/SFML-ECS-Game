@@ -36,11 +36,23 @@ FetchContent_Declare(
 )
 FetchContent_MakeAvailable(tgui)
 
+# FastNoiseLite
+FetchContent_Declare(
+    fastnoiselite
+    GIT_REPOSITORY https://github.com/Auburn/FastNoiseLite.git
+    GIT_TAG master
+)
+FetchContent_MakeAvailable(fastnoiselite)
+
 file(GLOB_RECURSE SOURCES CONFIGURE_DEPENDS engine/*.cpp game/*.cpp  )
 
 add_executable(Game ${SOURCES})
 
-target_include_directories(Game PRIVATE Include)
+
+target_include_directories(Game PRIVATE
+    Include
+    ${fastnoiselite_SOURCE_DIR}/Cpp
+)
 
 target_link_libraries(Game 
     PRIVATE 

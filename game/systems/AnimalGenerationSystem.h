@@ -1,10 +1,12 @@
 #pragma once
 
 #include <entt/entt.hpp>
+#include <SFML/Graphics.hpp>
+#include "../components/Components.h"
 #include "../../engine/Resources.h"
+#include "../EntityFactory.h"
 
-
-inline void WorldGenerationSystem(entt::registry& registry)
+inline void AnimalGenerationSystem(entt::registry& registry)
 {
     auto& world = registry.ctx().get<WorldMap>();
 
@@ -14,11 +16,7 @@ inline void WorldGenerationSystem(entt::registry& registry)
     {
         for(int x=0;x<world.width;x++)
         {
-            auto& tile = world.get(x,y);
 
-            tile.terrain = 0;
-            tile.walkable = true;
-            tile.buildable = true;
         }
     }
 }

@@ -6,7 +6,7 @@
 #include "../../engine/Resources.h"
 #include "../EntityFactory.h"
 
-inline void PlaceWorldTreesSystem(entt::registry& registry)
+inline void VegetationGenerationSystem(entt::registry& registry)
 {
     auto& world = registry.ctx().get<WorldMap>();
 
