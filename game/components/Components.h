@@ -43,3 +43,10 @@ struct TileMapComponent
 
     sf::VertexArray vertices;
 };
+
+struct AnimalComponent
+{
+    sf::Vector2f direction;
+    float speed;
+    float changeDirectionTimer;
+};

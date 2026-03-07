@@ -13,6 +13,7 @@
 #include "systems/BuildTileMapSystem.h"
 #include "systems/VegetationGenerationSystem.h"
 #include "systems/AnimalGenerationSystem.h"
+#include "systems/AnimalMovementSystem.h"
 #include "EntityFactory.h"
 
 void Game::load(Engine& engine)
@@ -35,7 +36,8 @@ void Game::load(Engine& engine)
     sounds.load("test2", "assets/sounds/test2.mp3");
     textures.load("tree", "assets/textures/tree.png");
     textures.load("tileset", "assets/textures/tilemap64.png");
-    textures.load("player", "assets/textures/player.png");
+    textures.load("colonist", "assets/textures/colonist.png");
+    textures.load("animal", "assets/textures/animal.png");
 
 
     engine.addSystem(Stage::OnEnter, BackgroundMusicSystem, {GameState::Playing,});
@@ -45,6 +47,7 @@ void Game::load(Engine& engine)
     engine.addSystem(Stage::OnEnter, AnimalGenerationSystem, {GameState::Playing});
     engine.addSystem(Stage::Input, InputSystem, {GameState::Playing});
     engine.addSystem(Stage::Update, MovementSystem, {GameState::Playing});
+    engine.addSystem(Stage::Update, AnimalMovementSystem, {GameState::Playing});
     engine.addSystem(Stage::Update, CameraSystem, {GameState::Playing});
     engine.addSystem(Stage::Render, TileMapRenderSystem, {GameState::Playing});
     engine.addSystem(Stage::Render, RenderSystem, {GameState::Playing});
@@ -53,7 +56,6 @@ void Game::load(Engine& engine)
     engine.addSystem(Stage::Render, UiRenderSystem, {GameState::Menu, GameState::Playing});
 
 
-    EntityFactory::createPlayer(registry);
     EntityFactory::createTileMap(registry, textures.get("tileset"));
     EntityFactory::createUIButton(registry, "Click", 300, 250);
     EntityFactory::createHUD(registry);

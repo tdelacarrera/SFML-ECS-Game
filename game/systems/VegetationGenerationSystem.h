@@ -27,7 +27,9 @@ inline void VegetationGenerationSystem(entt::registry& registry)
         {
             for(int x=0; x<world.width; x++)
             {
-                if(rand() % 3 == 1){
+                 auto& tile = world.get(x,y);
+            
+                if(rand() % 3 == 1 && tile.terrain == 3){
                     EntityFactory::createTree(registry, x * tilemap.tileSize, y * tilemap.tileSize);
                 }
 

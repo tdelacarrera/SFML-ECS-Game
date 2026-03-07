@@ -33,7 +33,7 @@ inline void TerrainGenerationSystem(entt::registry& registry)
             {
                  tile.terrain = 2; 
             }
-            else if(n < 0.5){
+            else if(n < 0.8){
                  tile.terrain = 3; 
             }
             else
