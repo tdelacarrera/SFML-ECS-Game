@@ -8,10 +8,6 @@ struct UiWidgetComponent
     tgui::Widget::Ptr widget;
 };
 
-struct UiRootComponent
-{
-};
-
 struct UiHudTag {};
 
 struct UiMenuTag {};
@@ -22,8 +18,6 @@ struct TransformComponent
     sf::Vector2f scale;
     float rotation;
 };
-
-struct PlayerComponent {};
 
 struct SpriteComponent 
 {

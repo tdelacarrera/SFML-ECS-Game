@@ -15,6 +15,7 @@
 #include "systems/VegetationGenerationSystem.h"
 #include "systems/AnimalGenerationSystem.h"
 #include "systems/AnimalMovementSystem.h"
+#include "systems/ColonistGenerationSystem.h"
 #include "EntityFactory.h"
 
 void Game::load(Engine& engine)
@@ -49,6 +50,7 @@ void Game::load(Engine& engine)
     engine.addSystem(Stage::OnEnter, BuildTileMapSystem, {GameState::Playing});
     engine.addSystem(Stage::OnEnter, VegetationGenerationSystem, {GameState::Playing});
     engine.addSystem(Stage::OnEnter, AnimalGenerationSystem, {GameState::Playing});
+    engine.addSystem(Stage::OnEnter, ColonistGenerationSystem, {GameState::Playing});
     engine.addSystem(Stage::Input, InputSystem, {GameState::Playing});
     engine.addSystem(Stage::Update, MovementSystem, {GameState::Playing});
     engine.addSystem(Stage::Update, AnimalMovementSystem, {GameState::Playing});
@@ -61,7 +63,6 @@ void Game::load(Engine& engine)
 
 
     EntityFactory::createTileMap(registry, textures.get("tileset"));
-    EntityFactory::createUIButton(registry, "Click", 300, 250);
     EntityFactory::createHUD(registry);
     EntityFactory::createMainMenu(registry, textures.get("background"));
 }

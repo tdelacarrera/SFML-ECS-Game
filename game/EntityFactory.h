@@ -25,6 +25,15 @@ namespace EntityFactory
         return entity;
     }
 
+    inline entt::entity createColonist(entt::registry& registry, float x, float y)
+    {
+        entt::entity entity = registry.create();
+        registry.emplace<TransformComponent>(entity,sf::Vector2f{x, y},  sf::Vector2f{1.f, 1.f},  0.f);
+        registry.emplace<SpriteComponent>(entity, "colonist");
+
+        return entity;
+    }
+
     inline entt::entity createTileMap(entt::registry& registry, const sf::Texture& texture)
     {
         auto entity = registry.create();
@@ -40,22 +49,6 @@ namespace EntityFactory
         tilemap.height = world.height;
 
         tilemap.vertices.setPrimitiveType(sf::PrimitiveType::Triangles);
-
-        return entity;
-    }
-
-    inline entt::entity createUIButton(entt::registry& registry,const std::string& text, float x, float y)
-    {
-        auto& gui = registry.ctx().get<GuiResource>().gui;
-
-        auto entity = registry.create();
-
-        auto button = tgui::Button::create(text);
-        button->setPosition(x, y);
-
-        registry.emplace<UiWidgetComponent>(entity, button);
-
-        gui.add(button);
 
         return entity;
     }

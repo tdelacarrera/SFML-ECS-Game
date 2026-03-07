@@ -6,10 +6,10 @@
 inline void MovementSystem(entt::registry& registry)
 {
     auto& deltaTime = registry.ctx().get<TimeResource>().deltaTime;
-    auto view = registry.view<TransformComponent, PlayerComponent>();
+    auto view = registry.view<TransformComponent>();
     auto& input = registry.ctx().get<InputState>();
     
-    for (auto [entity, transform] : view.each()) {
+   /* for (auto [entity, transform] : view.each()) {
         if(input.pressed("move_up"))
            transform.position.y -= 200 * deltaTime;
 
@@ -24,4 +24,5 @@ inline void MovementSystem(entt::registry& registry)
 
         break;
     }
+        */
 }
