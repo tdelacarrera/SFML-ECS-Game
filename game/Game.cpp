@@ -6,6 +6,7 @@
 #include "systems/RenderSystem.h"
 #include "systems/TileMapRenderSystem.h"
 #include "systems/BackgroundMusicSystem.h"
+#include "systems/TitleScreenMusicSystem.h"
 #include "systems/CameraSystem.h"
 #include "systems/UiRenderSystem.h"
 #include "systems/UiEventSystem.h"
@@ -33,6 +34,7 @@ void Game::load(Engine& engine)
     bindings.bind("zoom_out", sf::Keyboard::Key::E);
 
     music.load("music1", "assets/music/music2.ogg");
+    music.load("music2", "assets/music/music4.ogg");
     sounds.load("test2", "assets/sounds/test2.mp3");
     textures.load("tree", "assets/textures/tree.png");
     textures.load("tileset", "assets/textures/tilemap64.png");
@@ -40,6 +42,7 @@ void Game::load(Engine& engine)
     textures.load("animal", "assets/textures/animal.png");
 
 
+    engine.addSystem(Stage::Init, TitleScreenMusicSystem, {GameState::Menu,});
     engine.addSystem(Stage::OnEnter, BackgroundMusicSystem, {GameState::Playing,});
     engine.addSystem(Stage::OnEnter, TerrainGenerationSystem, {GameState::Playing});
     engine.addSystem(Stage::OnEnter, BuildTileMapSystem, {GameState::Playing});
