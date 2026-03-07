@@ -7,30 +7,39 @@
 
 inline void CameraSystem(entt::registry& registry)
 {
-    auto &window = registry.ctx().get<WindowResource>().window;
-    auto &deltaTime = registry.ctx().get<TimeResource>().deltaTime;
-    sf::View camera = window.getView(); 
-    
-    float cameraSmooth = 2;
+    auto& window = registry.ctx().get<WindowResource>().window;
+    auto& deltaTime = registry.ctx().get<TimeResource>().deltaTime;
+    auto& input = registry.ctx().get<InputState>();
 
-    auto view = registry.view<TransformComponent, PlayerComponent>();
+    sf::View camera = window.getView();
 
-    for (auto [entity, transform] : view.each()) 
-    {
-        sf::Vector2f camPos = camera.getCenter();
-        sf::Vector2f target = transform.position;
+    float speed = 600.f;
+    float zoomSpeed = 1.5f;
 
-        sf::Vector2f newPos;
-        newPos.x = camPos.x + (target.x - camPos.x) * cameraSmooth * deltaTime;
-        newPos.y = camPos.y + (target.y - camPos.y) * cameraSmooth * deltaTime;
-    
-        camera.setCenter(newPos);
-        window.setView(camera);
+    sf::Vector2f movement{0.f,0.f};
 
-        break;
-    }
+
+    // camera movement
+    if(input.pressed("move_up"))
+        movement.y -= speed * deltaTime;
+
+    if(input.pressed("move_down"))
+        movement.y += speed * deltaTime;
+
+    if(input.pressed("move_left"))
+        movement.x -= speed * deltaTime;
+
+    if(input.pressed("move_right"))
+        movement.x += speed * deltaTime;
+
+    camera.move(movement);
+
+    // zoom
+    if(input.pressed("zoom_in"))
+        camera.zoom(1.f + zoomSpeed * deltaTime);
+
+    if(input.pressed("zoom_out"))
+        camera.zoom(1.f - zoomSpeed * deltaTime);
+
+    window.setView(camera);
 }
-
-
-
-

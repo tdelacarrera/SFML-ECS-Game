@@ -28,6 +28,8 @@ void Game::load(Engine& engine)
     bindings.bind("move_down", sf::Keyboard::Key::S);
     bindings.bind("move_left", sf::Keyboard::Key::A);
     bindings.bind("move_right", sf::Keyboard::Key::D);
+    bindings.bind("zoom_in", sf::Keyboard::Key::Q);
+    bindings.bind("zoom_out", sf::Keyboard::Key::E);
 
     music.load("music1", "assets/music/music2.ogg");
     sounds.load("test2", "assets/sounds/test2.mp3");
