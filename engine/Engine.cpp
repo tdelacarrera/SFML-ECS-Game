@@ -19,6 +19,7 @@ void Engine::init()
 
     auto &gui = registry_.ctx().get<GuiResource>().gui;
     auto &window = registry_.ctx().get<WindowResource>().window;
+    window.setFramerateLimit(60);
 
     gui.setTarget(window);
     
