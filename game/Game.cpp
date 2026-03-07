@@ -11,6 +11,7 @@
 #include "systems/UiEventSystem.h"
 #include "systems/WorldGenerationSystem.h"
 #include "systems/BuildTileMapSystem.h"
+#include "systems/PlaceWorldTreesSystem.h"
 #include "EntityFactory.h"
 
 void Game::load(Engine& engine)
@@ -29,13 +30,15 @@ void Game::load(Engine& engine)
 
     music.load("music1", "assets/music/music2.ogg");
     sounds.load("test2", "assets/sounds/test2.mp3");
-    textures.load("colonist", "assets/textures/tile2.png");
-    textures.load("tileset", "assets/textures/tileset.png");
+    textures.load("tree", "assets/textures/tree.png");
+    textures.load("tileset", "assets/textures/tilemap64.png");
+    textures.load("player", "assets/textures/player.png");
 
 
-    engine.addSystem(Stage::OnEnter, BackgroundMusicSystem, {GameState::Playing});
+    engine.addSystem(Stage::OnEnter, BackgroundMusicSystem, {GameState::Playing,});
     engine.addSystem(Stage::OnEnter, WorldGenerationSystem, {GameState::Playing});
     engine.addSystem(Stage::OnEnter, BuildTileMapSystem, {GameState::Playing});
+    engine.addSystem(Stage::OnEnter, PlaceWorldTreesSystem, {GameState::Playing});
     engine.addSystem(Stage::Input, InputSystem, {GameState::Playing});
     engine.addSystem(Stage::Update, MovementSystem, {GameState::Playing});
     engine.addSystem(Stage::Update, CameraSystem, {GameState::Playing});

@@ -16,7 +16,7 @@ inline void WorldGenerationSystem(entt::registry& registry)
         {
             auto& tile = world.get(x,y);
 
-            tile.terrain = rand() % 3;
+            tile.terrain = 0;
             tile.walkable = true;
             tile.buildable = true;
         }
