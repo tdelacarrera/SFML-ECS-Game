@@ -78,40 +78,53 @@ namespace EntityFactory
         return hud;
     }
 
-    inline entt::entity createMainMenu(entt::registry& registry)
+    inline entt::entity createMainMenu(entt::registry& registry, const sf::Texture& texture)
     {
         auto& gui = registry.ctx().get<GuiResource>().gui;
-        auto& states = registry.ctx().get<GameStateStack>();
 
         entt::entity menu = registry.create();
 
+        // Panel raíz
         auto panel = tgui::Panel::create({"100%", "100%"});
         gui.add(panel);
 
-        panel->getRenderer()->setBackgroundColor({20,20,20});
+        // Imagen de fondo
+        auto background = tgui::Picture::create(texture);
+        background->setSize({"100%", "100%"});
+        panel->add(background);
 
+        // Overlay oscuro
+        auto overlay = tgui::Panel::create({"100%", "100%"});
+        overlay->getRenderer()->setBackgroundColor(tgui::Color(0,0,0,120));
+        panel->add(overlay);
+
+        // Título
         auto title = tgui::Label::create("ECS GAME");
-        title->setPosition("40%","10%");
+        title->setPosition("40%", "10%");
         title->setTextSize(40);
-        panel->add(title);
+        overlay->add(title);
 
+        // Botón Jugar
         auto play = tgui::Button::create("Jugar");
-        play->setSize(200,50);
-        play->setPosition("40%","40%");
-        panel->add(play);
+        play->setSize(200, 50);
+        play->setPosition("40%", "40%");
+        overlay->add(play);
 
+        // Botón Opciones
         auto options = tgui::Button::create("Opciones");
-        options->setSize(200,50);
-        options->setPosition("40%","50%");
-        panel->add(options);
+        options->setSize(200, 50);
+        options->setPosition("40%", "50%");
+        overlay->add(options);
 
+        // Botón Salir
         auto quit = tgui::Button::create("Salir");
-        quit->setSize(200,50);
-        quit->setPosition("40%","60%");
-        panel->add(quit);
+        quit->setSize(200, 50);
+        quit->setPosition("40%", "60%");
+        overlay->add(quit);
 
-        play->onPress([&registry](){
-
+        // Eventos
+        play->onPress([&registry]()
+        {
             auto& states = registry.ctx().get<GameStateStack>();
             states.set(GameState::Playing);
 
@@ -120,9 +133,9 @@ namespace EntityFactory
 
             EntityFactory::createHUD(registry);
         });
-        
-        quit->onPress([&registry](){
 
+        quit->onPress([&registry]()
+        {
             auto& window = registry.ctx().get<WindowResource>().window;
             window.close();
         });
