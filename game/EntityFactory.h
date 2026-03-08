@@ -116,13 +116,13 @@ namespace EntityFactory
         overlay->add(quit);
 
         // Eventos
-        play->onPress([&registry]()
+        play->onPress([&registry, panel]()
         {
             auto& states = registry.ctx().get<GameStateStack>();
-            states.set(GameState::Playing);
+            states.push(GameState::Playing);
 
             auto& gui = registry.ctx().get<GuiResource>().gui;
-            gui.removeAllWidgets();
+            panel->setVisible(false);
 
             EntityFactory::createHUD(registry);
         });
@@ -135,6 +135,68 @@ namespace EntityFactory
 
         registry.emplace<UiWidgetComponent>(menu, panel);
         registry.emplace<UiMenuTag>(menu);
+
+        return menu;
+    }
+
+    inline entt::entity createPauseMenu(entt::registry& registry)
+    {
+        auto& gui = registry.ctx().get<GuiResource>().gui;
+
+        entt::entity menu = registry.create();
+
+        // Panel raíz
+        auto panel = tgui::Panel::create({"100%", "100%"});
+        panel->setVisible(false);
+        gui.add(panel);
+
+        // Overlay oscuro
+        auto overlay = tgui::Panel::create({"100%", "100%"});
+        overlay->getRenderer()->setBackgroundColor(tgui::Color(0,0,0,120));
+        panel->add(overlay);
+
+        // Título
+        auto title = tgui::Label::create("ECS GAME");
+        title->setPosition("40%", "10%");
+        title->setTextSize(40);
+        overlay->add(title);
+
+        // Botón Jugar
+        auto play = tgui::Button::create("Jugar");
+        play->setSize(200, 50);
+        play->setPosition("40%", "40%");
+        overlay->add(play);
+
+        // Botón Opciones
+        auto options = tgui::Button::create("Opciones");
+        options->setSize(200, 50);
+        options->setPosition("40%", "50%");
+        overlay->add(options);
+
+        // Botón Salir
+        auto quit = tgui::Button::create("Salir");
+        quit->setSize(200, 50);
+        quit->setPosition("40%", "60%");
+        overlay->add(quit);
+
+        // Eventos
+        play->onPress([&registry, panel]()
+        {
+            auto& states = registry.ctx().get<GameStateStack>();
+            states.pop();
+            panel->setVisible(false); 
+        });
+
+        quit->onPress([&registry, panel]()
+        {
+            auto& states = registry.ctx().get<GameStateStack>();
+            states.set(GameState::Menu);
+            panel->setVisible(false); 
+            
+        });
+
+        registry.emplace<UiWidgetComponent>(menu, panel);
+        registry.emplace<UiPauseMenuTag>(menu);
 
         return menu;
     }

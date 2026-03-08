@@ -3,7 +3,7 @@
 #include <entt/entt.hpp>
 #include <SFML/Graphics.hpp>
 #include "../components/Components.h"
-#include "../../engine/Resources.h"
+#include "../../engine/Input.h"
 
 inline void CameraSystem(entt::registry& registry)
 {

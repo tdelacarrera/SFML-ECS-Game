@@ -12,6 +12,8 @@ struct UiHudTag {};
 
 struct UiMenuTag {};
 
+struct UiPauseMenuTag {};
+
 struct TransformComponent 
 {
     sf::Vector2f position;

@@ -5,50 +5,10 @@
 #include <vector>
 #include <unordered_map>
 #include <algorithm>
+#include "GameStateStack.h"
+#include <iostream>
 
-enum class Stage
-{
-    Init,
-    OnEnter,
-    Input,
-    Update,
-    Render,
-    OnExit
-};
 
-enum class GameState
-{
-    Menu,
-    Playing,
-    Paused
-};
-
-struct GameStateStack
-{
-    std::vector<GameState> stack;
-
-    GameState current() const
-    {
-        return stack.empty() ? GameState::Menu : stack.back();
-    }
-
-    void push(GameState s)
-    {
-        stack.push_back(s);
-    }
-
-    void pop()
-    {
-        if(!stack.empty())
-            stack.pop_back();
-    }
-
-    void set(GameState s)
-    {
-        stack.clear();
-        stack.push_back(s);
-    }
-};
 
 class SystemScheduler
 {
@@ -81,20 +41,33 @@ public:
         GameState state = stateStack.current();
 
         // detectar cambio de estado
-        if(state != lastState)
+        
+        size_t currentStackSize = stateStack.size();
+        std::cout<<currentStackSize<<std::endl;
+        
+        if(currentStackSize > lastStackSize)
         {
-            runStage(Stage::OnExit, registry, lastState);
             runStage(Stage::OnEnter, registry, state);
-            lastState = state;
         }
 
+        else if(currentStackSize < lastStackSize)
+        {
+            runStage(Stage::OnExit, registry, lastState);
+        }
+        lastStackSize = currentStackSize;
+        lastState = state;
+        
+
         runStage(Stage::Input, registry, state);
+        
         runStage(Stage::Update, registry, state);
+        
         runStage(Stage::Render, registry, state);
     }
 
 private:
-    GameState lastState = GameState::Menu;
+    GameState lastState;
+    size_t lastStackSize;
     
     bool isAllowed(GameState state, const std::vector<GameState>& allowed)
     {

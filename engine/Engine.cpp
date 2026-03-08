@@ -64,6 +64,7 @@ void Engine::run()
         scheduler_.run(registry_);
 
         window.display();
+
     }
 }
 

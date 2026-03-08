@@ -7,6 +7,7 @@
 #include "MusicManager.h"
 #include "SoundManager.h"
 #include "TextureManager.h"
+#include "Input.h"
 
 
 class Engine
