@@ -32,7 +32,9 @@ public:
     void runOnce(entt::registry& registry)
     {
         auto& stateStack = registry.ctx().get<GameStateStack>();
-        runStage(Stage::Init, registry, stateStack.current());
+        GameState state = stateStack.current();
+        runStage(Stage::Init, registry, state);
+        runStage(Stage::OnEnter, registry, state);
     }
 
     void run(entt::registry& registry)
@@ -44,7 +46,7 @@ public:
         
         size_t currentStackSize = stateStack.size();
         std::cout<<currentStackSize<<std::endl;
-        
+
         if(currentStackSize > lastStackSize)
         {
             runStage(Stage::OnEnter, registry, state);
