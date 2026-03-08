@@ -6,7 +6,7 @@
 #include <iostream>
 
 
-inline void UiPauseMenuRenderSystem(entt::registry& registry)
+inline void UiPauseMenuShowSystem(entt::registry& registry)
 {
     auto &gui = registry.ctx().get<GuiResource>().gui;
 

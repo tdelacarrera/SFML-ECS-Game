@@ -2,7 +2,6 @@
 
 #include "Game.h"
 #include "systems/InputSystem.h"
-#include "systems/MovementSystem.h"
 #include "systems/RenderSystem.h"
 #include "systems/TileMapRenderSystem.h"
 #include "systems/BackgroundMusicSystem.h"
@@ -16,7 +15,7 @@
 #include "systems/AnimalGenerationSystem.h"
 #include "systems/AnimalMovementSystem.h"
 #include "systems/ColonistGenerationSystem.h"
-#include "systems/UiPauseMenuRenderSystem.h"
+#include "systems/UiPauseMenuShowSystem.h"
 #include "systems/PauseInputSystem.h"
 #include "EntityFactory.h"
 
@@ -61,14 +60,13 @@ void Game::load(Engine& engine)
     engine.addSystem(Stage::Input, PauseInputSystem, {GameState::Playing, GameState::Paused});
     engine.addSystem(Stage::Input, UiEventSystem, {GameState::Menu, GameState::Playing});
 
-    engine.addSystem(Stage::Update, MovementSystem, {GameState::Playing});
     engine.addSystem(Stage::Update, AnimalMovementSystem, {GameState::Playing});
     engine.addSystem(Stage::Update, CameraSystem, {GameState::Playing});
     
-    engine.addSystem(Stage::Render, UiPauseMenuRenderSystem, {GameState::Paused});
+    engine.addSystem(Stage::Render, UiPauseMenuShowSystem, {GameState::Paused});
     engine.addSystem(Stage::Render, TileMapRenderSystem, {GameState::Playing, GameState::Paused});
     engine.addSystem(Stage::Render, RenderSystem, {GameState::Playing, GameState::Paused});
-    engine.addSystem(Stage::Render, UiRenderSystem, {GameState::Menu, GameState::Playing});
+    engine.addSystem(Stage::Render, UiRenderSystem, {GameState::Menu, GameState::Playing,  GameState::Paused});
 
     EntityFactory::createTileMap(registry, textures.get("tileset"));
     EntityFactory::createHUD(registry);

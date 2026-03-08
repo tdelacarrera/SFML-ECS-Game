@@ -16,8 +16,6 @@ inline void ColonistGenerationSystem(entt::registry& registry)
     {
         auto& tilemap = view.get<TileMapComponent>(entity);
 
-        tilemap.vertices.setPrimitiveType(sf::PrimitiveType::Triangles);
-        tilemap.vertices.resize(world.width * world.height * 6);
 
         int tilesetWidth = tilemap.texture->getSize().x / tilemap.tileSize;
 
