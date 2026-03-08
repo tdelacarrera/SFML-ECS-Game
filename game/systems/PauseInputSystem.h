@@ -4,7 +4,6 @@
 #include <entt/entt.hpp>
 #include "../../engine/Input.h"
 #include "../../engine/GameStateStack.h"
-#include <iostream>
 
 
 inline void PauseInputSystem(entt::registry& registry)

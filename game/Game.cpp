@@ -17,6 +17,7 @@
 #include "systems/ColonistGenerationSystem.h"
 #include "systems/UiPauseMenuShowSystem.h"
 #include "systems/PauseInputSystem.h"
+#include "systems/UiMainMenuShowSystem.h"
 #include "EntityFactory.h"
 
 void Game::load(Engine& engine)
@@ -55,15 +56,17 @@ void Game::load(Engine& engine)
     engine.addSystem(Stage::OnEnter, VegetationGenerationSystem, {GameState::Playing});
     engine.addSystem(Stage::OnEnter, AnimalGenerationSystem, {GameState::Playing});
     engine.addSystem(Stage::OnEnter, ColonistGenerationSystem, {GameState::Playing});
+    engine.addSystem(Stage::Render, UiPauseMenuShowSystem, {GameState::Paused});
+    engine.addSystem(Stage::OnExit, UiMainMenuShowSystem, {GameState::Paused});
     
-    engine.addSystem(Stage::Input, InputSystem, {GameState::Playing});
+
     engine.addSystem(Stage::Input, PauseInputSystem, {GameState::Playing, GameState::Paused});
-    engine.addSystem(Stage::Input, UiEventSystem, {GameState::Menu, GameState::Playing});
+    engine.addSystem(Stage::Input, UiEventSystem, {GameState::Menu, GameState::Playing, GameState::Paused});
+    engine.addSystem(Stage::Input, InputSystem, {GameState::Playing, GameState::Paused});
 
     engine.addSystem(Stage::Update, AnimalMovementSystem, {GameState::Playing});
     engine.addSystem(Stage::Update, CameraSystem, {GameState::Playing});
     
-    engine.addSystem(Stage::Render, UiPauseMenuShowSystem, {GameState::Paused});
     engine.addSystem(Stage::Render, TileMapRenderSystem, {GameState::Playing, GameState::Paused});
     engine.addSystem(Stage::Render, RenderSystem, {GameState::Playing, GameState::Paused});
     engine.addSystem(Stage::Render, UiRenderSystem, {GameState::Menu, GameState::Playing,  GameState::Paused});

@@ -147,12 +147,13 @@ namespace EntityFactory
 
         // Panel raíz
         auto panel = tgui::Panel::create({"100%", "100%"});
+        panel->getRenderer()->setBackgroundColor(tgui::Color::Transparent);
         panel->setVisible(false);
         gui.add(panel);
 
         // Overlay oscuro
         auto overlay = tgui::Panel::create({"100%", "100%"});
-        overlay->getRenderer()->setBackgroundColor(tgui::Color(0,0,0,120));
+        overlay->getRenderer()->setBackgroundColor(tgui::Color::Transparent);
         panel->add(overlay);
 
         // Título
@@ -190,7 +191,8 @@ namespace EntityFactory
         quit->onPress([&registry, panel]()
         {
             auto& states = registry.ctx().get<GameStateStack>();
-            states.set(GameState::Menu);
+            states.pop();
+            states.pop();
             panel->setVisible(false); 
             
         });

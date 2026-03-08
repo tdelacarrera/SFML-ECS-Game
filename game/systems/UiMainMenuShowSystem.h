@@ -6,20 +6,20 @@
 #include <iostream>
 
 
-inline void UiPauseMenuShowSystem(entt::registry& registry)
+inline void UiMainMenuShowSystem(entt::registry& registry)
 {
     auto &gui = registry.ctx().get<GuiResource>().gui;
     auto& states = registry.ctx().get<GameStateStack>();
     GameState state = states.current();
 
 
-    auto view = registry.view<UiPauseMenuTag, UiWidgetComponent>();
+    auto view = registry.view<UiMenuTag, UiWidgetComponent>();
 
     for(auto entity : view)
     {
         auto& widget = view.get<UiWidgetComponent>(entity);
 
-        if(state == GameState::Paused)
+        if(state == GameState::Menu)
         {
             widget.widget->setVisible(true);
         }
