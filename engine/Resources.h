@@ -26,7 +26,8 @@ struct GuiResource
 
 struct Tile
 {
-    uint16_t terrain;   // grass, dirt, stone
+    uint16_t terrain;
+    float cost = 1.f;
     bool walkable;
     bool buildable;
 };

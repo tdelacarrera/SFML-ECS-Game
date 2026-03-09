@@ -5,6 +5,7 @@
 #include "../components/Components.h"
 #include "../../engine/Resources.h"
 #include "../EntityFactory.h"
+#include "../AStar.h"
 
 inline void ColonistGenerationSystem(entt::registry& registry)
 {
@@ -30,7 +31,8 @@ inline void ColonistGenerationSystem(entt::registry& registry)
                  if(x < 5 && y < 5)
                  {
                   if(rand() % 3 == 1){
-                     EntityFactory::createColonist(registry, x * tilemap.tileSize, y * tilemap.tileSize);
+                    entt::entity colonist = EntityFactory::createColonist(registry, x * tilemap.tileSize, y * tilemap.tileSize);
+                    setDestination(registry, colonist, {50,70});
                   }
                  }
             }

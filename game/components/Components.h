@@ -46,3 +46,9 @@ struct AnimalComponent
     float speed;
     float changeDirectionTimer;
 };
+
+struct PathComponent
+{
+    std::vector<sf::Vector2i> path;
+    int currentIndex = 0;
+};
