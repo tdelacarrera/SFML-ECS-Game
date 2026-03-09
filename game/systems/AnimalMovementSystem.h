@@ -9,7 +9,8 @@
 inline void AnimalMovementSystem(entt::registry& registry)
 {
     auto& deltaTime = registry.ctx().get<TimeResource>().deltaTime;
-
+    auto& sound = registry.ctx().get<SoundManager>();
+    
     auto view = registry.view<TransformComponent, AnimalComponent>();
 
     for(auto [entity, transform, animal] : view.each())
@@ -27,6 +28,7 @@ inline void AnimalMovementSystem(entt::registry& registry)
             };
 
             animal.changeDirectionTimer = 2.f + (rand() % 3);
+            sound.play("cat", 100.f, 1.f, transform.position, 400.f);
         }
 
         transform.position += animal.direction * animal.speed * deltaTime;

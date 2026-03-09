@@ -42,4 +42,10 @@ inline void CameraSystem(entt::registry& registry)
         camera.zoom(1.f - zoomSpeed * deltaTime);
 
     window.setView(camera);
+
+
+    sf::Vector2f camCenter = camera.getCenter();
+    sf::Listener::setPosition(sf::Vector3f(camCenter.x, camCenter.y, 0.f));
+    sf::Listener::setDirection(sf::Vector3f(0.f, 1.f, 0.f));
+
 }

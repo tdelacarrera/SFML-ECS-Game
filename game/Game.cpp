@@ -40,11 +40,12 @@ void Game::load(Engine& engine)
     bindings.bind("move_right", sf::Keyboard::Key::D);
     bindings.bind("zoom_in", sf::Keyboard::Key::Q);
     bindings.bind("zoom_out", sf::Keyboard::Key::E);
-    bindings.bind("pause", sf::Keyboard::Key::Space);
+    bindings.bind("pause", sf::Keyboard::Key::Enter);
 
     music.load("music1", "assets/music/music1.ogg");
     music.load("music2", "assets/music/music4.ogg");
     sounds.load("test2", "assets/sounds/test2.mp3");
+    sounds.load("cat", "assets/sounds/cat.ogg");
     textures.load("tree", "assets/textures/tree.png");
     textures.load("tileset", "assets/textures/tilemap64.png");
     textures.load("colonist", "assets/textures/colonist.png");

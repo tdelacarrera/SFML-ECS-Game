@@ -9,5 +9,5 @@
 inline void BackgroundMusicSystem(entt::registry& registry)
 {
     auto& music = registry.ctx().get<MusicManager>();
-    music.play("music1", "assets/sounds/test2.,mp3");
+    music.play("music1");
 }

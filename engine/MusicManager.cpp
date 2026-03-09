@@ -36,6 +36,7 @@ void MusicManager::play(const std::string& id, bool loop, float volume)
 
     music.setLooping(loop);
     music.setVolume(volume);
+    music.setRelativeToListener(false);
     music.play();
 
     currentMusicId_ = id;

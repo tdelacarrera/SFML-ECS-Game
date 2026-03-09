@@ -32,7 +32,7 @@ inline void ColonistGenerationSystem(entt::registry& registry)
                  {
                   if(rand() % 3 == 1){
                     entt::entity colonist = EntityFactory::createColonist(registry, x * tilemap.tileSize, y * tilemap.tileSize);
-                    setDestination(registry, colonist, {50,70});
+                    setDestination(registry, colonist, {158,125});
                   }
                  }
             }
