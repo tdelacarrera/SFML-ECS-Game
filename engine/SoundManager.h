@@ -8,7 +8,7 @@
 
 class SoundManager {
 public:
-    SoundManager(size_t poolSize = 48);
+    SoundManager(size_t poolSize = 16);
 
     sf::SoundBuffer& load(const std::string& id, const std::string& path);
     sf::SoundBuffer& get(const std::string& id) const;

@@ -17,6 +17,8 @@ inline void RenderSystem(entt::registry& registry)
         sf::Texture& tex = textures.get(sprite.textureId);
         sf::Sprite drawable(tex);
         drawable.setPosition(transform.position);
+        sf::Vector2u size = tex.getSize();
+        drawable.setOrigin({size.x * 0.5, size.y * 0.5});
         window.draw(drawable);
     }
 }
