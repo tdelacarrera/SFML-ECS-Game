@@ -3,7 +3,7 @@
 #include <entt/entt.hpp>
 #include <SFML/Graphics.hpp>
 #include "../components/Components.h"
-#include "../../engine/Resources.h"
+#include "../World/WorldMap.h"
 #include "../EntityFactory.h"
 #include "../../engine/Pathfinding/Pathfinding.h"
 

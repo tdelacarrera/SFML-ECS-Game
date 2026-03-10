@@ -4,7 +4,7 @@
 #include <SFML/Graphics.hpp>
 #include <FastNoiseLite.h>
 #include "../components/Components.h"
-#include "../../engine/Resources.h"
+#include "../World/WorldMap.h"
 #include "../EntityFactory.h"
 
 inline void TerrainGenerationSystem(entt::registry& registry)

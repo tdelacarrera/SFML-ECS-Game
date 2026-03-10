@@ -19,7 +19,6 @@ void Engine::init()
     registry_.ctx().emplace<GuiResource>();
     registry_.ctx().emplace<GameStateStack>();
     registry_.ctx().emplace<InputManager>();
-    registry_.ctx().emplace<WorldMap>(255,255);
     registry_.ctx().emplace<Pathfinding>();
 
     auto &gui = registry_.ctx().get<GuiResource>().gui;

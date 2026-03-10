@@ -23,24 +23,3 @@ struct GuiResource
 {
     tgui::SFML_GRAPHICS::Gui gui;
 };
-
-struct Tile
-{
-    uint16_t terrain;
-    float cost = 1.f;
-    bool walkable;
-    bool buildable;
-};
-
-struct WorldMap
-{
-    int width;
-    int height;
-
-    std::vector<Tile> tiles;
-
-    Tile& get(int x, int y)
-    {
-        return tiles[x + y * width];
-    }
-};

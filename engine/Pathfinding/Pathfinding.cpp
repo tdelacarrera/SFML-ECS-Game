@@ -3,7 +3,7 @@
 #include <limits>
 #include <cmath>
 #include "../../game/components/Components.h"
-#include "../Resources.h"
+#include "../../game/World/WorldMap.h"
 
 
 // Chebyshev

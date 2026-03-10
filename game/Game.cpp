@@ -22,6 +22,7 @@
 #include "systems/PathDrawSystem.h"
 #include "EntityFactory.h"
 #include "../engine/TextureManager.h"
+#include "World/WorldMap.h"
 
 void Game::load(Engine& engine)
 {
@@ -32,6 +33,8 @@ void Game::load(Engine& engine)
     auto& textures = registry.ctx().get<TextureManager>();
     auto& input = registry.ctx().get<InputManager>();
     auto& states = registry.ctx().get<GameStateStack>();
+
+    registry.ctx().emplace<WorldMap>(255,255);
     
     states.push(GameState::Menu);
 
