@@ -3,7 +3,7 @@
 #include <entt/entt.hpp>
 #include <SFML/Graphics.hpp>
 #include <FastNoiseLite.h>
-#include "../components/Components.h"
+#include "../Components/Components.h"
 #include "../World/WorldMap.h"
 #include "../EntityFactory.h"
 

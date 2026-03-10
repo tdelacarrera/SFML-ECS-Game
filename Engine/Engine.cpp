@@ -1,8 +1,8 @@
 #include "Engine.h"
 #include "Input/InputManager.h"
-#include "MusicManager.h"
-#include "SoundManager.h"
-#include "TextureManager.h"
+#include "Audio/MusicManager.h"
+#include "Audio/SoundManager.h"
+#include "Textures/TextureManager.h"
 
 void Engine::init()
 {

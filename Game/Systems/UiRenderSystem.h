@@ -1,7 +1,7 @@
 #pragma once
 
 #include <entt/entt.hpp>
-#include "../../engine/Resources.h"
+#include "../../Engine/Resources.h"
 
 
 inline void UiRenderSystem(entt::registry& registry)

@@ -2,19 +2,22 @@
 
 #include <entt/entt.hpp>
 #include <SFML/Graphics.hpp>
-#include "../components/Components.h"
+#include "../Components/Components.h"
 #include "../World/WorldMap.h"
 #include "../EntityFactory.h"
+#include "../Pathfinding/Pathfinding.h"
 
-inline void AnimalGenerationSystem(entt::registry& registry)
+inline void ColonistGenerationSystem(entt::registry& registry)
 {
     auto& world = registry.ctx().get<WorldMap>();
+    auto& pathfinding = registry.ctx().get<Pathfinding>();
 
     auto view = registry.view<TileMapComponent>();
 
     for(auto entity : view)
     {
         auto& tilemap = view.get<TileMapComponent>(entity);
+
 
         int tilesetWidth = tilemap.texture->getSize().x / tilemap.tileSize;
 
@@ -25,11 +28,14 @@ inline void AnimalGenerationSystem(entt::registry& registry)
             for(int x=0; x<world.width; x++)
             {
                  auto& tile = world.get(x,y);
-            
-                if(rand() % 20 == 1 && tile.terrain != 0 && tile.terrain != 1){
-                    EntityFactory::createAnimal(registry, x * tilemap.tileSize, y * tilemap.tileSize);
-                }
 
+                 if(x < 5 && y < 5)
+                 {
+                  if(rand() % 3 == 1){
+                    entt::entity colonist = EntityFactory::createColonist(registry, x * tilemap.tileSize, y * tilemap.tileSize);
+                    pathfinding.setDestination(registry, colonist, {158,125});
+                  }
+                 }
             }
         }
     }

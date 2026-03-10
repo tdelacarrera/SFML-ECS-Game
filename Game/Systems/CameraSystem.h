@@ -2,8 +2,8 @@
 
 #include <entt/entt.hpp>
 #include <SFML/Graphics.hpp>
-#include "../components/Components.h"
-#include "../../engine/Input/InputManager.h"
+#include "../Components/Components.h"
+#include "../../Engine/Input/InputManager.h"
 
 inline void CameraSystem(entt::registry& registry)
 {

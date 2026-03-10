@@ -2,7 +2,7 @@
 #include <queue>
 #include <limits>
 #include <cmath>
-#include "../components/Components.h"
+#include "../Components/Components.h"
 #include "../World/WorldMap.h"
 
 

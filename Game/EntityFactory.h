@@ -1,7 +1,7 @@
 #pragma once
 
 #include <entt/entt.hpp>
-#include "components/Components.h"
+#include "Components/Components.h"
 
 namespace EntityFactory
 {

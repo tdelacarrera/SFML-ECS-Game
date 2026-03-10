@@ -2,8 +2,8 @@
 
 #include <SFML/Graphics.hpp>
 #include <entt/entt.hpp>
-#include "../../engine/Input/InputManager.h"
-#include "../../engine/GameStateStack.h"
+#include "../../Engine/Input/InputManager.h"
+#include "../../Engine/GameStateStack.h"
 
 
 inline void PauseInputSystem(entt::registry& registry)

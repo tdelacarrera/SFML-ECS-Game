@@ -2,7 +2,7 @@
 
 #include <SFML/Graphics.hpp>
 #include <entt/entt.hpp>
-#include "../../engine/Input/InputManager.h"
+#include "../../Engine/Input/InputManager.h"
 
 inline void InputSystem(entt::registry& registry)
 {

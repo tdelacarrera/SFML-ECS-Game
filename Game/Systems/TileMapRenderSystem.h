@@ -1,8 +1,8 @@
 #pragma once
 
 #include <entt/entt.hpp>
-#include "../../engine/Resources.h"
-#include "../components/Components.h"
+#include "../../Engine/Resources.h"
+#include "../Components/Components.h"
 
 inline void TileMapRenderSystem(entt::registry& registry)
 {

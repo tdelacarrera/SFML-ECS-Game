@@ -3,7 +3,7 @@
 #include <SFML/Graphics.hpp>
 #include <entt/entt.hpp>
 
-#include "../components/Components.h"
+#include "../Components/Components.h"
 
 inline void PathDrawSystem(entt::registry& registry)
 {

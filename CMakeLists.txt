@@ -44,7 +44,7 @@ FetchContent_Declare(
 )
 FetchContent_MakeAvailable(fastnoiselite)
 
-file(GLOB_RECURSE SOURCES CONFIGURE_DEPENDS engine/*.cpp game/*.cpp  )
+file(GLOB_RECURSE SOURCES CONFIGURE_DEPENDS Engine/*.cpp Game/*.cpp  )
 
 add_executable(Game ${SOURCES})
 

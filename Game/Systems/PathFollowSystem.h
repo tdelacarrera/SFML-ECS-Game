@@ -1,7 +1,7 @@
 #include <entt/entt.hpp>
 #include <SFML/Graphics.hpp>
-#include "../components/Components.h"
-#include "../../engine/Resources.h"
+#include "../Components/Components.h"
+#include "../../Engine/Resources.h"
 
 
 inline void PathFollowSystem(entt::registry& registry)

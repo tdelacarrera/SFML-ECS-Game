@@ -2,11 +2,11 @@
 
 #include <entt/entt.hpp>
 #include <SFML/Graphics.hpp>
-#include "../components/Components.h"
-#include "../../engine/Resources.h"
+#include "../Components/Components.h"
+#include "../World/WorldMap.h"
 #include "../EntityFactory.h"
 
-inline void VegetationGenerationSystem(entt::registry& registry)
+inline void AnimalGenerationSystem(entt::registry& registry)
 {
     auto& world = registry.ctx().get<WorldMap>();
 
@@ -26,8 +26,8 @@ inline void VegetationGenerationSystem(entt::registry& registry)
             {
                  auto& tile = world.get(x,y);
             
-                if(rand() % 3 == 1 && tile.terrain == 3){
-                    EntityFactory::createTree(registry, x * tilemap.tileSize, y * tilemap.tileSize);
+                if(rand() % 20 == 1 && tile.terrain != 0 && tile.terrain != 1){
+                    EntityFactory::createAnimal(registry, x * tilemap.tileSize, y * tilemap.tileSize);
                 }
 
             }
