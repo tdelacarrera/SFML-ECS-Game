@@ -23,6 +23,7 @@
 #include "EntityFactory.h"
 #include "../engine/TextureManager.h"
 #include "World/WorldMap.h"
+#include "Pathfinding/Pathfinding.h"
 
 void Game::load(Engine& engine)
 {
@@ -35,6 +36,7 @@ void Game::load(Engine& engine)
     auto& states = registry.ctx().get<GameStateStack>();
 
     registry.ctx().emplace<WorldMap>(255,255);
+    registry.ctx().emplace<Pathfinding>();
     
     states.push(GameState::Menu);
 

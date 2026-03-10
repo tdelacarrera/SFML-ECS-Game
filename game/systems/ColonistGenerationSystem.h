@@ -5,7 +5,7 @@
 #include "../components/Components.h"
 #include "../World/WorldMap.h"
 #include "../EntityFactory.h"
-#include "../../engine/Pathfinding/Pathfinding.h"
+#include "../Pathfinding/Pathfinding.h"
 
 inline void ColonistGenerationSystem(entt::registry& registry)
 {

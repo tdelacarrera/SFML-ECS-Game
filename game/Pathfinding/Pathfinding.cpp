@@ -2,8 +2,8 @@
 #include <queue>
 #include <limits>
 #include <cmath>
-#include "../../game/components/Components.h"
-#include "../../game/World/WorldMap.h"
+#include "../components/Components.h"
+#include "../World/WorldMap.h"
 
 
 // Chebyshev
