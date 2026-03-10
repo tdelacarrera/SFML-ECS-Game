@@ -3,13 +3,13 @@
 #include <entt/entt.hpp>
 #include <SFML/Graphics.hpp>
 #include "../components/Components.h"
-#include "../../engine/Input.h"
+#include "../../engine/Input/InputManager.h"
 
 inline void CameraSystem(entt::registry& registry)
 {
     auto& window = registry.ctx().get<WindowResource>().window;
     auto& deltaTime = registry.ctx().get<TimeResource>().deltaTime;
-    auto& input = registry.ctx().get<InputState>();
+    auto& input = registry.ctx().get<InputManager>();
 
     sf::View camera = window.getView();
 

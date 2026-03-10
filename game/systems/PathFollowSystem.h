@@ -2,7 +2,6 @@
 #include <SFML/Graphics.hpp>
 #include "../components/Components.h"
 #include "../../engine/Resources.h"
-#include "../AStar.h"
 
 
 inline void PathFollowSystem(entt::registry& registry)

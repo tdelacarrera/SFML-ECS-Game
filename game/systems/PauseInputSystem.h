@@ -2,13 +2,13 @@
 
 #include <SFML/Graphics.hpp>
 #include <entt/entt.hpp>
-#include "../../engine/Input.h"
+#include "../../engine/Input/InputManager.h"
 #include "../../engine/GameStateStack.h"
 
 
 inline void PauseInputSystem(entt::registry& registry)
 {
-    auto& input = registry.ctx().get<InputState>();
+    auto& input = registry.ctx().get<InputManager>();
     auto& states = registry.ctx().get<GameStateStack>();
 
     if(input.justPressed("pause"))

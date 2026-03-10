@@ -4,6 +4,7 @@
 #include <SFML/Graphics.hpp>
 #include "../components/Components.h"
 #include "../../engine/Resources.h"
+#include "../../engine/TextureManager.h"
 
 inline void RenderSystem(entt::registry& registry)
 {

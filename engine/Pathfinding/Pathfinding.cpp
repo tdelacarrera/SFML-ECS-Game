@@ -1,30 +1,13 @@
-#pragma once
-
+#include "Pathfinding.h"
 #include <queue>
-#include <vector>
 #include <limits>
 #include <cmath>
-#include "components/Components.h"
-#include "../engine/Resources.h"
+#include "../../game/components/Components.h"
+#include "../Resources.h"
 
-struct AStarNode
-{
-    int x;
-    int y;
-    float g;
-    float f;
-};
-
-struct AStarCompare
-{
-    bool operator()(const AStarNode& a, const AStarNode& b) const
-    {
-        return a.f > b.f;
-    }
-};
 
 // Chebyshev
-inline float heuristic(int x1,int y1,int x2,int y2)
+float Pathfinding::heuristic(int x1,int y1,int x2,int y2)
 {
     int dx = std::abs(x1-x2);
     int dy = std::abs(y1-y2);
@@ -32,14 +15,7 @@ inline float heuristic(int x1,int y1,int x2,int y2)
     return std::max(dx,dy); 
 }
 
-
-
-inline std::vector<sf::Vector2i> reconstructPath(
-    std::vector<int>& cameFrom,
-    int width,
-    int gx,
-    int gy
-)
+std::vector<sf::Vector2i> Pathfinding::reconstructPath( std::vector<int>& cameFrom, int width, int gx, int gy)
 {
     std::vector<sf::Vector2i> path;
 
@@ -60,11 +36,7 @@ inline std::vector<sf::Vector2i> reconstructPath(
     return path;
 }
 
-inline std::vector<sf::Vector2i> findPath(
-    WorldMap& world,
-    sf::Vector2i start,
-    sf::Vector2i goal
-)
+std::vector<sf::Vector2i> Pathfinding::findPath( WorldMap& world, sf::Vector2i start, sf::Vector2i goal)
 {
     int width = world.width;
     int height = world.height;
@@ -141,7 +113,7 @@ inline std::vector<sf::Vector2i> findPath(
 }
 
 
-void setDestination(entt::registry& registry, entt::entity entity, sf::Vector2i goal)
+void Pathfinding::setDestination(entt::registry& registry, entt::entity entity, sf::Vector2i goal)
 {
     auto& world = registry.ctx().get<WorldMap>();
 

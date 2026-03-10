@@ -2,18 +2,12 @@
 
 #include <SFML/Graphics.hpp>
 #include <entt/entt.hpp>
-#include "../../engine/Resources.h"
+#include "../../engine/Input/InputManager.h"
 
 inline void InputSystem(entt::registry& registry)
 {
-    auto& bindings = registry.ctx().get<InputBindings>();
-    auto& input = registry.ctx().get<InputState>();
+    auto& input = registry.ctx().get<InputManager>();
 
     input.nextFrame();
-
-    for(auto& [action, key] : bindings.bindings)
-    {
-        bool pressed = sf::Keyboard::isKeyPressed(key);
-        input.set(action, pressed);
-    }
+    input.update();
 }

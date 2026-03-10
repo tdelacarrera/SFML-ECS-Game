@@ -1,4 +1,9 @@
 #include "Engine.h"
+#include "Pathfinding/Pathfinding.h"
+#include "Input/InputManager.h"
+#include "MusicManager.h"
+#include "SoundManager.h"
+#include "TextureManager.h"
 
 void Engine::init()
 {
@@ -13,9 +18,9 @@ void Engine::init()
     registry_.ctx().emplace<EventResource>(); 
     registry_.ctx().emplace<GuiResource>();
     registry_.ctx().emplace<GameStateStack>();
-    registry_.ctx().emplace<InputBindings>();
-    registry_.ctx().emplace<InputState>();
+    registry_.ctx().emplace<InputManager>();
     registry_.ctx().emplace<WorldMap>(255,255);
+    registry_.ctx().emplace<Pathfinding>();
 
     auto &gui = registry_.ctx().get<GuiResource>().gui;
     auto &window = registry_.ctx().get<WindowResource>().window;

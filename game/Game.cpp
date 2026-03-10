@@ -21,6 +21,7 @@
 #include "systems/PathFollowSystem.h"
 #include "systems/PathDrawSystem.h"
 #include "EntityFactory.h"
+#include "../engine/TextureManager.h"
 
 void Game::load(Engine& engine)
 {
@@ -29,18 +30,18 @@ void Game::load(Engine& engine)
     auto& sounds = registry.ctx().get<SoundManager>();
     auto& music = registry.ctx().get<MusicManager>();
     auto& textures = registry.ctx().get<TextureManager>();
-    auto& bindings = registry.ctx().get<InputBindings>();
+    auto& input = registry.ctx().get<InputManager>();
     auto& states = registry.ctx().get<GameStateStack>();
     
     states.push(GameState::Menu);
 
-    bindings.bind("move_up", sf::Keyboard::Key::W);
-    bindings.bind("move_down", sf::Keyboard::Key::S);
-    bindings.bind("move_left", sf::Keyboard::Key::A);
-    bindings.bind("move_right", sf::Keyboard::Key::D);
-    bindings.bind("zoom_in", sf::Keyboard::Key::Q);
-    bindings.bind("zoom_out", sf::Keyboard::Key::E);
-    bindings.bind("pause", sf::Keyboard::Key::Enter);
+    input.bind("move_up", sf::Keyboard::Key::W);
+    input.bind("move_down", sf::Keyboard::Key::S);
+    input.bind("move_left", sf::Keyboard::Key::A);
+    input.bind("move_right", sf::Keyboard::Key::D);
+    input.bind("zoom_in", sf::Keyboard::Key::Q);
+    input.bind("zoom_out", sf::Keyboard::Key::E);
+    input.bind("pause", sf::Keyboard::Key::Escape);
 
     music.load("music1", "assets/music/music1.ogg");
     music.load("music2", "assets/music/music4.ogg");

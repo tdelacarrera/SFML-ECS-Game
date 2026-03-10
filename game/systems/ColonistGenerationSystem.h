@@ -5,11 +5,12 @@
 #include "../components/Components.h"
 #include "../../engine/Resources.h"
 #include "../EntityFactory.h"
-#include "../AStar.h"
+#include "../../engine/Pathfinding/Pathfinding.h"
 
 inline void ColonistGenerationSystem(entt::registry& registry)
 {
     auto& world = registry.ctx().get<WorldMap>();
+    auto& pathfinding = registry.ctx().get<Pathfinding>();
 
     auto view = registry.view<TileMapComponent>();
 
@@ -32,7 +33,7 @@ inline void ColonistGenerationSystem(entt::registry& registry)
                  {
                   if(rand() % 3 == 1){
                     entt::entity colonist = EntityFactory::createColonist(registry, x * tilemap.tileSize, y * tilemap.tileSize);
-                    setDestination(registry, colonist, {158,125});
+                    pathfinding.setDestination(registry, colonist, {158,125});
                   }
                  }
             }
