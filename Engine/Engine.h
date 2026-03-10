@@ -3,7 +3,7 @@
 #include <SFML/Graphics.hpp>
 #include <entt/entt.hpp>
 #include "Resources.h"
-#include "SystemScheduler.h"
+#include "GameState/SystemScheduler.h"
 
 
 class Engine

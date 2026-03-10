@@ -4,7 +4,6 @@
 #include <SFML/Graphics.hpp>
 #include "../Components/Components.h"
 #include "../../Engine/Resources.h"
-#include "../EntityFactory.h"
 #include "../../Engine/Audio/SoundManager.h"
 
 inline void AnimalMovementSystem(entt::registry& registry)

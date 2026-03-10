@@ -4,7 +4,7 @@
 #include <SFML/Graphics.hpp>
 #include "../Components/Components.h"
 #include "../World/WorldMap.h"
-#include "../EntityFactory.h"
+#include "../Entities/EntityFactory.h"
 #include "../Pathfinding/Pathfinding.h"
 
 inline void ColonistGenerationSystem(entt::registry& registry)

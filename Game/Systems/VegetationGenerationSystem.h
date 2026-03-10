@@ -4,7 +4,7 @@
 #include <SFML/Graphics.hpp>
 #include "../Components/Components.h"
 #include "../../Engine/Resources.h"
-#include "../EntityFactory.h"
+#include "../Entities/EntityFactory.h"
 
 inline void VegetationGenerationSystem(entt::registry& registry)
 {

@@ -5,7 +5,7 @@
 #include <FastNoiseLite.h>
 #include "../Components/Components.h"
 #include "../World/WorldMap.h"
-#include "../EntityFactory.h"
+#include "../Entities/EntityFactory.h"
 
 inline void TerrainGenerationSystem(entt::registry& registry)
 {
