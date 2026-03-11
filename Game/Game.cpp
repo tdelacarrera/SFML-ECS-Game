@@ -19,6 +19,8 @@
 #include "Systems/PathFollowSystem.h"
 #include "Systems/PathDrawSystem.h"
 #include "Systems/MouseSystem.h"
+#include "Systems/MouseSelectionSystem.h"
+#include "Systems/SelectionRenderSystem.h"
 #include "Entities/EntityFactory.h"
 #include "Entities/MapFactory.h"
 #include "Entities/UiFactory.h"
@@ -80,11 +82,13 @@ void Game::load(Engine& engine)
     engine.addSystem(Stage::Update, AnimalMovementSystem, {GameState::Playing});
     engine.addSystem(Stage::Update, PathFollowSystem, {GameState::Playing});
     engine.addSystem(Stage::Update, CameraSystem, {GameState::Playing});
+    engine.addSystem(Stage::Update, MouseSelectionSystem, {GameState::Menu, GameState::Playing});
     
     engine.addSystem(Stage::Render, TileMapRenderSystem, {GameState::Playing, GameState::Paused});
     engine.addSystem(Stage::Render, PathDrawSystem, {GameState::Playing, GameState::Paused});
     engine.addSystem(Stage::Render, RenderSystem, {GameState::Playing, GameState::Paused});
     engine.addSystem(Stage::Render, UiRenderSystem, {GameState::Menu, GameState::Playing,  GameState::Paused});
+    engine.addSystem(Stage::Render, SelectionRenderSystem, {GameState::Menu, GameState::Playing});
 
     EntityFactory::createTileMap(registry, textures.get("tileset"));
     EntityFactory::createHUD(registry);

@@ -39,3 +39,35 @@ void MouseManager::clearFrame()
 {
     wheelDelta_ = 0.f;
 }
+
+void MouseManager::startSelection(sf::Vector2f pos)
+{
+    isSelecting_ = true;
+    start_ = pos;
+    end_ = pos;
+}
+
+void MouseManager::updateSelection(sf::Vector2f pos)
+{
+    end_ = pos;
+}
+
+void MouseManager::endSelection()
+{
+    isSelecting_ = false;
+}
+
+bool MouseManager::selecting() const
+{
+    return isSelecting_;
+}
+
+sf::Vector2f MouseManager::getStart() const
+{
+    return start_;
+}
+
+sf::Vector2f MouseManager::getEnd() const
+{
+    return end_;
+}
