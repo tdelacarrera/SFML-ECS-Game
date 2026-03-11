@@ -34,7 +34,6 @@ public:
         auto& stateStack = registry.ctx().get<GameStateStack>();
         GameState state = stateStack.current();
         runStage(Stage::Init, registry, state);
-        runStage(Stage::OnEnter, registry, state);
     }
 
     void run(entt::registry& registry)

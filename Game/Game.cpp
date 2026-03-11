@@ -21,6 +21,7 @@
 #include "Systems/MouseSystem.h"
 #include "Systems/MouseSelectionSystem.h"
 #include "Systems/SelectionRenderSystem.h"
+#include "Systems/CleanupSystem.h"
 #include "Entities/EntityFactory.h"
 #include "Entities/MapFactory.h"
 #include "Entities/UiFactory.h"
@@ -63,6 +64,7 @@ void Game::load(Engine& engine)
     textures.load("animal", "assets/textures/animal.png");
     textures.load("background", "assets/textures/background.png");
 
+    engine.addSystem(Stage::OnEnter, CleanupSystem, {GameState::Menu});
     engine.addSystem(Stage::OnEnter, TitleScreenMusicSystem, {GameState::Menu});
     engine.addSystem(Stage::OnEnter, BackgroundMusicSystem, {GameState::Playing});
     engine.addSystem(Stage::OnEnter, TerrainGenerationSystem, {GameState::Playing});
@@ -71,7 +73,7 @@ void Game::load(Engine& engine)
     engine.addSystem(Stage::OnEnter, AnimalGenerationSystem, {GameState::Playing});
     engine.addSystem(Stage::OnEnter, ColonistGenerationSystem, {GameState::Playing});
     engine.addSystem(Stage::Render, UiPauseMenuShowSystem, {GameState::Paused});
-    engine.addSystem(Stage::OnExit, UiMainMenuShowSystem, {GameState::Paused});
+    engine.addSystem(Stage::OnEnter, UiMainMenuShowSystem, {GameState::Menu});
     
 
     engine.addSystem(Stage::Input, PauseInputSystem, {GameState::Playing, GameState::Paused});
@@ -90,7 +92,6 @@ void Game::load(Engine& engine)
     engine.addSystem(Stage::Render, UiRenderSystem, {GameState::Menu, GameState::Playing,  GameState::Paused});
     engine.addSystem(Stage::Render, SelectionRenderSystem, {GameState::Menu, GameState::Playing});
 
-    EntityFactory::createTileMap(registry, textures.get("tileset"));
     EntityFactory::createHUD(registry);
     EntityFactory::createMainMenu(registry, textures.get("background"));
     EntityFactory::createPauseMenu(registry);

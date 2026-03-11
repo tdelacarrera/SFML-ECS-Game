@@ -144,8 +144,8 @@ namespace EntityFactory
         quit->onPress([&registry, panel]()
         {
             auto& states = registry.ctx().get<GameStateStack>();
-            states.pop();
-            states.pop();
+            states.push(GameState::Menu);
+
             panel->setVisible(false); 
             
         });

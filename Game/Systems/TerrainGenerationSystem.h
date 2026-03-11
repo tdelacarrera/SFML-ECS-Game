@@ -5,13 +5,15 @@
 #include <FastNoiseLite.h>
 #include "../Components/Components.h"
 #include "../World/WorldMap.h"
-#include "../Entities/EntityFactory.h"
+#include "../Entities/MapFactory.h"
 
 inline void TerrainGenerationSystem(entt::registry& registry)
 {
     FastNoiseLite noise;
     
     auto& world = registry.ctx().get<WorldMap>();
+    auto& textures = registry.ctx().get<TextureManager>();
+    EntityFactory::createTileMap(registry, textures.get("tileset"));
 
     world.tiles.resize(world.width * world.height);
 
