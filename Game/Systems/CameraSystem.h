@@ -4,12 +4,14 @@
 #include <SFML/Graphics.hpp>
 #include "../Components/Components.h"
 #include "../../Engine/Input/InputManager.h"
+#include "../../Engine/Input/MouseManager.h"
 
 inline void CameraSystem(entt::registry& registry)
 {
     auto& window = registry.ctx().get<WindowResource>().window;
     auto& deltaTime = registry.ctx().get<TimeResource>().deltaTime;
     auto& input = registry.ctx().get<InputManager>();
+    auto& mouse = registry.ctx().get<MouseManager>();
 
     sf::View camera = window.getView();
 
@@ -19,7 +21,7 @@ inline void CameraSystem(entt::registry& registry)
     sf::Vector2f movement{0.f,0.f};
 
 
-    // camera movement
+    // camera movement 
     if(input.pressed("move_up"))
         movement.y -= speed * deltaTime;
 
@@ -33,6 +35,15 @@ inline void CameraSystem(entt::registry& registry)
         movement.x += speed * deltaTime;
 
     camera.move(movement);
+
+    //zoom with mouse wheel
+    float wheel = mouse.getWheel();
+
+    if(wheel != 0.f)
+    {
+        float zoomFactor = 1.f - wheel * 0.1f;
+        camera.zoom(zoomFactor);
+    }
 
     // zoom
     if(input.pressed("zoom_in"))

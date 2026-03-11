@@ -1,5 +1,3 @@
-#pragma once
-
 #include "Game.h"
 #include "Systems/InputSystem.h"
 #include "Systems/RenderSystem.h"
@@ -20,6 +18,7 @@
 #include "Systems/UiMainMenuShowSystem.h"
 #include "Systems/PathFollowSystem.h"
 #include "Systems/PathDrawSystem.h"
+#include "Systems/MouseSystem.h"
 #include "Entities/EntityFactory.h"
 #include "Entities/MapFactory.h"
 #include "Entities/UiFactory.h"
@@ -75,7 +74,8 @@ void Game::load(Engine& engine)
 
     engine.addSystem(Stage::Input, PauseInputSystem, {GameState::Playing, GameState::Paused});
     engine.addSystem(Stage::Input, UiEventSystem, {GameState::Menu, GameState::Playing, GameState::Paused});
-    engine.addSystem(Stage::Input, InputSystem, {GameState::Playing, GameState::Paused});
+    engine.addSystem(Stage::Input, InputSystem, {GameState::Menu, GameState::Playing, GameState::Paused});
+    engine.addSystem(Stage::Input, MouseSystem, {GameState::Menu, GameState::Playing, GameState::Paused});
 
     engine.addSystem(Stage::Update, AnimalMovementSystem, {GameState::Playing});
     engine.addSystem(Stage::Update, PathFollowSystem, {GameState::Playing});

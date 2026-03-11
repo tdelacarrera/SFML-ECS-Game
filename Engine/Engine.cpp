@@ -1,5 +1,6 @@
 #include "Engine.h"
 #include "Input/InputManager.h"
+#include "Input/MouseManager.h"
 #include "Audio/MusicManager.h"
 #include "Audio/SoundManager.h"
 #include "Textures/TextureManager.h"
@@ -18,6 +19,7 @@ void Engine::init()
     registry_.ctx().emplace<GuiResource>();
     registry_.ctx().emplace<GameStateStack>();
     registry_.ctx().emplace<InputManager>();
+    registry_.ctx().emplace<MouseManager>();
 
     auto &gui = registry_.ctx().get<GuiResource>().gui;
     auto &window = registry_.ctx().get<WindowResource>().window;
