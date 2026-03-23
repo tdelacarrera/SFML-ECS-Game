@@ -22,8 +22,10 @@ inline void MouseSelectionSystem(entt::registry& registry)
 
     if(mouse.selecting())
     {
+        
          mouse.updateSelection(world);
 
+        //Logica para Seleccionar las entidades bajo el cuadro de seleccion
         sf::Vector2f start = mouse.getStart();
         sf::Vector2f end = mouse.getEnd();
 
@@ -46,6 +48,38 @@ inline void MouseSelectionSystem(entt::registry& registry)
                 if(registry.all_of<SelectedComponent>(entity))
                 {
                     registry.remove<SelectedComponent>(entity);
+                }
+            }
+        }
+
+
+        //Logica para Seleccionar una sola entidad por click
+        float dx = std::abs(end.x - start.x);
+        float dy = std::abs(end.y - start.y);
+
+        bool isClick = (dx < 5.f && dy < 5.f);
+
+
+        if(isClick)
+        {
+            for(auto entity : view)
+            {
+                auto& transform = view.get<TransformComponent>(entity);
+
+                float radius = 32.f; //area del rectangulo de seleccion para el click
+                sf::FloatRect bounds({transform.position.x - radius, transform.position.y - radius}, {radius * 2, radius * 2});
+
+                if(bounds.contains(end))
+                {
+                    registry.emplace_or_replace<SelectedComponent>(entity);
+                    break;
+                }
+                else
+                {
+                    if(registry.all_of<SelectedComponent>(entity))
+                    {
+                        registry.remove<SelectedComponent>(entity);
+                    }
                 }
             }
         }
