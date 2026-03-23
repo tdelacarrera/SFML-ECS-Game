@@ -44,7 +44,7 @@ public:
         // detectar cambio de estado
         
         size_t currentStackSize = stateStack.size();
-        std::cout<<currentStackSize<<std::endl;
+       // std::cout<<currentStackSize<<std::endl;
 
         if(currentStackSize > lastStackSize)
         {

@@ -11,6 +11,7 @@ namespace EntityFactory
         entt::entity entity = registry.create();
         registry.emplace<TransformComponent>(entity,sf::Vector2f{x, y},  sf::Vector2f{1.f, 1.f},  0.f);
         registry.emplace<SpriteComponent>(entity, "tree");
+        registry.emplace<SelectableComponent>(entity);
 
         return entity;
     }
@@ -21,6 +22,7 @@ namespace EntityFactory
         registry.emplace<TransformComponent>(entity,sf::Vector2f{x, y},  sf::Vector2f{1.f, 1.f},  0.f);
         registry.emplace<SpriteComponent>(entity, "animal");
         registry.emplace<AnimalComponent>( entity, sf::Vector2f{x,y}, 40.f,  0.f);
+        registry.emplace<SelectableComponent>(entity);
 
         return entity;
     }
@@ -30,6 +32,7 @@ namespace EntityFactory
         entt::entity entity = registry.create();
         registry.emplace<TransformComponent>(entity,sf::Vector2f{x, y},  sf::Vector2f{1.f, 1.f},  0.f);
         registry.emplace<SpriteComponent>(entity, "colonist");
+        registry.emplace<SelectableComponent>(entity);
 
         return entity;
     }

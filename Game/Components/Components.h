@@ -52,3 +52,8 @@ struct PathComponent
     std::vector<sf::Vector2i> path;
     int currentIndex = 0;
 };
+
+
+struct SelectedComponent {};
+
+struct SelectableComponent {};

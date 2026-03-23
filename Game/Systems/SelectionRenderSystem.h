@@ -7,6 +7,19 @@
 inline void SelectionRenderSystem(entt::registry& registry)
 {
     auto& window = registry.ctx().get<WindowResource>().window;
+    auto view = registry.view<TransformComponent, SelectedComponent>();
+
+    for(auto entity : view)
+    {
+        auto& transform = view.get<TransformComponent>(entity);
+
+        sf::CircleShape marker(5.f);
+        marker.setFillColor(sf::Color::Yellow);
+        marker.setPosition(transform.position);
+
+        window.draw(marker);
+    }
+
     auto& mouse = registry.ctx().get<MouseManager>();
 
     if(!mouse.selecting())
