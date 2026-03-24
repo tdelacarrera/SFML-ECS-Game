@@ -49,6 +49,24 @@ inline void SelectionRenderSystem(entt::registry& registry)
     auto& window = registry.ctx().get<WindowResource>().window;
     auto view = registry.view<TransformComponent, SelectedComponent>();
 
+    //DEBUG
+    //ELIMINAR
+    auto view2 = registry.view<TransformComponent, ChopMarkedComponent>();
+
+    for (auto entity : view2)
+    {
+        auto& t = view2.get<TransformComponent>(entity);
+
+        sf::RectangleShape rect({64.f, 64.f});
+        rect.setOrigin({32.f, 32.f});
+        rect.setPosition(t.position);
+
+        rect.setFillColor(sf::Color(255, 0, 0, 100));
+
+        window.draw(rect);
+    }
+    //ELIMINAR
+
     for(auto entity : view)
     {
         auto& transform = view.get<TransformComponent>(entity);

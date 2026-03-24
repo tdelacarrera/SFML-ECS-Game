@@ -57,3 +57,30 @@ struct PathComponent
 struct SelectedComponent {};
 
 struct SelectableComponent {};
+
+struct ChoppableComponent {};
+
+struct ChopMarkedComponent {};
+
+
+//HUD
+enum class ToolMode
+{
+    None,
+    Chop,
+    Harvest,
+    Build,
+    ZoneStorage
+};
+
+struct ToolState
+{
+    ToolMode current = ToolMode::None;
+};
+
+struct ResourceData
+{
+    int wood = 0;
+    int food = 0;
+    int stone = 0;
+};

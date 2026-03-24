@@ -6,23 +6,74 @@
 namespace EntityFactory
 {
 
-    inline entt::entity createHUD(entt::registry& registry)
+
+inline entt::entity createHUD(entt::registry& registry)
+{
+    auto& gui = registry.ctx().get<GuiResource>().gui;
+
+    entt::entity hud = registry.create();
+
+    //root panel
+    auto root = tgui::Panel::create({"100%", "100%"});
+    root->getRenderer()->setBackgroundColor(tgui::Color::Transparent);
+    gui.add(root);
+
+    // barra de recursos
+    auto topBar = tgui::Panel::create({"100%", 40});
+    topBar->getRenderer()->setBackgroundColor(tgui::Color(20,20,20,200));
+    root->add(topBar);
+
+    auto woodLabel = tgui::Label::create("Madera: 0");
+    woodLabel->setPosition(10, 5);
+    topBar->add(woodLabel);
+
+    auto foodLabel = tgui::Label::create("Comida: 0");
+    foodLabel->setPosition(150, 5);
+    topBar->add(foodLabel);
+
+    auto stoneLabel = tgui::Label::create("Piedra: 0");
+    stoneLabel->setPosition(300, 5);
+    topBar->add(stoneLabel);
+
+
+    //barra de acciones
+    auto bottomBar = tgui::Panel::create({"100%", 80});
+    bottomBar->setPosition({"0%", "100% - 80"});
+    bottomBar->getRenderer()->setBackgroundColor(tgui::Color(20,20,20,200));
+    root->add(bottomBar);
+
+    int x = 10;
+
+    auto makeButton = [&](const std::string& text, ToolMode mode)
     {
-        auto& gui = registry.ctx().get<GuiResource>().gui;
+        auto btn = tgui::Button::create(text);
+        btn->setSize(120, 40);
+        btn->setPosition(x, 20);
 
-        entt::entity hud = registry.create();
+        btn->onPress([&registry, mode]()
+        {
+            auto& tool = registry.ctx().get<ToolState>();
+            tool.current = mode;
+        });
 
-        auto label = tgui::Label::create("HUD TEXT");
-        label->setPosition(10,10);
-        label->setSize(200,40);
+        bottomBar->add(btn);
+        x += 130;
+    };
 
-        gui.add(label);
+    makeButton("Construir", ToolMode::Build);
+    makeButton("Talar", ToolMode::Chop);
+    makeButton("Cultivar", ToolMode::Harvest);
+    makeButton("Zona", ToolMode::ZoneStorage);
 
-        registry.emplace<UiWidgetComponent>(hud, label);
-        registry.emplace<UiHudTag>(hud);
 
-        return hud;
-    }
+    registry.emplace<UiWidgetComponent>(hud, root);
+    registry.emplace<UiHudTag>(hud);
+
+    registry.ctx().emplace<std::tuple<tgui::Label::Ptr,tgui::Label::Ptr,tgui::Label::Ptr>>(woodLabel, foodLabel, stoneLabel);
+    registry.ctx().emplace<ToolState>();
+
+    return hud;
+}
 
     inline entt::entity createMainMenu(entt::registry& registry, const sf::Texture& texture)
     {
@@ -157,6 +208,4 @@ namespace EntityFactory
     }
 
 }
-
-
 

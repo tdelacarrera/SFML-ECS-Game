@@ -12,6 +12,8 @@ public:
 
     void setButton(sf::Mouse::Button button, bool pressed);
     bool isPressed(sf::Mouse::Button button) const;
+    bool isJustPressed(sf::Mouse::Button button) const;
+    bool isJustReleased(sf::Mouse::Button button) const;
 
     void setWheel(float delta);
     float getWheel() const;
@@ -28,10 +30,15 @@ public:
     sf::Vector2f getStart() const;
     sf::Vector2f getEnd() const;
 
+    void update();
+
 private:
 
     sf::Vector2i position_;
-    std::unordered_map<sf::Mouse::Button, bool> buttons_;
+
+    std::unordered_map<sf::Mouse::Button, bool> currentButtons_;
+    std::unordered_map<sf::Mouse::Button, bool> previousButtons_;
+
     float wheelDelta_ = 0.f;
 
     bool isSelecting_ = false;

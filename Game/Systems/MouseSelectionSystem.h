@@ -66,7 +66,8 @@ inline void MouseSelectionSystem(entt::registry& registry)
             {
                 auto& transform = view.get<TransformComponent>(entity);
 
-                float radius = 32.f; //area del rectangulo de seleccion para el click
+                //area del rectangulo de seleccion para el click
+                float radius = 32.f;
                 sf::FloatRect bounds({transform.position.x - radius, transform.position.y - radius}, {radius * 2, radius * 2});
 
                 if(bounds.contains(end))
