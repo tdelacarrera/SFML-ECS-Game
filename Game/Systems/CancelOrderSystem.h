@@ -5,14 +5,15 @@
 #include <algorithm>
 #include "../Components/Components.h"
 
-inline void ChopOrderSystem(entt::registry& registry)
+
+inline void CancelOrderSystem(entt::registry& registry)
 {
     auto& tool = registry.ctx().get<ToolState>();
     auto& mouse = registry.ctx().get<MouseManager>();
     auto& window = registry.ctx().get<WindowResource>().window;
 
     // Solo funciona en modo talar
-    if (tool.current != ToolMode::Chop)
+    if (tool.current != ToolMode::Cancel)
     {
         return;
     }
@@ -48,24 +49,29 @@ inline void ChopOrderSystem(entt::registry& registry)
 
         sf::FloatRect rect(position, size);
 
-        // Marcar entidades dentro del area
-        auto view = registry.view<TransformComponent, ChoppableComponent>();
+
+        //Mejorar
+        auto view = registry.view<MineMarkedComponent, TransformComponent>();
 
         for (auto entity : view)
         {
-            auto& t = view.get<TransformComponent>(entity);
+            const auto& transform = view.get<TransformComponent>(entity);
 
-            if (rect.contains(t.position))
+            if (rect.contains(transform.position))
             {
-                registry.emplace_or_replace<ChopMarkedComponent>(entity);
+                registry.remove<MineMarkedComponent>(entity);
             }
         }
-    }
+        auto view2 = registry.view<ChopMarkedComponent, TransformComponent>();
 
-    // Terminar seleccion
-    if (mouse.isJustReleased(sf::Mouse::Button::Right))
-    {
-        mouse.endSelection();
-        tool.current = ToolMode::None;
+        for (auto entity : view2)
+        {
+            const auto& transform = view2.get<TransformComponent>(entity);
+
+            if (rect.contains(transform.position))
+            {
+                registry.remove<ChopMarkedComponent>(entity);
+            }
+        }
     }
 }

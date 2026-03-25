@@ -75,6 +75,7 @@ enum class ToolMode
     Mine,
     Harvest,
     Build,
+    Cancel,
     ZoneStorage
 };
 

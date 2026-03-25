@@ -12,9 +12,11 @@ inline void MineOrderSystem(entt::registry& registry)
     auto& mouse = registry.ctx().get<MouseManager>();
     auto& window = registry.ctx().get<WindowResource>().window;
 
-    // Solo funciona en modo talar
+    // Solo funciona en modo minar
     if (tool.current != ToolMode::Mine)
+    {
         return;
+    }
 
     // Posición mouse en mundo
     sf::Vector2i pixel = mouse.getPosition();
