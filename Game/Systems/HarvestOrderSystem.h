@@ -5,15 +5,14 @@
 #include <algorithm>
 #include "../Components/Components.h"
 
-
-inline void CancelOrderSystem(entt::registry& registry)
+inline void HarvestOrderSystem(entt::registry& registry)
 {
     auto& tool = registry.ctx().get<ToolState>();
     auto& mouse = registry.ctx().get<MouseManager>();
     auto& window = registry.ctx().get<WindowResource>().window;
 
-    // Solo funciona en modo talar
-    if (tool.current != ToolMode::Cancel)
+    // Solo funciona en modo cosechar
+    if (tool.current != ToolMode::Harvest)
     {
         return;
     }
@@ -49,40 +48,24 @@ inline void CancelOrderSystem(entt::registry& registry)
 
         sf::FloatRect rect(position, size);
 
-
-        //Mejorar
-        auto view = registry.view<MineMarkedComponent, TransformComponent>();
+        // Marcar entidades dentro del area
+        auto view = registry.view<TransformComponent, HarvestableComponent>();
 
         for (auto entity : view)
         {
-            const auto& transform = view.get<TransformComponent>(entity);
+            auto& t = view.get<TransformComponent>(entity);
 
-            if (rect.contains(transform.position))
+            if (rect.contains(t.position))
             {
-                registry.remove<MineMarkedComponent>(entity);
+                registry.emplace_or_replace<HarvestMarkedComponent>(entity);
             }
         }
-        auto view2 = registry.view<ChopMarkedComponent, TransformComponent>();
+    }
 
-        for (auto entity : view2)
-        {
-            const auto& transform = view2.get<TransformComponent>(entity);
-
-            if (rect.contains(transform.position))
-            {
-                registry.remove<ChopMarkedComponent>(entity);
-            }
-        }
-        auto view3 = registry.view<HarvestMarkedComponent, TransformComponent>();
-
-        for (auto entity : view3)
-        {
-            const auto& transform = view2.get<TransformComponent>(entity);
-
-            if (rect.contains(transform.position))
-            {
-                registry.remove<HarvestMarkedComponent>(entity);
-            }
-        }
+    // Terminar seleccion
+    if (mouse.isJustReleased(sf::Mouse::Button::Right))
+    {
+        mouse.endSelection();
+        tool.current = ToolMode::None;
     }
 }

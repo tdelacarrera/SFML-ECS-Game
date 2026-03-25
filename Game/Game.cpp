@@ -26,6 +26,7 @@
 #include "Systems/MineOrderSystem.h"
 #include "Systems/CancelOrderSystem.h"
 #include "Systems/StoneGenerationSystem.h"
+#include "Systems/HarvestOrderSystem.h"
 #include "Entities/EntityFactory.h"
 #include "Entities/MapFactory.h"
 #include "Entities/UiFactory.h"
@@ -92,6 +93,7 @@ void Game::load(Engine& engine)
     engine.addSystem(Stage::Update, CameraSystem, {GameState::Playing});
     engine.addSystem(Stage::Update, ChopOrderSystem, {GameState::Playing});
     engine.addSystem(Stage::Update, MineOrderSystem, {GameState::Playing});
+    engine.addSystem(Stage::Update, HarvestOrderSystem, {GameState::Playing});
     engine.addSystem(Stage::Update, CancelOrderSystem, {GameState::Playing});
     engine.addSystem(Stage::Update, MouseSelectionSystem, {GameState::Menu, GameState::Playing});
     engine.addSystem(Stage::Update, InputSystem, {GameState::Menu, GameState::Playing, GameState::Paused});
