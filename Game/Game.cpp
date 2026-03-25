@@ -23,6 +23,7 @@
 #include "Systems/SelectionRenderSystem.h"
 #include "Systems/CleanupSystem.h"
 #include "Systems/ChopOrderSystem.h"
+#include "Systems/StoneGenerationSystem.h"
 #include "Entities/EntityFactory.h"
 #include "Entities/MapFactory.h"
 #include "Entities/UiFactory.h"
@@ -64,6 +65,7 @@ void Game::load(Engine& engine)
     textures.load("colonist", "assets/textures/colonist.png");
     textures.load("animal", "assets/textures/animal.png");
     textures.load("background", "assets/textures/background.png");
+    textures.load("stone", "assets/textures/stone.png");
 
     engine.addSystem(Stage::OnEnter, CleanupSystem, {GameState::Menu});
     engine.addSystem(Stage::OnEnter, TitleScreenMusicSystem, {GameState::Menu});
@@ -71,6 +73,7 @@ void Game::load(Engine& engine)
     engine.addSystem(Stage::OnEnter, TerrainGenerationSystem, {GameState::Playing});
     engine.addSystem(Stage::OnEnter, BuildTileMapSystem, {GameState::Playing});
     engine.addSystem(Stage::OnEnter, VegetationGenerationSystem, {GameState::Playing});
+    engine.addSystem(Stage::OnEnter, StoneGenerationSystem, {GameState::Playing});
     engine.addSystem(Stage::OnEnter, AnimalGenerationSystem, {GameState::Playing});
     engine.addSystem(Stage::OnEnter, ColonistGenerationSystem, {GameState::Playing});
     engine.addSystem(Stage::Render, UiPauseMenuShowSystem, {GameState::Paused});
@@ -91,8 +94,8 @@ void Game::load(Engine& engine)
     engine.addSystem(Stage::Render, TileMapRenderSystem, {GameState::Playing, GameState::Paused});
     engine.addSystem(Stage::Render, PathDrawSystem, {GameState::Playing, GameState::Paused});
     engine.addSystem(Stage::Render, RenderSystem, {GameState::Playing, GameState::Paused});
-    engine.addSystem(Stage::Render, UiRenderSystem, {GameState::Menu, GameState::Playing,  GameState::Paused});
     engine.addSystem(Stage::Render, SelectionRenderSystem, {GameState::Menu, GameState::Playing});
+    engine.addSystem(Stage::Render, UiRenderSystem, {GameState::Menu, GameState::Playing,  GameState::Paused});
 
     EntityFactory::createHUD(registry);
     EntityFactory::createMainMenu(registry, textures.get("background"));

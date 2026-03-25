@@ -67,29 +67,3 @@ inline void ChopOrderSystem(entt::registry& registry)
         tool.current = ToolMode::None;
     }
 }
-
-/*
-inline void ChopOrderSystem(entt::registry& registry)
-{
-    auto& tool = registry.ctx().get<ToolState>();
-    auto& mouse = registry.ctx().get<MouseManager>();
-
-    //retornar si no esta en modo cortar
-    if (tool.current != ToolMode::Chop)
-        return;
-
-    if (mouse.isPressed(sf::Mouse::Button::Left))
-    {
-        auto view = registry.view<SelectedComponent, ChoppableComponent>();
-
-        for (auto entity : view)
-        {
-            //evitar duplicar el componente
-            if (!registry.all_of<ChopMarkedComponent>(entity))
-            {
-                registry.emplace<ChopMarkedComponent>(entity);
-            }
-        }
-    }
-}
-*/

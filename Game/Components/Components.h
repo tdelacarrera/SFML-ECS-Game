@@ -62,6 +62,10 @@ struct ChoppableComponent {};
 
 struct ChopMarkedComponent {};
 
+struct MinableComponent {};
+
+struct MineMarkedComponent {};
+
 
 //HUD
 enum class ToolMode
