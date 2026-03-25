@@ -65,6 +65,20 @@ inline void SelectionRenderSystem(entt::registry& registry)
 
         window.draw(rect);
     }
+    auto view3 = registry.view<TransformComponent, MineMarkedComponent>();
+
+    for (auto entity : view3)
+    {
+        auto& t = view3.get<TransformComponent>(entity);
+
+        sf::RectangleShape rect({64.f, 64.f});
+        rect.setOrigin({32.f, 32.f});
+        rect.setPosition(t.position);
+
+        rect.setFillColor(sf::Color(0, 0, 255, 100));
+
+        window.draw(rect);
+    }
     //ELIMINAR
 
     for(auto entity : view)

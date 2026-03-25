@@ -72,6 +72,7 @@ enum class ToolMode
 {
     None,
     Chop,
+    Mine,
     Harvest,
     Build,
     ZoneStorage

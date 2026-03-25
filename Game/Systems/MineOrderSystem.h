@@ -5,14 +5,15 @@
 #include <algorithm>
 #include "../Components/Components.h"
 
-inline void ChopOrderSystem(entt::registry& registry)
+
+inline void MineOrderSystem(entt::registry& registry)
 {
     auto& tool = registry.ctx().get<ToolState>();
     auto& mouse = registry.ctx().get<MouseManager>();
     auto& window = registry.ctx().get<WindowResource>().window;
 
     // Solo funciona en modo talar
-    if (tool.current != ToolMode::Chop)
+    if (tool.current != ToolMode::Mine)
         return;
 
     // Posición mouse en mundo
@@ -47,7 +48,7 @@ inline void ChopOrderSystem(entt::registry& registry)
         sf::FloatRect rect(position, size);
 
         // Marcar entidades dentro del area
-        auto view = registry.view<TransformComponent, ChoppableComponent>();
+        auto view = registry.view<TransformComponent, MinableComponent>();
 
         for (auto entity : view)
         {
@@ -55,7 +56,7 @@ inline void ChopOrderSystem(entt::registry& registry)
 
             if (rect.contains(t.position))
             {
-                registry.emplace_or_replace<ChopMarkedComponent>(entity);
+                registry.emplace_or_replace<MineMarkedComponent>(entity);
             }
         }
     }
