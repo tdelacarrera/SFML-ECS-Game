@@ -68,6 +68,7 @@ void Game::load(Engine& engine)
     textures.load("animal", "assets/textures/animal.png");
     textures.load("background", "assets/textures/background.png");
     textures.load("stone", "assets/textures/stone.png");
+    textures.load("plant", "assets/textures/plant.png");
 
     engine.addSystem(Stage::OnEnter, CleanupSystem, {GameState::Menu});
     engine.addSystem(Stage::OnEnter, TitleScreenMusicSystem, {GameState::Menu});

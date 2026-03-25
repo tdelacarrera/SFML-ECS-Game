@@ -30,6 +30,10 @@ inline void VegetationGenerationSystem(entt::registry& registry)
                     EntityFactory::createTree(registry, x * tilemap.tileSize, y * tilemap.tileSize);
                 }
 
+                if(rand() % 3 == 1 && tile.terrain == 2){
+                    EntityFactory::createPlant(registry, x * tilemap.tileSize, y * tilemap.tileSize);
+                }
+
             }
         }
     }

@@ -15,6 +15,15 @@ namespace EntityFactory
 
         return entity;
     }
+    inline entt::entity createPlant(entt::registry& registry, float x, float y)
+    {
+        entt::entity entity = registry.create();
+        registry.emplace<TransformComponent>(entity,sf::Vector2f{x, y},  sf::Vector2f{1.f, 1.f},  0.f);
+        registry.emplace<SpriteComponent>(entity, "plant");
+        registry.emplace<HarvestableComponent>(entity);
+
+        return entity;
+    }
 
     inline entt::entity createStone(entt::registry& registry, float x, float y)
     {

@@ -66,6 +66,10 @@ struct MinableComponent {};
 
 struct MineMarkedComponent {};
 
+struct HarvestableComponent {};
+
+struct HarvestMarkedComponent {};
+
 
 //HUD
 enum class ToolMode
