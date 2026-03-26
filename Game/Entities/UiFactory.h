@@ -63,7 +63,7 @@ inline entt::entity createHUD(entt::registry& registry)
     makeButton("Construir", ToolMode::Build);
     makeButton("Talar", ToolMode::Chop);
     makeButton("Minar", ToolMode::Mine);
-    makeButton("Cultivar", ToolMode::Harvest);
+    makeButton("Cosechar", ToolMode::Harvest);
     makeButton("Cancelar", ToolMode::Cancel);
     makeButton("Zona", ToolMode::ZoneStorage);
 
