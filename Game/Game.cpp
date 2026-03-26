@@ -20,6 +20,7 @@
 #include "Systems/PathDrawSystem.h"
 #include "Systems/MouseSystem.h"
 #include "Systems/MouseSelectionSystem.h"
+#include "Systems/SetColonistPathSystem.h"
 #include "Systems/SelectionRenderSystem.h"
 #include "Systems/CleanupSystem.h"
 #include "Systems/ChopOrderSystem.h"
@@ -96,6 +97,7 @@ void Game::load(Engine& engine)
     engine.addSystem(Stage::Update, HarvestOrderSystem, {GameState::Playing});
     engine.addSystem(Stage::Update, CancelOrderSystem, {GameState::Playing});
     engine.addSystem(Stage::Update, MouseSelectionSystem, {GameState::Menu, GameState::Playing});
+    engine.addSystem(Stage::Update, SetColonistPathSystem, {GameState::Playing});
     engine.addSystem(Stage::Update, InputSystem, {GameState::Menu, GameState::Playing, GameState::Paused});
     
     engine.addSystem(Stage::Render, TileMapRenderSystem, {GameState::Playing, GameState::Paused});

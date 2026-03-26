@@ -52,6 +52,7 @@ namespace EntityFactory
         registry.emplace<TransformComponent>(entity,sf::Vector2f{x, y},  sf::Vector2f{1.f, 1.f},  0.f);
         registry.emplace<SpriteComponent>(entity, "colonist");
         registry.emplace<SelectableComponent>(entity);
+        registry.emplace<ColonistComponent>(entity);
 
         return entity;
     }

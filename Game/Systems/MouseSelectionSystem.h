@@ -5,7 +5,6 @@
 #include <SFML/Graphics.hpp>
 #include "../../Engine/Input/MouseManager.h"
 #include "../../Engine/Textures/TextureManager.h"
-#include <iostream>
 
 inline void MouseSelectionSystem(entt::registry& registry)
 {

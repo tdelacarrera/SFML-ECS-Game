@@ -53,6 +53,7 @@ struct PathComponent
     int currentIndex = 0;
 };
 
+struct ColonistComponent {};
 
 struct SelectedComponent {};
 

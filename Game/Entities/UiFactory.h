@@ -169,7 +169,7 @@ inline entt::entity createHUD(entt::registry& registry)
         overlay->add(title);
 
         // Botón Jugar
-        auto play = tgui::Button::create("Jugar");
+        auto play = tgui::Button::create("Renaudar");
         play->setSize(200, 50);
         play->setPosition("40%", "40%");
         overlay->add(play);
@@ -191,7 +191,7 @@ inline entt::entity createHUD(entt::registry& registry)
         {
             auto& states = registry.ctx().get<GameStateStack>();
             states.pop();
-            panel->setVisible(false); 
+            panel->setVisible(false);
         });
 
         quit->onPress([&registry, panel]()

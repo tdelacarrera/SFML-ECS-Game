@@ -33,7 +33,6 @@ inline void ColonistGenerationSystem(entt::registry& registry)
                  {
                   if(rand() % 3 == 1){
                     entt::entity colonist = EntityFactory::createColonist(registry, x * tilemap.tileSize, y * tilemap.tileSize);
-                    pathfinding.setDestination(registry, colonist, {158,125});
                   }
                  }
             }
