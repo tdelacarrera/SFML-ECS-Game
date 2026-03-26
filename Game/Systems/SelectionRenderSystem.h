@@ -4,18 +4,15 @@
 #include <SFML/Graphics.hpp>
 #include "../../Engine/Input/MouseManager.h"
 
-inline void drawSelectionBracket(sf::RenderWindow& window, sf::Vector2f center)
+inline void drawSelectionBracket(sf::RenderWindow& window, sf::Vector2f topLeft)
 {
-    float size = 64.f; 
-    float corner = 8.f; 
+    float size = 64.f;
+    float corner = 8.f;
     float thickness = 2.f;
 
-    sf::Vector2f half(size / 2.f, size / 2.f);
-
-    sf::Vector2f topLeft = center - half;
-    sf::Vector2f topRight = {center.x + half.x, center.y - half.y};
-    sf::Vector2f bottomLeft = {center.x - half.x, center.y + half.y};
-    sf::Vector2f bottomRight = center + half;
+    sf::Vector2f topRight = {topLeft.x + size, topLeft.y};
+    sf::Vector2f bottomLeft = {topLeft.x, topLeft.y + size};
+    sf::Vector2f bottomRight = {topLeft.x + size, topLeft.y + size};
 
     sf::Color color = sf::Color::Yellow;
 
@@ -58,7 +55,6 @@ inline void SelectionRenderSystem(entt::registry& registry)
         auto& t = view2.get<TransformComponent>(entity);
 
         sf::RectangleShape rect({64.f, 64.f});
-        rect.setOrigin({32.f, 32.f});
         rect.setPosition(t.position);
 
         rect.setFillColor(sf::Color(255, 0, 0, 100));
@@ -72,7 +68,6 @@ inline void SelectionRenderSystem(entt::registry& registry)
         auto& t = view3.get<TransformComponent>(entity);
 
         sf::RectangleShape rect({64.f, 64.f});
-        rect.setOrigin({32.f, 32.f});
         rect.setPosition(t.position);
 
         rect.setFillColor(sf::Color(0, 0, 255, 100));
@@ -87,7 +82,6 @@ inline void SelectionRenderSystem(entt::registry& registry)
         auto& t = view4.get<TransformComponent>(entity);
 
         sf::RectangleShape rect({64.f, 64.f});
-        rect.setOrigin({32.f, 32.f});
         rect.setPosition(t.position);
 
         rect.setFillColor(sf::Color(0, 255, 0, 100));

@@ -18,19 +18,19 @@ inline void HarvestOrderSystem(entt::registry& registry)
     }
 
     // Posición mouse en mundo
-    sf::Vector2i pixel = mouse.getPosition();
-    sf::Vector2f world = window.mapPixelToCoords(pixel);
+    sf::Vector2i mousePositon = mouse.getPosition();
+    sf::Vector2f worldPosition = window.mapPixelToCoords(mousePositon);
 
     // Iniciar selección
     if (mouse.isJustPressed(sf::Mouse::Button::Left))
     {
-        mouse.startSelection(world);
+        mouse.startSelection(worldPosition);
     }
 
     // Hacer mientras se arrastra
     if (mouse.selecting())
     {
-        mouse.updateSelection(world);
+        mouse.updateSelection(worldPosition);
 
         sf::Vector2f start = mouse.getStart();
         sf::Vector2f end   = mouse.getEnd();

@@ -15,8 +15,8 @@ inline void SetColonistPathSystem(entt::registry& registry)
     auto& mouse = registry.ctx().get<MouseManager>();
     auto& window = registry.ctx().get<WindowResource>().window;
 
-    sf::Vector2i pixel = mouse.getPosition();
-    sf::Vector2f world = window.mapPixelToCoords(pixel);
+    sf::Vector2i mousePositon = mouse.getPosition();
+    sf::Vector2f worldPosition = window.mapPixelToCoords(mousePositon);
 
     auto view = registry.view<ColonistComponent, SelectedComponent>();
 
@@ -28,8 +28,8 @@ inline void SetColonistPathSystem(entt::registry& registry)
             const int TILE_SIZE = 64;
 
             sf::Vector2i tilePos;
-            tilePos.x = static_cast<int>(world.x) / TILE_SIZE;
-            tilePos.y = static_cast<int>(world.y) / TILE_SIZE;
+            tilePos.x = static_cast<int>(worldPosition.x) / TILE_SIZE;
+            tilePos.y = static_cast<int>(worldPosition.y) / TILE_SIZE;
 
             pathfinding.setDestination(registry, entity, {tilePos.x, tilePos.y});
         }

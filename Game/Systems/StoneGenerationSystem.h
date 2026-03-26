@@ -11,14 +11,11 @@ inline void StoneGenerationSystem(entt::registry& registry)
     auto& world = registry.ctx().get<WorldMap>();
 
     auto view = registry.view<TileMapComponent>();
+    
 
     for(auto entity : view)
     {
         auto& tilemap = view.get<TileMapComponent>(entity);
-
-        int tilesetWidth = tilemap.texture->getSize().x / tilemap.tileSize;
-
-        int v = 0;
 
         for(int y=0; y<world.height; y++)
         {
@@ -26,10 +23,9 @@ inline void StoneGenerationSystem(entt::registry& registry)
             {
                  auto& tile = world.get(x,y);
             
-                if(rand() % 10 == 1 && tile.terrain == 3){
+                if(tile.terrain == 4){
                     EntityFactory::createStone(registry, x * tilemap.tileSize, y * tilemap.tileSize);
                 }
-
             }
         }
     }

@@ -11,18 +11,18 @@ inline void MouseSelectionSystem(entt::registry& registry)
     auto& mouse = registry.ctx().get<MouseManager>();
     auto& window = registry.ctx().get<WindowResource>().window;
 
-    sf::Vector2i pixel = mouse.getPosition();
-    sf::Vector2f world = window.mapPixelToCoords(pixel);
+    sf::Vector2i mousePositon = mouse.getPosition();
+    sf::Vector2f worldPosition = window.mapPixelToCoords(mousePositon);
 
     if(mouse.isPressed(sf::Mouse::Button::Left) && !mouse.selecting())
     {
-        mouse.startSelection(world);
+        mouse.startSelection(worldPosition);
     }
 
     if(mouse.selecting())
     {
         
-         mouse.updateSelection(world);
+         mouse.updateSelection(worldPosition);
 
         //Logica para Seleccionar las entidades bajo el cuadro de seleccion
         sf::Vector2f start = mouse.getStart();
@@ -67,7 +67,7 @@ inline void MouseSelectionSystem(entt::registry& registry)
 
                 //area del rectangulo de seleccion para el click
                 float radius = 32.f;
-                sf::FloatRect bounds({transform.position.x - radius, transform.position.y - radius}, {radius * 2, radius * 2});
+                sf::FloatRect bounds({transform.position.x, transform.position.y}, {radius * 2, radius * 2});
 
                 if(bounds.contains(end))
                 {

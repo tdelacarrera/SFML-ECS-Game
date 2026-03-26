@@ -10,9 +10,7 @@ namespace EntityFactory
     inline entt::entity createTileMap(entt::registry& registry, const sf::Texture& texture)
     {
         auto entity = registry.create();
-
         auto& world = registry.ctx().get<WorldMap>();
-
         auto& tilemap = registry.emplace<TileMapComponent>(entity);
 
         tilemap.texture = &texture;
@@ -20,8 +18,6 @@ namespace EntityFactory
 
         tilemap.width = world.width;
         tilemap.height = world.height;
-
-        tilemap.vertices.setPrimitiveType(sf::PrimitiveType::Triangles);
 
         return entity;
     }

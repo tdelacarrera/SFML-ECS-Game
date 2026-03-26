@@ -11,6 +11,7 @@ namespace EntityFactory
         entt::entity entity = registry.create();
         registry.emplace<TransformComponent>(entity,sf::Vector2f{x, y},  sf::Vector2f{1.f, 1.f},  0.f);
         registry.emplace<SpriteComponent>(entity, "tree");
+        registry.emplace<SelectableComponent>(entity);
         registry.emplace<ChoppableComponent>(entity);
 
         return entity;
@@ -20,6 +21,7 @@ namespace EntityFactory
         entt::entity entity = registry.create();
         registry.emplace<TransformComponent>(entity,sf::Vector2f{x, y},  sf::Vector2f{1.f, 1.f},  0.f);
         registry.emplace<SpriteComponent>(entity, "plant");
+        registry.emplace<SelectableComponent>(entity);
         registry.emplace<HarvestableComponent>(entity);
 
         return entity;
@@ -30,6 +32,7 @@ namespace EntityFactory
         entt::entity entity = registry.create();
         registry.emplace<TransformComponent>(entity,sf::Vector2f{x, y},  sf::Vector2f{1.f, 1.f},  0.f);
         registry.emplace<SpriteComponent>(entity, "stone");
+        registry.emplace<SelectableComponent>(entity);
         registry.emplace<MinableComponent>(entity);
 
         return entity;
