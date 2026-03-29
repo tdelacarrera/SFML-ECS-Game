@@ -115,11 +115,11 @@ std::vector<sf::Vector2i> Pathfinding::findPath( WorldMap& world, sf::Vector2i s
 
 void Pathfinding::setDestination(entt::registry& registry, entt::entity entity, sf::Vector2i goal)
 {
-    auto& world = registry.ctx().get<WorldMap>();
-
     auto& transform = registry.get<TransformComponent>(entity);
+    auto& world = registry.ctx().get<WorldMap>();
+    int tileSize = world.tileSize;
 
-    int tileSize = 64;
+
 
     sf::Vector2i start(
         transform.position.x / tileSize,

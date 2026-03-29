@@ -7,10 +7,10 @@
 
 inline void PathDrawSystem(entt::registry& registry)
 {
-    //TODO: REMOVE HARCODED VALUE
-    int tileSize = 64;
     auto &window = registry.ctx().get<WindowResource>().window;
     auto& tiles = registry.ctx().get<WorldMap>().tiles;
+    auto& world = registry.ctx().get<WorldMap>();
+    int tileSize = world.tileSize;
 
     auto view = registry.view<PathComponent>();
 
@@ -20,9 +20,9 @@ inline void PathDrawSystem(entt::registry& registry)
         if(path.path.empty()) continue;
 
         sf::RectangleShape rect(sf::Vector2f(tileSize, tileSize));
-        rect.setFillColor(sf::Color(255, 0, 0, 80));
         for(auto& tile : path.path)
         {
+            rect.setFillColor(sf::Color(255, 0, 0, 80));
             rect.setPosition({tile.x * tileSize, tile.y * tileSize});
             rect.setOrigin({tile.x * 0.5f, tile.y * 0.5f});
             window.draw(rect);

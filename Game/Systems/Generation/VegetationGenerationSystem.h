@@ -4,7 +4,7 @@
 #include <SFML/Graphics.hpp>
 #include "Components/Components.h"
 #include "Engine/Resources.h"
-#include "Entities/EntityFactory.h"
+#include "Entities/Entities.h"
 
 inline void VegetationGenerationSystem(entt::registry& registry)
 {
@@ -14,10 +14,6 @@ inline void VegetationGenerationSystem(entt::registry& registry)
 
     for(auto entity : view)
     {
-        auto& tilemap = view.get<TileMapComponent>(entity);
-
-        int tilesetWidth = tilemap.texture->getSize().x / tilemap.tileSize;
-
         int v = 0;
 
         for(int y=0; y<world.height; y++)
@@ -27,11 +23,11 @@ inline void VegetationGenerationSystem(entt::registry& registry)
                  auto& tile = world.get(x,y);
             
                 if(rand() % 3 == 1 && tile.terrain == 3){
-                    EntityFactory::createTree(registry, x * tilemap.tileSize, y * tilemap.tileSize);
+                    EntityFactory::createTree(registry, x * world.tileSize, y * world.tileSize);
                 }
 
                 if(rand() % 3 == 1 && tile.terrain == 2){
-                    EntityFactory::createPlant(registry, x * tilemap.tileSize, y * tilemap.tileSize);
+                    EntityFactory::createPlant(registry, x * world.tileSize, y * world.tileSize);
                 }
 
             }

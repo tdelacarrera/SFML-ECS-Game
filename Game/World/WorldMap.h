@@ -1,25 +1,19 @@
 #pragma once
 
-#include <vector>
-#include <cstdint>
-
-struct Tile
-{
-    uint16_t terrain;
-    float cost = 1.f;
-    bool walkable;
-    bool buildable;
-};
+#include "Tile.h"
 
 struct WorldMap
 {
     int width;
     int height;
 
+    int tileSize = 64;
+
     std::vector<Tile> tiles;
 
     Tile& get(int x, int y)
     {
+        assert(inBounds(x, y));
         return tiles[x + y * width];
     }
 

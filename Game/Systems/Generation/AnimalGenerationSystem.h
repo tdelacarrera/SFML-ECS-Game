@@ -3,8 +3,7 @@
 #include <entt/entt.hpp>
 #include <SFML/Graphics.hpp>
 #include "Components/Components.h"
-#include "World/WorldMap.h"
-#include "Entities/EntityFactory.h"
+#include "Entities/Entities.h"
 
 inline void AnimalGenerationSystem(entt::registry& registry)
 {
@@ -12,25 +11,19 @@ inline void AnimalGenerationSystem(entt::registry& registry)
 
     auto view = registry.view<TileMapComponent>();
 
-    for(auto entity : view)
+    int v = 0;
+
+    for(int y=0; y<world.height; y++)
     {
-        auto& tilemap = view.get<TileMapComponent>(entity);
-
-        int tilesetWidth = tilemap.texture->getSize().x / tilemap.tileSize;
-
-        int v = 0;
-
-        for(int y=0; y<world.height; y++)
+        for(int x=0; x<world.width; x++)
         {
-            for(int x=0; x<world.width; x++)
-            {
-                 auto& tile = world.get(x,y);
+            auto& tile = world.get(x,y);
             
-                if(rand() % 20 == 1 && tile.terrain != 0 && tile.terrain != 1){
-                    EntityFactory::createAnimal(registry, x * tilemap.tileSize, y * tilemap.tileSize);
-                }
+            if(rand() % 20 == 1 && tile.terrain != 0 && tile.terrain != 1){
+                EntityFactory::createAnimal(registry, x * world.tileSize, y * world.tileSize);
+             }
 
-            }
-        }
+           }
     }
+    
 }

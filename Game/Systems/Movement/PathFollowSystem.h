@@ -6,11 +6,12 @@
 
 inline void PathFollowSystem(entt::registry& registry)
 {
-    int tileSize = 64;
     float speed = 120.f;
 
     auto& deltaTime = registry.ctx().get<TimeResource>().deltaTime;
     auto view = registry.view<TransformComponent, PathComponent>();
+    auto& world = registry.ctx().get<WorldMap>();
+    int tileSize = world.tileSize;
 
     for(auto entity : view)
     {

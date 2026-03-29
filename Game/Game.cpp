@@ -7,13 +7,10 @@
 #include "Systems/Movement/Systems.h"
 #include "Systems/Orders/Systems.h"
 #include "Systems/Rendering/Systems.h"
-#include "Entities/EntityFactory.h"
-#include "Entities/MapFactory.h"
-#include "Entities/UiFactory.h"
+#include "Entities/Entities.h"
 #include "Engine/Audio/SoundManager.h"
 #include "Engine/Audio/MusicManager.h"
 #include "Engine/Textures/TextureManager.h"
-#include "World/WorldMap.h"
 #include "Pathfinding/Pathfinding.h"
 
 void Game::load(Engine& engine)

@@ -9,20 +9,17 @@ namespace EntityFactory
 
     inline entt::entity createTileMap(entt::registry& registry, const sf::Texture& texture)
     {
-        auto entity = registry.create();
         auto& world = registry.ctx().get<WorldMap>();
+        auto entity = registry.create();
         auto& tilemap = registry.emplace<TileMapComponent>(entity);
-
         tilemap.texture = &texture;
-        tilemap.tileSize = 64;
-
-        tilemap.width = world.width;
-        tilemap.height = world.height;
+        tilemap.tilesetWidth = texture.getSize().x / 64;
 
         return entity;
     }
 
 }
+
 
 
 

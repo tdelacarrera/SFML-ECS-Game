@@ -18,7 +18,7 @@ inline void BuildTileMapSystem(entt::registry& registry)
         tilemap.vertices.setPrimitiveType(sf::PrimitiveType::Triangles);
         tilemap.vertices.resize(world.width * world.height * 6);
 
-        int tilesetWidth = tilemap.texture->getSize().x / tilemap.tileSize;
+        int tilesetWidth = tilemap.texture->getSize().x / world.tileSize;
 
         int v = 0;
 
@@ -30,32 +30,32 @@ inline void BuildTileMapSystem(entt::registry& registry)
 
                 int tileNumber = tile.terrain;
 
-                int tu = tileNumber % tilesetWidth;
-                int tv = tileNumber / tilesetWidth;
+                int tu = tileNumber % tilemap.tilesetWidth;
+                int tv = tileNumber / tilemap.tilesetWidth;
 
-                float px = x * tilemap.tileSize;
-                float py = y * tilemap.tileSize;
+                float px = x * world.tileSize;
+                float py = y * world.tileSize;
 
-                float tx = tu * tilemap.tileSize;
-                float ty = tv * tilemap.tileSize;
+                float tx = tu * world.tileSize;
+                float ty = tv * world.tileSize;
 
                 sf::Vertex* quad = &tilemap.vertices[v];
 
                 quad[0].position = {px, py};
-                quad[1].position = {px + tilemap.tileSize, py};
-                quad[2].position = {px + tilemap.tileSize, py + tilemap.tileSize};
+                quad[1].position = {px + world.tileSize, py};
+                quad[2].position = {px + world.tileSize, py + world.tileSize};
 
                 quad[3].position = {px, py};
-                quad[4].position = {px + tilemap.tileSize, py + tilemap.tileSize};
-                quad[5].position = {px, py + tilemap.tileSize};
+                quad[4].position = {px + world.tileSize, py + world.tileSize};
+                quad[5].position = {px, py + world.tileSize};
 
                 quad[0].texCoords = {tx, ty};
-                quad[1].texCoords = {tx + tilemap.tileSize, ty};
-                quad[2].texCoords = {tx + tilemap.tileSize, ty + tilemap.tileSize};
+                quad[1].texCoords = {tx + world.tileSize, ty};
+                quad[2].texCoords = {tx + world.tileSize, ty + world.tileSize};
 
                 quad[3].texCoords = {tx, ty};
-                quad[4].texCoords = {tx + tilemap.tileSize, ty + tilemap.tileSize};
-                quad[5].texCoords = {tx, ty + tilemap.tileSize};
+                quad[4].texCoords = {tx + world.tileSize, ty + world.tileSize};
+                quad[5].texCoords = {tx, ty + world.tileSize};
 
                 v += 6;
             }

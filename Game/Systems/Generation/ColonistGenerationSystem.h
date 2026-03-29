@@ -3,8 +3,7 @@
 #include <entt/entt.hpp>
 #include <SFML/Graphics.hpp>
 #include "Components/Components.h"
-#include "World/WorldMap.h"
-#include "Entities/EntityFactory.h"
+#include "Entities/Entities.h"
 #include "Pathfinding/Pathfinding.h"
 
 inline void ColonistGenerationSystem(entt::registry& registry)
@@ -18,9 +17,6 @@ inline void ColonistGenerationSystem(entt::registry& registry)
     {
         auto& tilemap = view.get<TileMapComponent>(entity);
 
-
-        int tilesetWidth = tilemap.texture->getSize().x / tilemap.tileSize;
-
         int v = 0;
 
         for(int y=0; y<world.height; y++)
@@ -32,7 +28,7 @@ inline void ColonistGenerationSystem(entt::registry& registry)
                  if(x < 5 && y < 5)
                  {
                   if(rand() % 3 == 1){
-                    entt::entity colonist = EntityFactory::createColonist(registry, x * tilemap.tileSize, y * tilemap.tileSize);
+                    entt::entity colonist = EntityFactory::createColonist(registry, x * world.tileSize, y * world.tileSize);
                   }
                  }
             }
