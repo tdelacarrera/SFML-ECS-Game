@@ -1,9 +1,9 @@
 #pragma once
 
 #include <entt/entt.hpp>
-#include "../../Components/Components.h"
-#include "../../../Engine/Resources.h"
-#include "../../../Engine/Audio/MusicManager.h"
+#include "Components/Components.h"
+#include "Engine/Resources.h"
+#include "Engine/Audio/MusicManager.h"
 
 inline void BackgroundMusicSystem(entt::registry& registry)
 {

@@ -2,12 +2,12 @@
 
 #include <entt/entt.hpp>
 #include <SFML/Graphics.hpp>
-#include "../../Components/Components.h"
-#include "../../World/WorldMap.h"
-#include "../../Entities/EntityFactory.h"
-#include "../../Pathfinding/Pathfinding.h"
-#include "../../../Engine/Input/MouseManager.h"
-#include "../../../Engine/Resources.h"
+#include "Components/Components.h"
+#include "World/WorldMap.h"
+#include "Entities/EntityFactory.h"
+#include "Pathfinding/Pathfinding.h"
+#include "Engine/Input/MouseManager.h"
+#include "Engine/Resources.h"
 
 inline void SetColonistPathSystem(entt::registry& registry)
 {

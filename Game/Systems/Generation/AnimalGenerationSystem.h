@@ -2,9 +2,9 @@
 
 #include <entt/entt.hpp>
 #include <SFML/Graphics.hpp>
-#include "../../Components/Components.h"
-#include "../../World/WorldMap.h"
-#include "../../Entities/EntityFactory.h"
+#include "Components/Components.h"
+#include "World/WorldMap.h"
+#include "Entities/EntityFactory.h"
 
 inline void AnimalGenerationSystem(entt::registry& registry)
 {

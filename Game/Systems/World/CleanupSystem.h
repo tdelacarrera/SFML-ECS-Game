@@ -1,7 +1,7 @@
 #pragma once
 
 #include <entt/entt.hpp>
-#include "../../Components/Components.h"
+#include "Components/Components.h"
 
 inline void CleanupSystem(entt::registry& registry)
 {

@@ -3,8 +3,8 @@
 #include <algorithm>
 #include <entt/entt.hpp>
 #include <SFML/Graphics.hpp>
-#include "../../../Engine/Input/MouseManager.h"
-#include "../../../Engine/Textures/TextureManager.h"
+#include "Engine/Input/MouseManager.h"
+#include "Engine/Textures/TextureManager.h"
 
 inline void MouseSelectionSystem(entt::registry& registry)
 {

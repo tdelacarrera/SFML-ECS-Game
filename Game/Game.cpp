@@ -10,9 +10,9 @@
 #include "Entities/EntityFactory.h"
 #include "Entities/MapFactory.h"
 #include "Entities/UiFactory.h"
-#include "../Engine/Audio/SoundManager.h"
-#include "../Engine/Audio/MusicManager.h"
-#include "../Engine/Textures/TextureManager.h"
+#include "Engine/Audio/SoundManager.h"
+#include "Engine/Audio/MusicManager.h"
+#include "Engine/Textures/TextureManager.h"
 #include "World/WorldMap.h"
 #include "Pathfinding/Pathfinding.h"
 

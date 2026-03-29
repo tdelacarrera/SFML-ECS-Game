@@ -2,10 +2,10 @@
 
 #include <entt/entt.hpp>
 #include <SFML/Graphics.hpp>
-#include "../../Components/Components.h"
-#include "../../../Engine/Resources.h"
-#include "../../Entities/EntityFactory.h"
-#include "../../World/WorldMap.h"
+#include "Components/Components.h"
+#include "Engine/Resources.h"
+#include "Entities/EntityFactory.h"
+#include "World/WorldMap.h"
 
 inline void StoneGenerationSystem(entt::registry& registry)
 {

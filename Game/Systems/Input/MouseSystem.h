@@ -1,7 +1,7 @@
 #include <SFML/Graphics.hpp>
 #include <entt/entt.hpp>
-#include "../../../Engine/Input/MouseManager.h"
-#include "../../../Engine/Resources.h"
+#include "Engine/Input/MouseManager.h"
+#include "Engine/Resources.h"
 
 inline void MouseSystem(entt::registry& registry)
 {

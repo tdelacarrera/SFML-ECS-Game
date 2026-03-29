@@ -3,9 +3,9 @@
 #include <entt/entt.hpp>
 #include <SFML/Graphics.hpp>
 #include <FastNoiseLite.h>
-#include "../../Components/Components.h"
-#include "../../World/WorldMap.h"
-#include "../../Entities/MapFactory.h"
+#include "Components/Components.h"
+#include "World/WorldMap.h"
+#include "Entities/MapFactory.h"
 
 inline void TerrainGenerationSystem(entt::registry& registry)
 {

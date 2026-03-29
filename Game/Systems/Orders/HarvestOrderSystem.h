@@ -3,7 +3,7 @@
 #include <entt/entt.hpp>
 #include <SFML/Graphics.hpp>
 #include <algorithm>
-#include "../../Components/Components.h"
+#include "Components/Components.h"
 
 inline void HarvestOrderSystem(entt::registry& registry)
 {

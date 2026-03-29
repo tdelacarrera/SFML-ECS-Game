@@ -2,8 +2,8 @@
 
 #include <SFML/Graphics.hpp>
 #include <entt/entt.hpp>
-#include "../../../Engine/Input/InputManager.h"
-#include "../../../Engine/Input/MouseManager.h"
+#include "Engine/Input/InputManager.h"
+#include "Engine/Input/MouseManager.h"
 
 inline void InputSystem(entt::registry& registry)
 {

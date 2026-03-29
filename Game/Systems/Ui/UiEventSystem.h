@@ -1,7 +1,7 @@
 #pragma once
 
 #include <entt/entt.hpp>
-#include "../../../Engine/Resources.h"
+#include "Engine/Resources.h"
 
 
 inline void UiEventSystem(entt::registry& registry)

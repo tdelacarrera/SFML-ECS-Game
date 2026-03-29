@@ -2,8 +2,8 @@
 
 #include <entt/entt.hpp>
 #include <SFML/Graphics.hpp>
-#include "../../Components/Components.h"
-#include "../../../Engine/Resources.h"
+#include "Components/Components.h"
+#include "Engine/Resources.h"
 
 inline void BuildTileMapSystem(entt::registry& registry)
 {

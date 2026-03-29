@@ -50,7 +50,9 @@ add_executable(Game ${SOURCES})
 
 
 target_include_directories(Game PRIVATE
-    Include
+    ${CMAKE_SOURCE_DIR}
+    ${CMAKE_SOURCE_DIR}/Engine
+    ${CMAKE_SOURCE_DIR}/Game
     ${fastnoiselite_SOURCE_DIR}/Cpp
 )
 

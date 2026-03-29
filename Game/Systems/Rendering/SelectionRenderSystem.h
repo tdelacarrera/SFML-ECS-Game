@@ -2,7 +2,7 @@
 
 #include <entt/entt.hpp>
 #include <SFML/Graphics.hpp>
-#include "../../../Engine/Input/MouseManager.h"
+#include "Engine/Input/MouseManager.h"
 
 inline void drawSelectionBracket(sf::RenderWindow& window, sf::Vector2f topLeft)
 {

@@ -3,9 +3,9 @@
 #include <entt/entt.hpp>
 #include <SFML/Graphics.hpp>
 #include <SFML/Audio.hpp>
-#include "../../Components/Components.h"
-#include "../../../Engine/Input/InputManager.h"
-#include "../../../Engine/Input/MouseManager.h"
+#include "Components/Components.h"
+#include "Engine/Input/InputManager.h"
+#include "Engine/Input/MouseManager.h"
 
 inline void CameraSystem(entt::registry& registry)
 {

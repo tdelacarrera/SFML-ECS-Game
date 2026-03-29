@@ -1,8 +1,8 @@
 #pragma once
 
 #include <entt/entt.hpp>
-#include "../Components/Components.h"
-#include "../World/WorldMap.h"
+#include "Components/Components.h"
+#include "World/WorldMap.h"
 
 namespace EntityFactory
 {

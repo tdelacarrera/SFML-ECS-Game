@@ -2,9 +2,9 @@
 
 #include <entt/entt.hpp>
 #include <SFML/Graphics.hpp>
-#include "../../Components/Components.h"
-#include "../../../Engine/Resources.h"
-#include "../../../Engine/Textures/TextureManager.h"
+#include "Components/Components.h"
+#include "Engine/Resources.h"
+#include "Engine/Textures/TextureManager.h"
 
 inline void RenderSystem(entt::registry& registry)
 {
