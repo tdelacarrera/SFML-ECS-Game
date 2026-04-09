@@ -29,17 +29,17 @@ inline void TerrainGenerationSystem(entt::registry& registry)
                 tile.walkable = false;
             }    
             else if(n < -0.1){
-                tile.terrain = 3; 
+                tile.terrain = 7; 
                 tile.walkable = false;
             }
             else if(n < 0.2)
             {
-                 tile.terrain = 2; 
+                 tile.terrain = 6; 
                  tile.walkable = true;
                  tile.cost = 5;
             }
             else if(n < 0.8){
-                 tile.terrain = 0; 
+                 tile.terrain = 10; 
                  tile.walkable = true;
                  tile.cost = 1;
             }

@@ -1,12 +1,11 @@
 #pragma once
+#include <SFML/Graphics.hpp>
 
-#include <vector>
-#include <cstdint>
-
-//solo datos para renderizado
 struct TileMapComponent
 {
-    const sf::Texture* texture;
-    int tilesetWidth;
     sf::VertexArray vertices;
+    const sf::Texture* texture = nullptr;
+
+    int tilesetWidth = 0;
+    sf::Texture mapDataTexture;
 };

@@ -41,7 +41,7 @@ void Game::load(Engine &engine)
     sounds.load("test2", "assets/sounds/test2.mp3");
     sounds.load("cat", "assets/sounds/cat.ogg");
     textures.load("tree", "assets/textures/tree.png");
-    textures.load("tileset", "assets/textures/tileset64.png");
+    textures.load("tileset", "assets/textures/tiles2.jpg");
     textures.load("colonist", "assets/textures/colonist.png");
     textures.load("animal", "assets/textures/animal.png");
     textures.load("background", "assets/textures/background.png");

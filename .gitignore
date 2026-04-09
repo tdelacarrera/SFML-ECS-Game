@@ -1,2 +1,3 @@
-Build
-assets
+Build/
+assets/*
+!assets/shaders/
