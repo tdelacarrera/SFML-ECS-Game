@@ -22,11 +22,11 @@ inline void VegetationGenerationSystem(entt::registry& registry)
             {
                  auto& tile = world.get(x,y);
             
-                if(rand() % 3 == 1 && tile.terrain == 3){
+                if(rand() % 3 == 1 && tile.terrain == 1){
                     EntityFactory::createTree(registry, x * world.tileSize, y * world.tileSize);
                 }
 
-                if(rand() % 3 == 1 && tile.terrain == 2){
+                if(rand() % 3 == 1 && tile.terrain == 0){
                     EntityFactory::createPlant(registry, x * world.tileSize, y * world.tileSize);
                 }
 

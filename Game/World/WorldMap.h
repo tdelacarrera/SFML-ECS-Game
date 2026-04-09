@@ -7,11 +7,16 @@ struct WorldMap
     int width;
     int height;
 
-    int tileSize = 64;
+    int tileSize = 16;
 
     std::vector<Tile> tiles;
 
     Tile& get(int x, int y)
+    {
+        assert(inBounds(x, y));
+        return tiles[x + y * width];
+    }
+    const Tile& get(int x, int y) const
     {
         assert(inBounds(x, y));
         return tiles[x + y * width];

@@ -4,9 +4,9 @@
 #include <SFML/Graphics.hpp>
 #include "Engine/Input/MouseManager.h"
 
-inline void drawSelectionBracket(sf::RenderWindow& window, sf::Vector2f topLeft)
+inline void drawSelectionBracket(sf::RenderWindow& window, sf::Vector2f topLeft, float tileSize)
 {
-    float size = 64.f;
+    float size = tileSize;
     float corner = 8.f;
     float thickness = 2.f;
 
@@ -43,6 +43,7 @@ inline void drawSelectionBracket(sf::RenderWindow& window, sf::Vector2f topLeft)
 
 inline void SelectionRenderSystem(entt::registry& registry)
 {
+    auto& world = registry.ctx().get<WorldMap>();
     auto& window = registry.ctx().get<WindowResource>().window;
     auto view = registry.view<TransformComponent, SelectedComponent>();
 
@@ -54,7 +55,7 @@ inline void SelectionRenderSystem(entt::registry& registry)
     {
         auto& t = view2.get<TransformComponent>(entity);
 
-        sf::RectangleShape rect({64.f, 64.f});
+        sf::RectangleShape rect({world.tileSize,world.tileSize});
         rect.setPosition(t.position);
 
         rect.setFillColor(sf::Color(255, 0, 0, 100));
@@ -67,7 +68,7 @@ inline void SelectionRenderSystem(entt::registry& registry)
     {
         auto& t = view3.get<TransformComponent>(entity);
 
-        sf::RectangleShape rect({64.f, 64.f});
+        sf::RectangleShape rect({world.tileSize, world.tileSize});
         rect.setPosition(t.position);
 
         rect.setFillColor(sf::Color(0, 0, 255, 100));
@@ -81,7 +82,7 @@ inline void SelectionRenderSystem(entt::registry& registry)
     {
         auto& t = view4.get<TransformComponent>(entity);
 
-        sf::RectangleShape rect({64.f, 64.f});
+        sf::RectangleShape rect({world.tileSize, world.tileSize});
         rect.setPosition(t.position);
 
         rect.setFillColor(sf::Color(0, 255, 0, 100));
@@ -95,7 +96,7 @@ inline void SelectionRenderSystem(entt::registry& registry)
     {
         auto& transform = view.get<TransformComponent>(entity);
 
-        drawSelectionBracket(window, transform.position);
+        drawSelectionBracket(window, transform.position, world.tileSize);
     }
 
     auto& mouse = registry.ctx().get<MouseManager>();

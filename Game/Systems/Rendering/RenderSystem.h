@@ -17,6 +17,7 @@ inline void RenderSystem(entt::registry& registry)
     {
         sf::Texture& tex = textures.get(sprite.textureId);
         sf::Sprite drawable(tex);
+        drawable.setScale({0.2f,0.2f});//cambiar escala para testing
         drawable.setPosition(transform.position);
         sf::Vector2u size = tex.getSize();
         window.draw(drawable);

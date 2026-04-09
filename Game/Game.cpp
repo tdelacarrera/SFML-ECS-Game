@@ -13,19 +13,19 @@
 #include "Engine/Textures/TextureManager.h"
 #include "Pathfinding/Pathfinding.h"
 
-void Game::load(Engine& engine)
+void Game::load(Engine &engine)
 {
-    auto& registry = engine.getRegistry();
+    auto &registry = engine.getRegistry();
 
-    auto& sounds = registry.ctx().get<SoundManager>();
-    auto& music = registry.ctx().get<MusicManager>();
-    auto& textures = registry.ctx().get<TextureManager>();
-    auto& input = registry.ctx().get<InputManager>();
-    auto& states = registry.ctx().get<GameStateStack>();
+    auto &sounds = registry.ctx().get<SoundManager>();
+    auto &music = registry.ctx().get<MusicManager>();
+    auto &textures = registry.ctx().get<TextureManager>();
+    auto &input = registry.ctx().get<InputManager>();
+    auto &states = registry.ctx().get<GameStateStack>();
 
-    registry.ctx().emplace<WorldMap>(255,255);
+    registry.ctx().emplace<WorldMap>(255, 255);
     registry.ctx().emplace<Pathfinding>();
-    
+
     states.push(GameState::Menu);
 
     input.bind("move_up", sf::Keyboard::Key::W);
@@ -41,7 +41,7 @@ void Game::load(Engine& engine)
     sounds.load("test2", "assets/sounds/test2.mp3");
     sounds.load("cat", "assets/sounds/cat.ogg");
     textures.load("tree", "assets/textures/tree.png");
-    textures.load("tileset", "assets/textures/tilemap64.png");
+    textures.load("tileset", "assets/textures/tileset64.png");
     textures.load("colonist", "assets/textures/colonist.png");
     textures.load("animal", "assets/textures/animal.png");
     textures.load("background", "assets/textures/background.png");
@@ -49,7 +49,7 @@ void Game::load(Engine& engine)
     textures.load("plant", "assets/textures/plant.png");
 
     engine.addSystem(Stage::OnEnter, CleanupSystem, {GameState::Menu});
-    engine.addSystem(Stage::OnEnter, TitleScreenMusicSystem, {GameState::Menu});
+    engine.addSystem(Stage::Init, TitleScreenMusicSystem, {GameState::Menu});
     engine.addSystem(Stage::OnEnter, BackgroundMusicSystem, {GameState::Playing});
     engine.addSystem(Stage::OnEnter, TerrainGenerationSystem, {GameState::Playing});
     engine.addSystem(Stage::OnEnter, BuildTileMapSystem, {GameState::Playing});
@@ -57,9 +57,8 @@ void Game::load(Engine& engine)
     engine.addSystem(Stage::OnEnter, StoneGenerationSystem, {GameState::Playing});
     engine.addSystem(Stage::OnEnter, AnimalGenerationSystem, {GameState::Playing});
     engine.addSystem(Stage::OnEnter, ColonistGenerationSystem, {GameState::Playing});
-    engine.addSystem(Stage::Render, UiPauseMenuShowSystem, {GameState::Paused});
+    engine.addSystem(Stage::OnEnter, UiPauseMenuShowSystem, {GameState::Paused});
     engine.addSystem(Stage::OnEnter, UiMainMenuShowSystem, {GameState::Menu});
-    
 
     engine.addSystem(Stage::Input, PauseInputSystem, {GameState::Playing, GameState::Paused});
     engine.addSystem(Stage::Input, UiEventSystem, {GameState::Menu, GameState::Playing, GameState::Paused});
@@ -71,16 +70,16 @@ void Game::load(Engine& engine)
     engine.addSystem(Stage::Update, ChopOrderSystem, {GameState::Playing});
     engine.addSystem(Stage::Update, MineOrderSystem, {GameState::Playing});
     engine.addSystem(Stage::Update, HarvestOrderSystem, {GameState::Playing});
-    engine.addSystem(Stage::Update, CancelOrderSystem, {GameState::Playing});
+    engine.addSystem(Stage::Update, CancelOrderSystem, {GameState::Playing}) ;
     engine.addSystem(Stage::Update, MouseSelectionSystem, {GameState::Menu, GameState::Playing});
     engine.addSystem(Stage::Update, SetColonistPathSystem, {GameState::Playing});
     engine.addSystem(Stage::Update, InputSystem, {GameState::Menu, GameState::Playing, GameState::Paused});
-    
+
     engine.addSystem(Stage::Render, TileMapRenderSystem, {GameState::Playing, GameState::Paused});
-    engine.addSystem(Stage::Render, PathDrawSystem, {GameState::Playing, GameState::Paused});
+   // engine.addSystem(Stage::Render, PathDrawSystem, {GameState::Playing, GameState::Paused});
     engine.addSystem(Stage::Render, RenderSystem, {GameState::Playing, GameState::Paused});
     engine.addSystem(Stage::Render, SelectionRenderSystem, {GameState::Menu, GameState::Playing});
-    engine.addSystem(Stage::Render, UiRenderSystem, {GameState::Menu, GameState::Playing,  GameState::Paused});
+    engine.addSystem(Stage::Render, UiRenderSystem, {GameState::Menu, GameState::Playing, GameState::Paused});
 
     EntityFactory::createHUD(registry);
     EntityFactory::createMainMenu(registry, textures.get("background"));

@@ -13,7 +13,7 @@ namespace EntityFactory
         auto entity = registry.create();
         auto& tilemap = registry.emplace<TileMapComponent>(entity);
         tilemap.texture = &texture;
-        tilemap.tilesetWidth = texture.getSize().x / 64;
+        tilemap.tilesetWidth = texture.getSize().x / world.tileSize;
 
         return entity;
     }
