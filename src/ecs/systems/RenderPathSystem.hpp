@@ -3,9 +3,15 @@
 #include <SFML/Graphics.hpp>
 #include "ecs/components/Components.hpp"
 
+#pragma once
+
+#include <entt/entt.hpp>
+#include <SFML/Graphics.hpp>
+#include <ecs/components/Components.hpp>
+
 inline void renderPathSystem(const entt::registry &registry, sf::RenderWindow &window)
 {
-    auto view = registry.view<Position, PathFollower, PathDebug>();
+    auto view = registry.view<Position, PathFollower, PathDebug, Selected>();
 
     for (auto entity : view)
     {
@@ -15,28 +21,31 @@ inline void renderPathSystem(const entt::registry &registry, sf::RenderWindow &w
         if (!debug.showPath || follower.waypoints.empty())
             continue;
 
+        size_t start = follower.currentIndex;
+        if (start >= follower.waypoints.size())
+            continue;
+
         const auto &path = follower.waypoints;
 
-        sf::VertexArray line(sf::PrimitiveType::LineStrip, path.size());
+        sf::VertexArray line(sf::PrimitiveType::LineStrip, path.size() - start);
 
-        for (size_t i = 0; i < path.size(); ++i)
+        for (size_t i = start; i < path.size(); ++i)
         {
-            line[i].position = path[i];
-            line[i].color = debug.color;
-        }
+            sf::Vertex v;
+            v.position = path[i];
+            v.color = debug.color;
 
-        // fade último punto
-        line[path.size() - 1].color.a = 160;
+            line[i - start] = v;
+        }
 
         window.draw(line);
 
-        // Dibujar puntos
         sf::CircleShape dot(3.f);
         dot.setFillColor(sf::Color::Yellow);
 
-        for (const auto &p : path)
+        for (size_t i = start; i < path.size(); ++i)
         {
-            dot.setPosition(p - sf::Vector2f(3.f, 3.f));
+            dot.setPosition(path[i] - sf::Vector2f(3.f, 3.f));
             window.draw(dot);
         }
     }

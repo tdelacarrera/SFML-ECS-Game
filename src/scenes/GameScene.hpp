@@ -187,7 +187,7 @@ public:
             camInput /= length;
         }
 
-        float speed = 500.f;
+        float speed = 800.f;
 
         camera.move(camInput * speed * dt);
         camera.update(dt);
