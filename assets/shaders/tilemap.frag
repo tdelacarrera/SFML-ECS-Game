@@ -3,7 +3,7 @@ uniform sampler2D mapData;
 
 uniform vec2 mapSize;
 uniform float tilesPerRow;
-uniform float tileSize;
+uniform float time;
 
 float getId(vec2 t)
 {
@@ -18,7 +18,22 @@ vec4 sampleTile(vec2 t, vec2 local)
     float col = mod(id, tilesPerRow);
 
     vec2 baseUV = vec2(col, row) / tilesPerRow;
+
+
     vec2 finalUV = baseUV + local / tilesPerRow;
+
+    if (id == 1.0)
+    {
+        float noise = sin(dot(t, vec2(12.9898, 78.233)) + time * 2.0);
+        noise *= 0.04;
+
+        vec2 offset = vec2(noise, noise) / tilesPerRow;
+
+        // clamp dentro del tile
+        finalUV = clamp(finalUV + offset,
+                        baseUV + 0.001,
+                        baseUV + (1.0 / tilesPerRow) - 0.001);
+    }
 
     return texture2D(tileset, finalUV);
 }
@@ -31,9 +46,9 @@ void main()
     vec2 local = fract(tilePos);
 
     vec4 center = sampleTile(tile, local);
-    vec4 east = sampleTile(tile + vec2(1,0), local);
-    vec4 south = sampleTile(tile + vec2(0,1), local);
-    vec4 se = sampleTile(tile + vec2(1,1), local);
+    vec4 east   = sampleTile(tile + vec2(1.0, 0.0), local);
+    vec4 south  = sampleTile(tile + vec2(0.0, 1.0), local);
+    vec4 se     = sampleTile(tile + vec2(1.0, 1.0), local);
 
     float fx = smoothstep(0.1, 1.0, local.x);
     float fy = smoothstep(0.1, 1.0, local.y);

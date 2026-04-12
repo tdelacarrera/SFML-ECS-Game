@@ -30,10 +30,14 @@ FetchContent_Declare(
 FetchContent_MakeAvailable(json)
 
 # tgui
+set(TGUI_BACKEND SFML_GRAPHICS CACHE STRING "" FORCE)
+set(TGUI_BUILD_GUI_BUILDER OFF CACHE BOOL "" FORCE)
+
 FetchContent_Declare(
     tgui
     URL https://github.com/texus/TGUI/archive/refs/tags/v1.12.0.tar.gz
 )
+
 FetchContent_MakeAvailable(tgui)
 
 # FastNoiseLite
@@ -44,15 +48,14 @@ FetchContent_Declare(
 )
 FetchContent_MakeAvailable(fastnoiselite)
 
-file(GLOB_RECURSE SOURCES CONFIGURE_DEPENDS Engine/*.cpp Game/*.cpp  )
+file(GLOB_RECURSE SOURCES CONFIGURE_DEPENDS src/*.cpp)
 
 add_executable(Game ${SOURCES})
 
 
 target_include_directories(Game PRIVATE
     ${CMAKE_SOURCE_DIR}
-    ${CMAKE_SOURCE_DIR}/Engine
-    ${CMAKE_SOURCE_DIR}/Game
+    ${CMAKE_SOURCE_DIR}/src
     ${fastnoiselite_SOURCE_DIR}/Cpp
 )
 
