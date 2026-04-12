@@ -9,7 +9,6 @@
 #include "ecs/systems/RenderSystem.hpp"
 #include "ecs/systems/RenderShadows.hpp"
 #include "ecs/systems/MovementSystem.hpp"
-#include "ecs/systems/CameraFollowSystem.hpp"
 #include "ecs/systems/SelectionRenderSystem.hpp"
 #include "ecs/systems/MouseSelectionSystem.hpp"
 #include "ecs/systems/SelectionRenderSystem.hpp"
@@ -40,7 +39,7 @@ public:
         registry.clear();
 
         auto &textures = sceneManager->getGame().getTextureManager();
-        textures.load("player", "assets/textures/player.png");
+        textures.load("pawn", "assets/textures/pawn.png");
         textures.load("tree", "assets/textures/tree.png");
         textures.load("animal", "assets/textures/animal.png");
         textures.load("plant", "assets/textures/plant.png");
@@ -73,7 +72,11 @@ public:
         camera.setSize({1600, 900});
         camera.setTarget({0, 0});
 
-        EntityFactory::createPlayer(registry, 250, 300);
+        EntityFactory::createPawn(registry, 250, 300);
+        EntityFactory::createPawn(registry, 280, 360);
+        EntityFactory::createPawn(registry, 250, 250);
+        EntityFactory::createPawn(registry, 110, 360);
+        EntityFactory::createPawn(registry, 220, 180);
         createHUD();
 
         registry.ctx().emplace<ToolState>();
@@ -92,21 +95,13 @@ public:
         movementSystem(registry, dt, mouseManager);
         mouseSelectionSystem(registry, *window, camera, mouseManager);
         pathfindingSystem(registry, world, *window, camera, mouseManager);
-        cameraFollowSystem(registry, camera);
         chopOrderSystem(registry, *window, camera, mouseManager);
         mineOrderSystem(registry, *window, camera, mouseManager);
         harvestOrderSystem(registry, *window, camera, mouseManager);
         cancelOrderSystem(registry, *window, camera, mouseManager);
 
         tilemap.update(dt);
-
-        float scroll = mouseManager.getScroll();
-        if (scroll != 0.f)
-        {
-            camera.addZoom(scroll);
-        }
-
-        camera.update(dt);
+        handleCamera(dt, mouseManager, inputManager);
     }
 
     void render(sf::RenderWindow &window) override
@@ -149,6 +144,33 @@ public:
             }
         }
     }
+
+    void handleCamera(float dt, MouseManager mouseManager, InputManager inputManager)
+    {
+        float scroll = mouseManager.getScroll();
+        if (scroll != 0.f)
+        {
+            camera.addZoom(scroll);
+        }
+
+        sf::Vector2f camInput(0.f, 0.f);
+
+        if (inputManager.isPressed("move_up"))
+            camInput.y -= 1.f;
+        if (inputManager.isPressed("move_down"))
+            camInput.y += 1.f;
+        if (inputManager.isPressed("move_left"))
+            camInput.x -= 1.f;
+        if (inputManager.isPressed("move_right"))
+            camInput.x += 1.f;
+
+        float speed = 500.f;
+
+        camera.move(camInput * speed * dt);
+
+        camera.update(dt);
+    }
+
     void createPauseMenu()
     {
         gui.removeAllWidgets();

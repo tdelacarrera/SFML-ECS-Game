@@ -3,6 +3,10 @@
 class Camera
 {
 public:
+    void move(const sf::Vector2f &delta)
+    {
+        target += delta;
+    }
     void setTarget(const sf::Vector2f &pos)
     {
         target = pos;

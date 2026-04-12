@@ -5,11 +5,7 @@
 #include "core/input/MouseManager.hpp"
 #include "ecs/components/Components.hpp"
 
-inline void pathfindingSystem(entt::registry &registry,
-                              const WorldMap &world,
-                              const sf::RenderWindow &window,
-                              const Camera &camera,
-                              MouseManager &mouseManager)
+inline void pathfindingSystem(entt::registry &registry, const WorldMap &world, const sf::RenderWindow &window, const Camera &camera, MouseManager &mouseManager)
 {
     if (!mouseManager.isJustPressed(sf::Mouse::Button::Right))
         return;
@@ -19,7 +15,7 @@ inline void pathfindingSystem(entt::registry &registry,
     sf::Vector2f mouseWorld = window.mapPixelToCoords(mouseScreen, camera.getView());
 
     // Procesar solo entidades que tienen PathFollower + Position
-    auto view = registry.view<Position, PathFollower>();
+    auto view = registry.view<Position, PathFollower, Selected>();
 
     for (auto entity : view)
     {
