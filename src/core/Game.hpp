@@ -11,7 +11,12 @@ class Game
 {
 public:
     Game()
-        : window(sf::VideoMode({1600, 900}), "ECS Game"), musicManager(), soundManager(), inputManager(), mouseManager(), textureManager(),
+        : window(sf::VideoMode::getDesktopMode(), "ECS Game", sf::State::Fullscreen),
+          musicManager(),
+          soundManager(),
+          inputManager(),
+          mouseManager(),
+          textureManager(),
           sceneManager(*this, window)
     {
         window.setFramerateLimit(60);

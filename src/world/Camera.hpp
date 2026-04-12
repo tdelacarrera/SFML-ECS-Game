@@ -15,7 +15,7 @@ public:
     void update(float dt)
     {
         sf::Vector2f current = view.getCenter();
-        view.setCenter(current + (target - current) * 5.f * dt);
+        view.setCenter(target);
     }
 
     const sf::View &getView() const { return view; }
