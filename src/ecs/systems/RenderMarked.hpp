@@ -15,7 +15,7 @@ inline void renderMarked(entt::registry &registry, sf::RenderWindow &window, Wor
     {
         auto &position = view1.get<Position>(entity);
 
-        sf::RectangleShape rect({world.getTileSize(), world.getTileSize()});
+        sf::RectangleShape rect(sf::Vector2f(static_cast<float>(world.getTileSize()), static_cast<float>(world.getTileSize())));
         rect.setPosition(position.value);
         rect.setFillColor(sf::Color::Yellow);
         window.draw(rect);
@@ -26,7 +26,7 @@ inline void renderMarked(entt::registry &registry, sf::RenderWindow &window, Wor
     {
         auto &position = view2.get<Position>(entity);
 
-        sf::RectangleShape rect({world.getTileSize(), world.getTileSize()});
+        sf::RectangleShape rect(sf::Vector2f(static_cast<float>(world.getTileSize()), static_cast<float>(world.getTileSize())));
         rect.setPosition(position.value);
         rect.setFillColor(sf::Color::Green);
         window.draw(rect);
@@ -37,7 +37,7 @@ inline void renderMarked(entt::registry &registry, sf::RenderWindow &window, Wor
     {
         auto &position = view3.get<Position>(entity);
 
-        sf::RectangleShape rect({world.getTileSize(), world.getTileSize()});
+        sf::RectangleShape rect(sf::Vector2f(static_cast<float>(world.getTileSize()), static_cast<float>(world.getTileSize())));
         rect.setPosition(position.value);
         rect.setFillColor(sf::Color::Blue);
         window.draw(rect);

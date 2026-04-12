@@ -59,35 +59,4 @@ inline void renderSelectionBrackets(entt::registry &registry, sf::RenderWindow &
         makeLine({bottomRight.x - corner, bottomRight.y - thickness}, {corner, thickness});
         makeLine({bottomRight.x - thickness, bottomRight.y - corner}, {thickness, corner});
     }
-
-    auto view3 = registry.view<Position, MarkedForChopping>();
-    for (auto entity : view3)
-    {
-        auto &pos = view3.get<Position>(entity);
-
-        sf::RectangleShape rect({world.getTileSize(), world.getTileSize()});
-        rect.setPosition(pos.value);
-        rect.setFillColor(sf::Color::Yellow);
-        window.draw(rect);
-    }
-    auto view4 = registry.view<Position, MarkedForHarvest>();
-    for (auto entity : view4)
-    {
-        auto &pos = view4.get<Position>(entity);
-
-        sf::RectangleShape rect({world.getTileSize(), world.getTileSize()});
-        rect.setPosition(pos.value);
-        rect.setFillColor(sf::Color::Green);
-        window.draw(rect);
-    }
-    auto view5 = registry.view<Position, MarkedForMining>();
-    for (auto entity : view5)
-    {
-        auto &pos = view5.get<Position>(entity);
-
-        sf::RectangleShape rect({world.getTileSize(), world.getTileSize()});
-        rect.setPosition(pos.value);
-        rect.setFillColor(sf::Color::Blue);
-        window.draw(rect);
-    }
 }
