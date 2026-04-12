@@ -52,7 +52,7 @@ inline void toolApplicationSystem(entt::registry &registry, entt::entity entity)
     }
 }
 
-inline void ChopOrderSystem(entt::registry &registry, sf::RenderWindow &window, Camera &camera, MouseManager mouseManager)
+inline void chopOrderSystem(entt::registry &registry, sf::RenderWindow &window, Camera &camera, MouseManager mouseManager)
 {
     auto &tool = registry.ctx().get<ToolState>();
 
@@ -113,7 +113,7 @@ inline void ChopOrderSystem(entt::registry &registry, sf::RenderWindow &window, 
     }
 }
 
-inline void MineOrderSystem(entt::registry &registry, sf::RenderWindow &window, Camera &camera, MouseManager mouseManager)
+inline void mineOrderSystem(entt::registry &registry, sf::RenderWindow &window, Camera &camera, MouseManager mouseManager)
 {
     auto &tool = registry.ctx().get<ToolState>();
 
@@ -174,7 +174,7 @@ inline void MineOrderSystem(entt::registry &registry, sf::RenderWindow &window, 
     }
 }
 
-inline void HarvestOrderSystem(entt::registry &registry, sf::RenderWindow &window, Camera &camera, MouseManager mouseManager)
+inline void harvestOrderSystem(entt::registry &registry, sf::RenderWindow &window, Camera &camera, MouseManager mouseManager)
 {
     auto &tool = registry.ctx().get<ToolState>();
 
@@ -235,7 +235,7 @@ inline void HarvestOrderSystem(entt::registry &registry, sf::RenderWindow &windo
     }
 }
 
-inline void CancelOrderSystem(entt::registry &registry, sf::RenderWindow &window, Camera &camera, MouseManager &mouseManager)
+inline void cancelOrderSystem(entt::registry &registry, sf::RenderWindow &window, Camera &camera, MouseManager &mouseManager)
 {
     auto &tool = registry.ctx().get<ToolState>();
 

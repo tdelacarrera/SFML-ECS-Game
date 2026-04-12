@@ -16,7 +16,7 @@
 #include "ecs/systems/RenderSelectionBrackets.hpp"
 #include "ecs/systems/PathfindingSystem.hpp"
 #include "ecs/systems/RenderPathSystem.hpp"
-#include "ecs/systems/ToolApplicationSystem.hpp"
+#include "ecs/systems/ToolSystems.hpp"
 #include "ecs/systems/RenderMarked.hpp"
 #include "ecs/entities/EntityFactory.hpp"
 #include "core/audio/MusicManager.hpp"
@@ -93,10 +93,10 @@ public:
         mouseSelectionSystem(registry, *window, camera, mouseManager);
         pathfindingSystem(registry, world, *window, camera, mouseManager);
         cameraFollowSystem(registry, camera);
-        ChopOrderSystem(registry, *window, camera, mouseManager);
-        MineOrderSystem(registry, *window, camera, mouseManager);
-        HarvestOrderSystem(registry, *window, camera, mouseManager);
-        CancelOrderSystem(registry, *window, camera, mouseManager);
+        chopOrderSystem(registry, *window, camera, mouseManager);
+        mineOrderSystem(registry, *window, camera, mouseManager);
+        harvestOrderSystem(registry, *window, camera, mouseManager);
+        cancelOrderSystem(registry, *window, camera, mouseManager);
 
         tilemap.update(dt);
 
