@@ -155,6 +155,7 @@ public:
 
         sf::Vector2f camInput(0.f, 0.f);
 
+        // Movimiento con teclado
         if (inputManager.isPressed("move_up"))
             camInput.y -= 1.f;
         if (inputManager.isPressed("move_down"))
@@ -164,10 +165,31 @@ public:
         if (inputManager.isPressed("move_right"))
             camInput.x += 1.f;
 
+        // Edge scrolling
+        sf::Vector2i mousePos = sf::Mouse::getPosition(*window);
+        sf::Vector2u winSize = window->getSize();
+
+        const int margin = 25;
+
+        if (mousePos.x <= margin)
+            camInput.x -= 1.f;
+        if (mousePos.x >= (int)winSize.x - margin)
+            camInput.x += 1.f;
+        if (mousePos.y <= margin)
+            camInput.y -= 1.f;
+        if (mousePos.y >= (int)winSize.y - margin)
+            camInput.y += 1.f;
+
+        // Normalizar
+        if (camInput.x != 0.f || camInput.y != 0.f)
+        {
+            float length = std::sqrt(camInput.x * camInput.x + camInput.y * camInput.y);
+            camInput /= length;
+        }
+
         float speed = 500.f;
 
         camera.move(camInput * speed * dt);
-
         camera.update(dt);
     }
 
