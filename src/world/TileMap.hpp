@@ -7,6 +7,7 @@ class TileMap : public sf::Drawable, public sf::Transformable
 public:
     bool load(const sf::Texture &tileset, const WorldMap &world);
     void updateMapData(const WorldMap &world);
+    void updateTile(int x, int y, int terrain);
     void update(float dt);
 
 private:

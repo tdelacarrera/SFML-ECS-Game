@@ -16,6 +16,8 @@
 #include "ecs/systems/PathfindingSystem.hpp"
 #include "ecs/systems/RenderPathSystem.hpp"
 #include "ecs/systems/ToolSystems.hpp"
+#include "ecs/systems/TilePaintSystem.hpp"
+#include "ui/Tools.hpp"
 #include "ecs/systems/RenderMarked.hpp"
 #include "ecs/entities/EntityFactory.hpp"
 #include "core/audio/MusicManager.hpp"
@@ -44,6 +46,9 @@ public:
         textures.load("animal", "assets/textures/animal.png");
         textures.load("plant", "assets/textures/plant.png");
         textures.load("stone", "assets/textures/stone.png");
+        tileset.loadFromFile("assets/textures/tiles.png");
+        tileset.setSmooth(false);
+        tileset.setRepeated(false);
 
         auto &music = sceneManager->getGame().getMusicManager();
 
@@ -57,8 +62,6 @@ public:
         input.bind("move_right", sf::Keyboard::Key::D);
         input.bind("move_left", sf::Keyboard::Key::A);
         input.bind("pause", sf::Keyboard::Key::Escape);
-
-        tileset.loadFromFile("assets/textures/tiles.png");
 
         std::random_device rd;
         int seed = rd();
@@ -99,6 +102,7 @@ public:
         mineOrderSystem(registry, *window, camera, mouseManager);
         harvestOrderSystem(registry, *window, camera, mouseManager);
         cancelOrderSystem(registry, *window, camera, mouseManager);
+        tilePaintSystem(registry, world, tilemap, *window, camera, mouseManager);
 
         tilemap.update(dt);
         handleCamera(dt, mouseManager, inputManager);
@@ -265,6 +269,7 @@ public:
         makeButton("Cancel", ToolMode::Cancel, 440);
 
         createResourcePanel(panel);
+        createTilePalette(panel);
     }
 
     void createResourcePanel(tgui::Panel::Ptr parent)
@@ -285,5 +290,46 @@ public:
         panel->add(stoneText);
 
         parent->add(panel);
+    }
+
+    void createTilePalette(tgui::Panel::Ptr parent)
+    {
+        auto palette = tgui::Panel::create({300, 200});
+        palette->setPosition({220, 10});
+        parent->add(palette);
+
+        int tileSize = world.getTileSize();
+        int tilesPerRow = tileset.getSize().x / tileSize;
+
+        int displaySize = 32; // tamaño visual
+
+        for (int i = 0; i < tilesPerRow * 4; i++) // ajusta filas
+        {
+            int tu = i % tilesPerRow;
+            int tv = i / tilesPerRow;
+
+            auto btn = tgui::Button::create();
+            btn->setSize(displaySize, displaySize);
+
+            int x = (i % 8) * displaySize;
+            int y = (i / 8) * displaySize;
+
+            btn->setPosition(x, y);
+
+            // Crear sprite del tile
+            tgui::Texture texture(
+                tileset,
+                {tu * tileSize, tv * tileSize, tileSize, tileSize});
+
+            btn->getRenderer()->setTexture(texture);
+
+                       btn->onPress([this, i]()
+                         {
+            auto &tool = registry.ctx().get<ToolState>();
+            tool.current = ToolMode::PaintTile;
+            tool.selectedTile = i; });
+
+            palette->add(btn);
+        }
     }
 };

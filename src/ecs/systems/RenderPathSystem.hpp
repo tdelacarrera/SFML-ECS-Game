@@ -3,12 +3,6 @@
 #include <SFML/Graphics.hpp>
 #include "ecs/components/Components.hpp"
 
-#pragma once
-
-#include <entt/entt.hpp>
-#include <SFML/Graphics.hpp>
-#include <ecs/components/Components.hpp>
-
 inline void renderPathSystem(const entt::registry &registry, sf::RenderWindow &window)
 {
     auto view = registry.view<Position, PathFollower, PathDebug, Selected>();

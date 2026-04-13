@@ -3,7 +3,6 @@ project(Game CXX)
 
 set(CMAKE_CXX_STANDARD 20)
 set(SFML_BUILD_NETWORK OFF)
-set(TGUI_BACKEND SFML_GRAPHICS)
 
 include(FetchContent)
 

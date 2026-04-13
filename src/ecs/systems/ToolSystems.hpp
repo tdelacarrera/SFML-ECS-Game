@@ -4,20 +4,7 @@
 #include "../components/Components.hpp"
 #include "core/input/MouseManager.hpp"
 #include "world/Camera.hpp"
-
-enum class ToolMode
-{
-    None,
-    Mine,
-    Chop,
-    Harvest,
-    Cancel
-};
-
-struct ToolState
-{
-    ToolMode current = ToolMode::None;
-};
+#include "ui/Tools.hpp"
 
 inline void toolApplicationSystem(entt::registry &registry, entt::entity entity)
 {

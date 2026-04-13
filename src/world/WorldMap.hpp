@@ -13,11 +13,23 @@ struct Tile
     bool buildable = true;
 };
 
+struct TileDef
+{
+    uint16_t terrain;
+    float cost;
+    bool walkable;
+    bool buildable;
+};
+
 class WorldMap
 {
 public:
     WorldMap(int w, int h, int tileSize = 32)
-        : width(w), height(h), tileSize(tileSize), tiles(w * h) {}
+        : width(w), height(h), tileSize(tileSize), tiles(w * h)
+    {
+
+        initTileDefs();
+    }
 
     void generate(int seed = 1337)
     {
@@ -32,7 +44,20 @@ public:
                 Tile &tile = at(x, y);
                 float n = noise.GetNoise((float)x, (float)y);
 
-                applyTerrain(tile, n);
+                uint16_t terrain;
+
+                if (n < -0.4f)
+                    terrain = 1;
+                else if (n < -0.1f)
+                    terrain = 7;
+                else if (n < 0.2f)
+                    terrain = 6;
+                else if (n < 0.8f)
+                    terrain = 10;
+                else
+                    terrain = 4;
+
+                setTile(x, y, terrain);
             }
         }
     }
@@ -57,7 +82,41 @@ public:
     int getWidth() const { return width; }
     int getHeight() const { return height; }
     int getTileSize() const { return tileSize; }
-    std::vector<Tile> getTiles() const { return tiles; }
+    std::vector<Tile> getTiles() const & { return tiles; }
+
+    void setTile(int x, int y, uint16_t terrain)
+    {
+        Tile &tile = at(x, y);
+
+        auto it = tileDefs.find(terrain);
+
+        if (it != tileDefs.end())
+        {
+            const TileDef &def = it->second;
+
+            tile.terrain = def.terrain;
+            tile.cost = def.cost;
+            tile.walkable = def.walkable;
+            tile.buildable = def.buildable;
+        }
+        else
+        {
+            // fallback
+            tile.terrain = terrain;
+            tile.cost = 1.f;
+            tile.walkable = true;
+            tile.buildable = true;
+        }
+    }
+
+    void initTileDefs()
+    {
+        tileDefs[1] = {1, 1.f, false, false};
+        tileDefs[7] = {7, 1.f, true, false};
+        tileDefs[6] = {6, 5.f, true, true};
+        tileDefs[10] = {10, 1.f, true, true};
+        tileDefs[4] = {4, 10.f, true, true};
+    }
 
 private:
     int width;
@@ -65,33 +124,10 @@ private:
     int tileSize;
 
     std::vector<Tile> tiles;
+    std::unordered_map<uint16_t, TileDef> tileDefs;
 
     int index(int x, int y) const
     {
         return x + y * width;
-    }
-
-    void applyTerrain(Tile &tile, float n)
-    {
-        if (n < -0.4f)
-        {
-            tile = {1, 1.f, false, false};
-        }
-        else if (n < -0.1f)
-        {
-            tile = {7, 1.f, true, false};
-        }
-        else if (n < 0.2f)
-        {
-            tile = {6, 5.f, true, true};
-        }
-        else if (n < 0.8f)
-        {
-            tile = {10, 1.f, true, true};
-        }
-        else
-        {
-            tile = {4, 10.f, true, true};
-        }
     }
 };

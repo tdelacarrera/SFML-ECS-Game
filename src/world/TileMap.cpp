@@ -93,6 +93,14 @@ void TileMap::updateMapData(const WorldMap &world)
     mapDataTexture.setSmooth(false);
     mapDataTexture.setRepeated(false);
 }
+
+void TileMap::updateTile(int x, int y, int terrain)
+{
+    sf::Image img = mapDataTexture.copyToImage();
+    img.setPixel({(unsigned)x, (unsigned)y}, sf::Color(terrain, 0, 0));
+    mapDataTexture.loadFromImage(img);
+}
+
 void TileMap::draw(sf::RenderTarget &target, sf::RenderStates states) const
 {
     if (!tilesetTexture)

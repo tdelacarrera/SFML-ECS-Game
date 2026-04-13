@@ -4,9 +4,17 @@
 #include <SFML/Graphics.hpp>
 #include "core/input/MouseManager.hpp"
 #include <ecs/components/Components.hpp>
+#include "ui/Tools.hpp"
 
 inline void mouseSelectionSystem(entt::registry &registry, const sf::RenderWindow &window, const Camera &camera, MouseManager &mouseManager)
 {
+    auto &tool = registry.ctx().get<ToolState>();
+
+    if (tool.current == ToolMode::PaintTile)
+    {
+        return;
+    }
+
     sf::Vector2i mousePixel = mouseManager.getPosition();
     sf::Vector2f worldPosition = window.mapPixelToCoords(mousePixel, camera.getView());
 

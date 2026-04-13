@@ -4,9 +4,17 @@
 #include <ecs/components/Components.hpp>
 #include "world/WorldMap.hpp"
 #include "core/input/MouseManager.hpp"
+#include "ui/Tools.hpp"
 
 inline void selectionRenderSystem(entt::registry &registry, sf::RenderWindow &window, MouseManager &mouseManager)
 {
+    auto &tool = registry.ctx().get<ToolState>();
+
+    if (tool.current == ToolMode::PaintTile)
+    {
+        return;
+    }
+
     if (!mouseManager.isSelecting())
         return;
 
