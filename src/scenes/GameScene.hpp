@@ -35,6 +35,8 @@ public:
     TileMap tilemap;
     Camera camera;
     sf::Texture tileset;
+    tgui::Panel::Ptr hudPanel;
+    tgui::Panel::Ptr pausePanel;
 
     void onCreate() override
     {
@@ -72,7 +74,10 @@ public:
         EntityFactory::createPawn(registry, 250, 250);
         EntityFactory::createPawn(registry, 110, 360);
         EntityFactory::createPawn(registry, 220, 180);
+
         createHUD();
+        createPauseMenu();
+        pausePanel->setVisible(false);
 
         registry.ctx().emplace<ToolState>();
     }
@@ -127,17 +132,22 @@ public:
         {
             if (key->code == sf::Keyboard::Key::Escape)
             {
-                paused = !paused;
-
-                if (paused)
-                {
-                    createPauseMenu();
-                }
-                else
-                {
-                    gui.removeAllWidgets();
-                }
+                togglePause();
             }
+        }
+    }
+
+    void togglePause()
+    {
+        paused = !paused;
+
+        if (paused)
+        {
+            pausePanel->setVisible(true);
+        }
+        else
+        {
+            pausePanel->setVisible(false);
         }
     }
 
@@ -191,23 +201,18 @@ public:
 
     void createPauseMenu()
     {
-        gui.removeAllWidgets();
-
-        auto overlay = tgui::Panel::create({"100%", "100%"});
-        overlay->getRenderer()->setBackgroundColor(tgui::Color(0, 0, 0, 150));
-        gui.add(overlay);
+        pausePanel = tgui::Panel::create({"100%", "100%"});
+        pausePanel->getRenderer()->setBackgroundColor(tgui::Color(0, 0, 0, 150));
+        gui.add(pausePanel);
 
         auto resumeBtn = tgui::Button::create("Resume");
         resumeBtn->setSize(200, 50);
         resumeBtn->setPosition({"(&.width - width)/2", "40%"});
 
         resumeBtn->onPress([this]()
-                           {
-                               paused = false;
-                               gui.removeAllWidgets();
-                               createHUD(); });
+                           { togglePause(); });
 
-        overlay->add(resumeBtn);
+        pausePanel->add(resumeBtn);
 
         auto mainMenuBtn = tgui::Button::create("Main Menu");
         mainMenuBtn->setSize(200, 50);
@@ -216,7 +221,7 @@ public:
         mainMenuBtn->onPress([this]()
                              { sceneManager->requestSceneChange<MainMenuScene>(); });
 
-        overlay->add(mainMenuBtn);
+        pausePanel->add(mainMenuBtn);
 
         auto quitBtn = tgui::Button::create("Exit");
         quitBtn->setSize(200, 50);
@@ -225,20 +230,18 @@ public:
         quitBtn->onPress([this]()
                          { window->close(); });
 
-        overlay->add(quitBtn);
+        pausePanel->add(quitBtn);
     }
 
     void createHUD()
     {
-        gui.removeAllWidgets();
-
-        auto panel = tgui::Panel::create({"100%", "100%"});
-        gui.add(panel);
+        hudPanel = tgui::Panel::create({"100%", "100%"});
+        gui.add(hudPanel);
 
         auto bar = tgui::Panel::create({"100%", "80"});
         bar->setPosition({"0", "100% - 80"});
-        panel->getRenderer()->setBackgroundColor(tgui::Color::Transparent);
-        panel->add(bar);
+        hudPanel->getRenderer()->setBackgroundColor(tgui::Color::Transparent);
+        hudPanel->add(bar);
 
         auto makeButton = [&](const std::string &text, ToolMode mode, float x)
         {
@@ -259,8 +262,8 @@ public:
         makeButton("Harvest", ToolMode::Harvest, 300);
         makeButton("Cancel", ToolMode::Cancel, 440);
 
-        createResourcePanel(panel);
-        createTilePalette(panel);
+        createResourcePanel(hudPanel);
+        createTilePalette(hudPanel);
     }
 
     void createResourcePanel(tgui::Panel::Ptr parent)
