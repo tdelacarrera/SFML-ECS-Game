@@ -50,6 +50,9 @@ public:
         music.play("game_music");
 
         auto &input = sceneManager->getGame().getInputManager();
+        auto &mouseManager = sceneManager->getGame().getMouseManager();
+        mouseManager.endSelection(); // terminar la seleccion para que no aparezca el cuadro de seleccion al ir al menu principal y volver al juego tras haber presionado un tile con anterioridad
+
         input.bind("key", sf::Keyboard::Key::Space);
         input.bind("move_up", sf::Keyboard::Key::W);
         input.bind("move_down", sf::Keyboard::Key::S);
