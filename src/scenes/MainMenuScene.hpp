@@ -15,7 +15,7 @@ public:
     {
 
         auto &music = sceneManager->getGame().getMusicManager();
-        music.load("menu_music", "assets/music/menu.mp3");
+        music.load("menu_music", "assets/music/menu.wav");
         music.play("menu_music", true);
 
         // root panel

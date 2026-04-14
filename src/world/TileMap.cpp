@@ -77,28 +77,54 @@ bool TileMap::load(const sf::Texture &tileset, const WorldMap &world)
 
 void TileMap::updateMapData(const WorldMap &world)
 {
-    sf::Image mapImage({width, height}, sf::Color::Black);
+    width = world.getWidth();
+    height = world.getHeight();
 
-    for (unsigned y = 0; y < height; y++)
+    mapDataPixels.resize(static_cast<size_t>(width) * height * 4);
+
+    for (unsigned y = 0; y < height; ++y)
     {
-        for (unsigned x = 0; x < width; x++)
+        for (unsigned x = 0; x < width; ++x)
         {
             const Tile &tile = world.getTiles()[x + y * width];
+            std::uint8_t terrainId = static_cast<std::uint8_t>(tile.terrain);
 
-            mapImage.setPixel({x, y}, sf::Color(tile.terrain, 0, 0));
+            size_t idx = (static_cast<size_t>(x) + static_cast<size_t>(y) * width) * 4;
+
+            mapDataPixels[idx + 0] = terrainId; // R = terrain ID
+            mapDataPixels[idx + 1] = 0;
+            mapDataPixels[idx + 2] = 0;
+            mapDataPixels[idx + 3] = 255; // A
         }
     }
 
-    mapDataTexture.loadFromImage(mapImage);
+    if (!mapDataTexture.resize({width, height}))
+    {
+        std::cerr << "Error al redimensionar mapDataTexture\n";
+        return;
+    }
+
+    mapDataTexture.update(mapDataPixels.data());
     mapDataTexture.setSmooth(false);
     mapDataTexture.setRepeated(false);
 }
 
-void TileMap::updateTile(int x, int y, int terrain)
+void TileMap::updateTile(int x, int y, uint16_t terrain)
 {
-    sf::Image img = mapDataTexture.copyToImage();
-    img.setPixel({(unsigned)x, (unsigned)y}, sf::Color(terrain, 0, 0));
-    mapDataTexture.loadFromImage(img);
+    if (x < 0 || y < 0 || x >= (int)width || y >= (int)height)
+        return;
+
+    size_t idx = (x + y * width) * 4;
+
+    mapDataPixels[idx + 0] = (uint8_t)terrain;
+    mapDataPixels[idx + 1] = 0;
+    mapDataPixels[idx + 2] = 0;
+    mapDataPixels[idx + 3] = 255;
+
+    mapDataTexture.update(
+        &mapDataPixels[idx],
+        {1, 1},
+        {(unsigned)x, (unsigned)y});
 }
 
 void TileMap::draw(sf::RenderTarget &target, sf::RenderStates states) const

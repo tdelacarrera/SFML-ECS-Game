@@ -46,7 +46,8 @@ public:
         textures.load("animal", "assets/textures/animal.png");
         textures.load("plant", "assets/textures/plant.png");
         textures.load("stone", "assets/textures/stone.png");
-        tileset.loadFromFile("assets/textures/tiles.png");
+        textures.load("tileset", "assets/textures/tiles.png");
+        tileset = sceneManager->getGame().getTextureManager().get("tileset");
         tileset.setSmooth(false);
         tileset.setRepeated(false);
 
@@ -243,7 +244,6 @@ public:
         auto panel = tgui::Panel::create({"100%", "100%"});
         gui.add(panel);
 
-        // Barra inferior
         auto bar = tgui::Panel::create({"100%", "80"});
         bar->setPosition({"0", "100% - 80"});
         panel->getRenderer()->setBackgroundColor(tgui::Color::Transparent);
@@ -301,9 +301,8 @@ public:
         int tileSize = world.getTileSize();
         int tilesPerRow = tileset.getSize().x / tileSize;
 
-        int displaySize = 32; // tamaño visual
-
-        for (int i = 0; i < tilesPerRow * 4; i++) // ajusta filas
+        int displaySize = 32;
+        for (int i = 0; i < tilesPerRow * 4; i++)
         {
             int tu = i % tilesPerRow;
             int tv = i / tilesPerRow;
@@ -323,7 +322,7 @@ public:
 
             btn->getRenderer()->setTexture(texture);
 
-                       btn->onPress([this, i]()
+            btn->onPress([this, i]()
                          {
             auto &tool = registry.ctx().get<ToolState>();
             tool.current = ToolMode::PaintTile;

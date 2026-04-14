@@ -16,3 +16,4 @@ inline void renderSystem(entt::registry &registry, sf::RenderWindow &window, Tex
         window.draw(drawable);
     }
 }
+
