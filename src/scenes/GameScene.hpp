@@ -40,21 +40,12 @@ public:
     {
         registry.clear();
 
-        auto &textures = sceneManager->getGame().getTextureManager();
-        textures.load("pawn", "assets/textures/pawn.png");
-        textures.load("tree", "assets/textures/tree.png");
-        textures.load("animal", "assets/textures/animal.png");
-        textures.load("plant", "assets/textures/plant.png");
-        textures.load("stone", "assets/textures/stone.png");
-        textures.load("tileset", "assets/textures/tiles.png");
         tileset = sceneManager->getGame().getTextureManager().get("tileset");
         tileset.setSmooth(false);
         tileset.setRepeated(false);
 
         auto &music = sceneManager->getGame().getMusicManager();
-
-        music.load("game_music", "assets/music/game.mp3");
-        music.play("game_music", true);
+        music.play("game_music");
 
         auto &input = sceneManager->getGame().getInputManager();
         input.bind("key", sf::Keyboard::Key::Space);

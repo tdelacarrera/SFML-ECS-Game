@@ -20,6 +20,23 @@ public:
           sceneManager(*this, window)
     {
         window.setFramerateLimit(60);
+        loadResources();
+    }
+
+    void loadResources()
+    {
+        auto &textures = getTextureManager();
+        auto &music = getMusicManager();
+
+        textures.load("pawn", "assets/textures/pawn.png");
+        textures.load("tree", "assets/textures/tree.png");
+        textures.load("animal", "assets/textures/animal.png");
+        textures.load("plant", "assets/textures/plant.png");
+        textures.load("stone", "assets/textures/stone.png");
+        textures.load("tileset", "assets/textures/tiles.png");
+
+        music.load("menu_music", "assets/music/menu.wav");
+        music.load("game_music", "assets/music/game.mp3");
     }
 
     void run()

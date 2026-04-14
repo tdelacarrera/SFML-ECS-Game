@@ -15,8 +15,7 @@ public:
     {
 
         auto &music = sceneManager->getGame().getMusicManager();
-        music.load("menu_music", "assets/music/menu.wav");
-        music.play("menu_music", true);
+        music.play("menu_music");
 
         // root panel
         auto rootPanel = tgui::Panel::create({"100%", "100%"});

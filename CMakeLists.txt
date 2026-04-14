@@ -69,4 +69,4 @@ target_link_libraries(Game
 
 #cmake -B Build -D CMAKE_BUILD_TYPE=Debug
 #cmake --build Build --config Debug -j
-#./build/debug/game
+#./Build/Game

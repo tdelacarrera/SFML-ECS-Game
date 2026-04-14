@@ -5,14 +5,14 @@ void WorldEntitySpawner::spawn(entt::registry &registry, const WorldMap &world)
 {
     int tileSize = world.getTileSize();
 
-    for (int y = 0; y < world.getHeight(); ++y)
+    for (unsigned int y = 0; y < world.getHeight(); ++y)
     {
-        for (int x = 0; x < world.getWidth(); ++x)
+        for (unsigned int x = 0; x < world.getWidth(); ++x)
         {
             const Tile &tile = world.at(x, y);
 
-            float wx = x * tileSize + tileSize;
-            float wy = y * tileSize + tileSize;
+            float wx = x * tileSize;
+            float wy = y * tileSize;
 
             if (tile.terrain == 10)
             {
