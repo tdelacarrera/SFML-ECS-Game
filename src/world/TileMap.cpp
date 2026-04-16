@@ -111,7 +111,7 @@ void TileMap::updateMapData(const WorldMap &world)
 
 void TileMap::updateTile(int x, int y, uint16_t terrain)
 {
-    if (x < 0 || y < 0 || x >= (int)width || y >= (int)height)
+    if (x < 0 || y < 0 || x >= static_cast<int>(width) || y >= static_cast<int>(height))
         return;
 
     size_t idx = (x + y * width) * 4;

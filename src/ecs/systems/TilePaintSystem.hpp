@@ -32,8 +32,9 @@ void tilePaintSystem(entt::registry &registry, WorldMap &world, TileMap &tilemap
     sf::Vector2i pixel = sf::Mouse::getPosition(window);
     sf::Vector2f worldPos = window.mapPixelToCoords(pixel, camera.getView());
 
-    int tx = worldPos.x / world.getTileSize();
-    int ty = worldPos.y / world.getTileSize();
+    int tileSize = world.getTileSize();
+    int tx = static_cast<int>(std::round(worldPos.x / tileSize));
+    int ty = static_cast<int>(std::round(worldPos.y / tileSize));
 
     if (!world.inBounds(tx, ty))
         return;
