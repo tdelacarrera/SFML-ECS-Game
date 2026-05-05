@@ -22,9 +22,9 @@ public:
         gui.add(rootPanel);
 
         // Background
-        auto background = tgui::Picture::create("assets/textures/background.png");
-        background->setSize({"100%", "100%"});
-        rootPanel->add(background);
+       // auto background = tgui::Picture::create("assets/textures/background.png");
+       // background->setSize({"100%", "100%"});
+       // rootPanel->add(background);
 
         // Overlay
         auto overlay = tgui::Panel::create({"100%", "100%"});

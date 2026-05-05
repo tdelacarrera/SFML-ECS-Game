@@ -1,3 +1,4 @@
 Build/
 assets/*
 !assets/shaders/
+!assets/textures/

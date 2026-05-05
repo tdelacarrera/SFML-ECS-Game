@@ -22,7 +22,7 @@ vec4 sampleTile(vec2 t, vec2 local)
 
     vec2 finalUV = baseUV + local / tilesPerRow;
 
-    if (id == 1.0)
+    if (id == 2.0)
     {
         float noise = sin(dot(t, vec2(12.9898, 78.233)) + time * 2.0);
         noise *= 0.04;

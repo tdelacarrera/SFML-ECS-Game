@@ -14,19 +14,19 @@ void WorldEntitySpawner::spawn(entt::registry &registry, const WorldMap &world)
             float wx = x * tileSize;
             float wy = y * tileSize;
 
-            if (tile.terrain == 10)
+            if (tile.terrain == 0)
             {
                 if (rand() % 10 == 0)
                     EntityFactory::createTree(registry, wx, wy);
             }
 
-            if (tile.terrain == 6)
+            if (tile.terrain == 1)
             {
                 if (rand() % 8 == 0)
                     EntityFactory::createPlant(registry, wx, wy);
             }
 
-            if (tile.terrain == 4)
+            if (tile.terrain == 3)
             {
                 if (rand() % 6 == 0)
                     EntityFactory::createStone(registry, wx, wy);

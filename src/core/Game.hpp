@@ -30,7 +30,6 @@ public:
 
         textures.load("pawn", "assets/textures/pawn.png");
         textures.load("tree", "assets/textures/tree.png");
-        textures.load("animal", "assets/textures/animal.png");
         textures.load("plant", "assets/textures/plant.png");
         textures.load("stone", "assets/textures/stone.png");
         textures.load("tileset", "assets/textures/tiles.png");

@@ -47,13 +47,13 @@ public:
                 uint16_t terrain;
 
                 if (n < -0.4f)
-                    terrain = 1;
+                    terrain = 0;
                 else if (n < -0.1f)
-                    terrain = 7;
+                    terrain = 3;
                 else if (n < 0.2f)
-                    terrain = 6;
+                    terrain = 1;
                 else if (n < 0.8f)
-                    terrain = 10;
+                    terrain = 2;
                 else
                     terrain = 4;
 
@@ -111,11 +111,11 @@ public:
 
     void initTileDefs()
     {
-        tileDefs[1] = {1, 1.f, false, false};
-        tileDefs[7] = {7, 1.f, true, false};
-        tileDefs[6] = {6, 5.f, true, true};
-        tileDefs[10] = {10, 1.f, true, true};
-        tileDefs[4] = {4, 10.f, true, true};
+        tileDefs[0] = {0, 0.f, true, true};
+        tileDefs[1] = {1, 0.f, true, true};
+        tileDefs[2] = {2, 0.f, false, false};
+        tileDefs[3] = {3, 0.f, true, true};
+        tileDefs[4] = {1, 0.f, true, true};
     }
 
 private:
